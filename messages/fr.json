@@ -1,0 +1,38 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "trainings": "Nos Formations",
+    "whyUs": "Pourquoi Nous ?",
+    "tutor": "Devenir Formateur"
+  },
+  "hero": {
+    "eyebrow": "Kennedy School",
+    "title": "Académie Tech & Langues d'El Biar pour les jeunes curieux.",
+    "subtitle": "Un espace d'apprentissage clair et multilingue, pensé pour la robotique, l'IA, les langues et la progression créative.",
+    "ctaPrimary": "Découvrir les formations",
+    "ctaSecondary": "Devenir formateur"
+  },
+  "trainings": {
+    "title": "Nos Formations",
+    "intro": "Une organisation en deux tranches d'âge pour adapter le rythme, les exemples et les défis à chaque profil.",
+    "age711": "7-11 ans",
+    "age1217": "12-17 ans"
+  },
+  "whyUs": {
+    "title": "Pourquoi Nous ?",
+    "intro": "Le business plan met en avant un modèle premium, pratique et très structuré.",
+    "items": [
+      "Un programme propriétaire conçu et détenu par l'école.",
+      "Un apprentissage STEM concret basé sur des projets et des démonstrations réelles.",
+      "Des formateurs techniques en cohérence avec le positionnement de l'académie.",
+      "Un rythme de 3 jours par semaine qui facilite l'organisation des familles.",
+      "Un système de cohortes strict qui protège la continuité pédagogique.",
+      "Une qualité premium avec une structure simple et rassurante pour les parents."
+    ]
+  },
+  "tutor": {
+    "title": "Devenir Formateur",
+    "intro": "Nous construisons une équipe sélective capable d'exécuter le système de l'école avec régularité.",
+    "cta": "Postuler"
+  }
+}

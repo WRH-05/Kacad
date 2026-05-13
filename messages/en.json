@@ -1,0 +1,38 @@
+{
+  "nav": {
+    "home": "Home",
+    "trainings": "Our Trainings",
+    "whyUs": "Why Us?",
+    "tutor": "Become a Tutor"
+  },
+  "hero": {
+    "eyebrow": "Kennedy School",
+    "title": "El Biar Tech & Language Academy for curious young minds.",
+    "subtitle": "A light-themed, multilingual learning space built for robotics, AI, languages, and expressive growth.",
+    "ctaPrimary": "Explore Trainings",
+    "ctaSecondary": "Become a Tutor"
+  },
+  "trainings": {
+    "title": "Our Trainings",
+    "intro": "Structured around two age bands so the pace, examples, and challenges feel right for every learner.",
+    "age711": "Ages 7-11",
+    "age1217": "Ages 12-17"
+  },
+  "whyUs": {
+    "title": "Why Us?",
+    "intro": "The business plan points to a premium, hands-on academy model with strong operational discipline.",
+    "items": [
+      "Proprietary curriculum designed and owned by the school.",
+      "Hands-on STEM learning built around real projects and demos.",
+      "Delivered by technically strong instructors aligned with the academy's positioning.",
+      "Compact 3-day rhythm that reduces fatigue and makes planning easier for families.",
+      "Strict cohort system that protects continuity and prevents late joiner disruption.",
+      "Premium quality with a practical, parent-friendly structure."
+    ]
+  },
+  "tutor": {
+    "title": "Become a Tutor",
+    "intro": "We are building a selective team of instructors who can deliver the school’s system with consistency.",
+    "cta": "Apply to Teach"
+  }
+}
