@@ -1,26 +1,103 @@
 {
   "nav": {
     "home": "Accueil",
-    "trainings": "Nos Formations",
-    "whyUs": "Pourquoi Nous ?",
+    "courses": "Formations",
+    "testimonials": "Témoignages",
+    "whyUs": "Pourquoi Nous",
     "tutor": "Devenir Formateur"
   },
   "hero": {
-    "eyebrow": "Kennedy School",
-    "title": "Académie Tech & Langues d'El Biar pour les jeunes curieux.",
-    "subtitle": "Un espace d'apprentissage clair et multilingue, pensé pour la robotique, l'IA, les langues et la progression créative.",
+    "eyebrow": "El Biar · Alger",
+    "title": "Une académie moderne où les jeunes construisent, créent et grandissent en confiance.",
+    "subtitle": "Kennedy School allie la rigueur éducative européenne à la chaleur de l'apprentissage communautaire algérien — robotique, IA, langues et médias créatifs dans un cadre lumineux et ouvert.",
     "ctaPrimary": "Découvrir les formations",
-    "ctaSecondary": "Devenir formateur"
+    "ctaSecondary": "Devenir formateur",
+    "statCourses": "7",
+    "statCoursesLabel": "Programmes spécialisés",
+    "statAges": "7–17",
+    "statAgesLabel": "Tranches d'âge accueillies",
+    "statLanguages": "4",
+    "statLanguagesLabel": "Langues enseignées"
   },
-  "trainings": {
+  "courses": {
     "title": "Nos Formations",
-    "intro": "Une organisation en deux tranches d'âge pour adapter le rythme, les exemples et les défis à chaque profil.",
-    "age711": "7-11 ans",
-    "age1217": "12-17 ans"
+    "intro": "Des programmes structurés pour la clarté, la progression et l'apprentissage pratique — des premiers robots aux compétences créatives professionnelles.",
+    "register": "S'inscrire",
+    "ageRanges": {
+      "kids": "7–11 ans",
+      "juniors": "12–17 ans",
+      "teens": "13–17 ans",
+      "all": "Tous âges"
+    },
+    "categories": {
+      "STEM": "STEM",
+      "Languages": "Langues",
+      "Creative": "Créatif"
+    },
+    "items": {
+      "robotics-kids": {
+        "title": "Robotique pour Enfants",
+        "description": "Initiation à la robotique où les enfants construisent, câblent et programment leurs premières machines en sessions ludiques et projetées."
+      },
+      "robotics-juniors": {
+        "title": "Robotique Juniors (Ados)",
+        "description": "Robotique avancée pour adolescents — capteurs, défis en équipe et projets d'ingénierie prêts pour la compétition."
+      },
+      "ai-fluency": {
+        "title": "Maîtrise de l'IA",
+        "description": "Littératie IA adaptée à l'âge — prompts, outils créatifs, usage responsable et applications concrètes que les élèves maîtrisent avec assurance."
+      },
+      "python-programming": {
+        "title": "Programmation Python",
+        "description": "Fondamentaux Python structurés, des variables à la logique jusqu'aux petites applications, enseignés avec patience et exemples pratiques."
+      },
+      "languages": {
+        "title": "Langues par Niveaux",
+        "description": "Français, anglais, allemand et espagnol par niveau — expression orale, lecture et conversation adaptées à chaque apprenant."
+      },
+      "audiovisual-training": {
+        "title": "Formation Audiovisuelle",
+        "description": "Cinéma, son et narration visuelle — les élèves apprennent à planifier, filmer et monter avec une discipline créative professionnelle."
+      },
+      "multimedia": {
+        "title": "Multimédia",
+        "description": "Design numérique et production multimédia — graphisme, mise en page et travaux créatifs prêts pour un portfolio."
+      }
+    }
+  },
+  "testimonials": {
+    "title": "Ce Que Disent les Familles",
+    "intro": "Des parents d'El Biar et d'Alger font confiance à Kennedy School pour une éducation structurée et inspirante.",
+    "items": {
+      "nadia": {
+        "quote": "Ma fille est passée de la timidité face à la technologie à la présentation confiante de son projet robot. Le campus d'El Biar est accueillant et sérieux à la fois.",
+        "name": "Nadia B.",
+        "role": "Parent",
+        "location": "El Biar"
+      },
+      "karim": {
+        "quote": "Le programme Python a donné à mon fils de vraies bases — pas seulement des jeux, mais une logique qu'il utilise à l'école. Les formateurs sont patients et compétents.",
+        "name": "Karim M.",
+        "role": "Parent",
+        "location": "Hydra"
+      },
+      "sofia": {
+        "quote": "Nous avons choisi le programme de langues par niveaux. La progression est claire, et notre fille attend ses sessions chaque semaine avec impatience.",
+        "name": "Sofia L.",
+        "role": "Parent",
+        "location": "Bouzareah"
+      },
+      "yasmine": {
+        "quote": "La formation multimédia a ouvert une voie créative inattendue. Ambiance professionnelle, enseignants chaleureux et un campus moderne et ouvert.",
+        "name": "Yasmine K.",
+        "role": "Parent",
+        "location": "Alger"
+      }
+    }
   },
   "whyUs": {
-    "title": "Pourquoi Nous ?",
-    "intro": "Le business plan met en avant un modèle premium, pratique et très structuré.",
+    "title": "Pourquoi Kennedy School",
+    "intro": "Un modèle d'académie premium et pratique, ancré à El Biar — structure européenne, cœur algérien.",
     "items": [
       "Un programme propriétaire conçu et détenu par l'école.",
       "Un apprentissage STEM concret basé sur des projets et des démonstrations réelles.",
@@ -32,7 +109,55 @@
   },
   "tutor": {
     "title": "Devenir Formateur",
-    "intro": "Nous construisons une équipe sélective capable d'exécuter le système de l'école avec régularité.",
+    "intro": "Nous construisons une équipe sélective capable d'exécuter le système de l'école avec constance, chaleur et expertise technique.",
     "cta": "Postuler"
+  },
+  "registration": {
+    "title": "Inscription à une Formation",
+    "subtitle": "Complétez le formulaire ci-dessous et notre équipe vous contactera rapidement.",
+    "submit": "Envoyer l'inscription",
+    "close": "Fermer",
+    "success": "Inscription reçue — nous vous contacterons bientôt.",
+    "courseLabel": "Formation sélectionnée",
+    "fields": {
+      "parentName": "Nom complet du parent / tuteur",
+      "studentName": "Prénom de l'élève",
+      "studentAge": "Âge de l'élève",
+      "email": "Adresse e-mail",
+      "phone": "Téléphone / WhatsApp",
+      "languagePreference": "Langue souhaitée",
+      "notes": "Notes supplémentaires (optionnel)"
+    },
+    "placeholders": {
+      "parentName": "ex. Amine Benali",
+      "studentName": "ex. Sara",
+      "studentAge": "ex. 10",
+      "email": "vous@exemple.com",
+      "phone": "+213 ...",
+      "notes": "Horaires préférés, expérience, questions..."
+    },
+    "languageOptions": {
+      "french": "Français",
+      "english": "Anglais",
+      "german": "Allemand",
+      "spanish": "Espagnol"
+    },
+    "errors": {
+      "required": "Ce champ est obligatoire.",
+      "email": "Veuillez entrer une adresse e-mail valide.",
+      "age": "Veuillez entrer un âge valide entre 5 et 25."
+    }
+  },
+  "footer": {
+    "tagline": "El Biar · Alger",
+    "love": "Fait avec amour pour chaque élève qui franchit nos portes.",
+    "navigation": "Navigation",
+    "connect": "Nous suivre",
+    "social": {
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "location": "Nous trouver sur Google Maps"
+    },
+    "copyright": "© {year} Kennedy School. Tous droits réservés."
   }
 }

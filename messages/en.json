@@ -1,26 +1,103 @@
 {
   "nav": {
     "home": "Home",
-    "trainings": "Our Trainings",
-    "whyUs": "Why Us?",
+    "courses": "Courses",
+    "testimonials": "Testimonials",
+    "whyUs": "Why Us",
     "tutor": "Become a Tutor"
   },
   "hero": {
-    "eyebrow": "Kennedy School",
-    "title": "El Biar Tech & Language Academy for curious young minds.",
-    "subtitle": "A light-themed, multilingual learning space built for robotics, AI, languages, and expressive growth.",
-    "ctaPrimary": "Explore Trainings",
-    "ctaSecondary": "Become a Tutor"
+    "eyebrow": "El Biar · Algiers",
+    "title": "A modern academy where young minds build, create, and grow with confidence.",
+    "subtitle": "Kennedy School blends European educational rigour with the warmth of Algerian community learning — robotics, AI, languages, and creative media in a light, open campus atmosphere.",
+    "ctaPrimary": "Explore Courses",
+    "ctaSecondary": "Become a Tutor",
+    "statCourses": "7",
+    "statCoursesLabel": "Specialised programmes",
+    "statAges": "7–17",
+    "statAgesLabel": "Age groups welcomed",
+    "statLanguages": "4",
+    "statLanguagesLabel": "Languages taught"
   },
-  "trainings": {
-    "title": "Our Trainings",
-    "intro": "Structured around two age bands so the pace, examples, and challenges feel right for every learner.",
-    "age711": "Ages 7-11",
-    "age1217": "Ages 12-17"
+  "courses": {
+    "title": "Our Courses",
+    "intro": "Structured programmes designed for clarity, progression, and hands-on learning — from first robotics builds to professional creative skills.",
+    "register": "Register",
+    "ageRanges": {
+      "kids": "Ages 7–11",
+      "juniors": "Ages 12–17",
+      "teens": "Ages 13–17",
+      "all": "All ages"
+    },
+    "categories": {
+      "STEM": "STEM",
+      "Languages": "Languages",
+      "Creative": "Creative"
+    },
+    "items": {
+      "robotics-kids": {
+        "title": "Robotics for Kids",
+        "description": "Introductory robotics where children build, wire, and programme their first moving machines through playful, project-based sessions."
+      },
+      "robotics-juniors": {
+        "title": "Robotics for Juniors (Teens)",
+        "description": "Advanced robotics for teenagers — sensor integration, team challenges, and competition-ready engineering projects."
+      },
+      "ai-fluency": {
+        "title": "AI Fluency",
+        "description": "Age-appropriate AI literacy covering prompts, creative tools, responsible use, and real-world applications students can explain with confidence."
+      },
+      "python-programming": {
+        "title": "Python Programming",
+        "description": "Structured Python foundations from variables and logic to small apps and data projects, taught with patience and practical examples."
+      },
+      "languages": {
+        "title": "Languages by Levels",
+        "description": "French, English, German, and Spanish taught by level — speaking, reading, and conversation practice aligned to each learner's stage."
+      },
+      "audiovisual-training": {
+        "title": "Audiovisual Training",
+        "description": "Film, sound, and visual storytelling — students learn to plan, shoot, and edit content with professional creative discipline."
+      },
+      "multimedia": {
+        "title": "Multimedia",
+        "description": "Digital design and multimedia production — graphics, layout, and portfolio-ready creative work for the modern creative economy."
+      }
+    }
+  },
+  "testimonials": {
+    "title": "What Families Say",
+    "intro": "Parents across El Biar and Algiers trust Kennedy School for structured, inspiring education.",
+    "items": {
+      "nadia": {
+        "quote": "My daughter went from being shy with technology to presenting her robot project with confidence. The El Biar campus feels welcoming and serious at the same time.",
+        "name": "Nadia B.",
+        "role": "Parent",
+        "location": "El Biar"
+      },
+      "karim": {
+        "quote": "The Python programme gave my son a real foundation — not just games, but logic he uses in school now. The instructors are patient and clearly know their subject.",
+        "name": "Karim M.",
+        "role": "Parent",
+        "location": "Hydra"
+      },
+      "sofia": {
+        "quote": "We enrolled in the English and French levels programme. The progression is clear, and our daughter actually looks forward to her sessions every week.",
+        "name": "Sofia L.",
+        "role": "Parent",
+        "location": "Bouzareah"
+      },
+      "yasmine": {
+        "quote": "The multimedia course opened a creative path we hadn't considered. Professional atmosphere, warm teachers, and a campus that feels open and modern.",
+        "name": "Yasmine K.",
+        "role": "Parent",
+        "location": "Algiers"
+      }
+    }
   },
   "whyUs": {
-    "title": "Why Us?",
-    "intro": "The business plan points to a premium, hands-on academy model with strong operational discipline.",
+    "title": "Why Kennedy School",
+    "intro": "A premium, hands-on academy model rooted in El Biar — European structure, Algerian heart.",
     "items": [
       "Proprietary curriculum designed and owned by the school.",
       "Hands-on STEM learning built around real projects and demos.",
@@ -32,7 +109,55 @@
   },
   "tutor": {
     "title": "Become a Tutor",
-    "intro": "We are building a selective team of instructors who can deliver the school’s system with consistency.",
+    "intro": "We are building a selective team of instructors who can deliver the school's system with consistency, warmth, and technical depth.",
     "cta": "Apply to Teach"
+  },
+  "registration": {
+    "title": "Course Registration",
+    "subtitle": "Complete the form below and our team will contact you shortly.",
+    "submit": "Submit Registration",
+    "close": "Close",
+    "success": "Registration received — we'll contact you soon.",
+    "courseLabel": "Selected course",
+    "fields": {
+      "parentName": "Parent / guardian full name",
+      "studentName": "Student first name",
+      "studentAge": "Student age",
+      "email": "Email address",
+      "phone": "Phone / WhatsApp",
+      "languagePreference": "Language preference",
+      "notes": "Additional notes (optional)"
+    },
+    "placeholders": {
+      "parentName": "e.g. Amine Benali",
+      "studentName": "e.g. Sara",
+      "studentAge": "e.g. 10",
+      "email": "you@example.com",
+      "phone": "+213 ...",
+      "notes": "Preferred schedule, prior experience, questions..."
+    },
+    "languageOptions": {
+      "french": "French",
+      "english": "English",
+      "german": "German",
+      "spanish": "Spanish"
+    },
+    "errors": {
+      "required": "This field is required.",
+      "email": "Please enter a valid email address.",
+      "age": "Please enter a valid age between 5 and 25."
+    }
+  },
+  "footer": {
+    "tagline": "El Biar · Algiers",
+    "love": "Made with love for every student who walks through our doors.",
+    "navigation": "Navigation",
+    "connect": "Connect with us",
+    "social": {
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "location": "Find us on Google Maps"
+    },
+    "copyright": "© {year} Kennedy School. All rights reserved."
   }
 }

@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
+import { SiteNavbar } from '../../components/site-navbar';
+import { SiteFooter } from '../../components/site-footer';
 import { getDictionary } from '../../lib/dictionaries';
 import { type Locale, isLocale, locales } from '../../lib/i18n';
 
@@ -20,7 +22,13 @@ export default async function LocaleLayout({
     notFound();
   }
 
-  await getDictionary(locale as Locale);
+  const dictionary = await getDictionary(locale as Locale);
 
-  return <>{children}</>;
+  return (
+    <>
+      <SiteNavbar locale={locale as Locale} nav={dictionary.nav} />
+      {children}
+      <SiteFooter locale={locale as Locale} nav={dictionary.nav} footer={dictionary.footer} />
+    </>
+  );
 }
