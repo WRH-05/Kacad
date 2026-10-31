@@ -18,22 +18,8 @@
     "titleLead": "Construire l'avenir.",
     "titleEmphasis": "À ciel ouvert.",
     "subtitle": "Kennedy Academy est une académie de technologie, d'arts numériques et de langues à El Biar — avec un laboratoire de robotique, un studio média et un café ouverts entre les sessions.",
-    "ctaPrimary": "Découvrir les formations",
-    "ctaSecondary": "Visiter le Hub",
-    "stats": {
-      "courses": {
-        "value": "7",
-        "label": "Programmes spécialisés"
-      },
-      "ages": {
-        "value": "7–17",
-        "label": "Tranches d'âge accueillies"
-      },
-      "languages": {
-        "value": "4",
-        "label": "Langues enseignées"
-      }
-    }
+    "ctaPrimary": "Explorer les programmes",
+    "ctaSecondary": "Visiter le Hub"
   },
   "hub": {
     "eyebrow": "Le Campus",

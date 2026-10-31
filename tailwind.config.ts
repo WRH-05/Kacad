@@ -51,6 +51,9 @@ const config: Config = {
         card: '0 4px 20px -6px rgb(var(--ink) / 0.08)',
         drawer: '-24px 0 80px -40px rgb(var(--ink) / 0.35)'
       },
+      dropShadow: {
+        logo: '0 30px 60px rgb(var(--accent) / 0.18)'
+      },
       backgroundImage: {
         'hero-wash':
           'radial-gradient(circle at 18% 12%, rgb(var(--highlight) / 0.18), transparent 42%), radial-gradient(circle at 86% 8%, rgb(var(--accent) / 0.1), transparent 38%)',

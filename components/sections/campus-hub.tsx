@@ -3,16 +3,19 @@
 import { useState, type KeyboardEvent as ReactKeyboardEvent } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { HubImage } from '@/components/ui/hub-image';
+import { SpaceStatusBadge } from '@/components/ui/space-status-badge';
 import type { HubSpace } from '@/content/hub';
 import type { Dictionary } from '@/lib/dictionaries';
+import type { OpenState } from '@/lib/hours';
 import { cn } from '@/lib/utils';
 
 type CampusHubProps = {
   hub: Dictionary['hub'];
   spaces: readonly HubSpace[];
+  initialStatus: OpenState;
 };
 
-export function CampusHub({ hub, spaces }: CampusHubProps) {
+export function CampusHub({ hub, spaces, initialStatus }: CampusHubProps) {
   const [activeId, setActiveId] = useState(spaces[0].id);
   const reduceMotion = useReducedMotion();
 
@@ -58,9 +61,14 @@ export function CampusHub({ hub, spaces }: CampusHubProps) {
               {hub.title}
             </h2>
           </div>
-          <p className="max-w-2xl text-lg leading-relaxed text-ink-muted lg:col-span-7 lg:col-start-6">
-            {hub.intro}
-          </p>
+          <div className="lg:col-span-7 lg:col-start-6">
+            <p className="max-w-2xl text-lg leading-relaxed text-ink-muted">
+              {hub.intro}
+            </p>
+            <div className="mt-4">
+              <SpaceStatusBadge labels={hub.status} initial={initialStatus} />
+            </div>
+          </div>
         </div>
 
         <div className="mt-14 grid gap-8 lg:grid-cols-12 lg:gap-10">

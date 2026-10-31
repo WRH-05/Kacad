@@ -29,13 +29,12 @@ export default async function LocaleHomePage({
 
   return (
     <main>
-      <Hero
-        locale={locale as Locale}
-        hero={dictionary.hero}
-        statusLabels={dictionary.hub.status}
+      <Hero locale={locale as Locale} hero={dictionary.hero} />
+      <CampusHub
+        hub={dictionary.hub}
+        spaces={hubSpaces}
         initialStatus={initialStatus}
       />
-      <CampusHub hub={dictionary.hub} spaces={hubSpaces} />
       <CourseMatrix
         coursesDict={dictionary.courses}
         waitlist={dictionary.waitlist}

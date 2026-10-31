@@ -1,24 +1,27 @@
 import Link from 'next/link';
 import { AsteriskLogo } from '@/components/brand/asterisk-logo';
-import { SpaceStatusBadge } from '@/components/ui/space-status-badge';
+import { DitherBackground } from '@/components/ui/dither-background';
 import type { Dictionary } from '@/lib/dictionaries';
-import type { OpenState } from '@/lib/hours';
-import { routes } from '@/lib/routes';
 import type { Locale } from '@/lib/i18n';
+import { routes } from '@/lib/routes';
 
 type HeroProps = {
   locale: Locale;
   hero: Dictionary['hero'];
-  statusLabels: Dictionary['hub']['status'];
-  initialStatus: OpenState;
 };
 
-export function Hero({ locale, hero, statusLabels, initialStatus }: HeroProps) {
-  const stats = [hero.stats.courses, hero.stats.ages, hero.stats.languages];
-
+export function Hero({ locale, hero }: HeroProps) {
   return (
-    <section className="relative overflow-hidden bg-hero-wash">
-      <div className="section-shell grid gap-16 py-20 lg:grid-cols-12 lg:gap-8 lg:py-28">
+    <section className="relative isolate min-h-[85vh] overflow-hidden bg-white">
+      <DitherBackground />
+
+      {/* Readability scrim: stronger vertical layer on mobile, horizontal on desktop. */}
+      <div
+        className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-surface/95 via-surface/90 to-surface/85 lg:bg-gradient-to-r lg:from-surface/95 lg:via-surface/75 lg:to-transparent"
+        aria-hidden="true"
+      />
+
+      <div className="section-shell relative z-10 grid min-h-[85vh] items-center gap-16 py-20 lg:grid-cols-12 lg:gap-8 lg:py-28">
         <div className="lg:col-span-7">
           <div className="flex items-center gap-4 font-mono text-[10px] uppercase tracking-[0.3em] text-accent">
             <span className="h-px w-10 bg-accent/40" aria-hidden="true" />
@@ -50,53 +53,19 @@ export function Hero({ locale, hero, statusLabels, initialStatus }: HeroProps) {
               {hero.ctaSecondary}
             </Link>
           </div>
-
-          <dl className="mt-14 grid grid-cols-3 border-y border-line/70">
-            {stats.map((stat, index) => (
-              <div
-                key={stat.label}
-                className={
-                  index === 0
-                    ? 'py-6'
-                    : 'border-l border-line/70 py-6 pl-5 sm:pl-6'
-                }
-              >
-                <dd className="font-serif text-3xl text-ink">{stat.value}</dd>
-                <dt className="mt-2 font-mono text-[9px] uppercase leading-relaxed tracking-[0.2em] text-ink-muted">
-                  {stat.label}
-                </dt>
-              </div>
-            ))}
-          </dl>
         </div>
 
-        <div className="lg:col-span-5">
-          <div className="relative flex h-full min-h-[24rem] flex-col justify-between border border-line/70 bg-surface-raised/70 p-8 shadow-soft">
-            <div className="flex items-start justify-between gap-4">
-              <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-ink-muted">
-                KA / EL BIAR
-              </span>
-              <SpaceStatusBadge labels={statusLabels} initial={initialStatus} />
-            </div>
-
-            <div className="flex flex-1 items-center justify-center py-10">
-              <AsteriskLogo
-                className="h-48 w-48 text-accent sm:h-60 sm:w-60"
-                animated
-              />
-            </div>
-
-            <div className="flex items-end justify-between gap-4 border-t border-line/60 pt-4">
-              <p className="font-mono text-[9px] uppercase leading-relaxed tracking-[0.22em] text-ink-muted">
-                Four Ks
-                <br />
-                one open room
-              </p>
-              <p className="font-mono text-[9px] uppercase tracking-[0.22em] text-accent">
-                36.75° N / 3.05° E
-              </p>
-            </div>
-          </div>
+        <div className="relative flex items-center justify-center lg:col-span-5 lg:justify-end">
+          <div
+            className="pointer-events-none absolute h-64 w-64 rounded-full bg-surface/70 blur-3xl"
+            aria-hidden="true"
+          />
+          <AsteriskLogo
+            dock
+            animated
+            decorative
+            className="relative h-52 w-52 text-accent drop-shadow-logo sm:h-64 sm:w-64 lg:h-[22rem] lg:w-[22rem]"
+          />
         </div>
       </div>
     </section>
