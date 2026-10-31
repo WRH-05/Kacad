@@ -22,21 +22,16 @@ export function middleware(request: NextRequest) {
   const locale = firstSegment && isLocale(firstSegment) ? firstSegment : null;
   const resolvedLocale = locale ?? request.cookies.get('NEXT_LOCALE')?.value ?? defaultLocale;
 
-  const requestHeaders = new Headers(request.headers);
-  requestHeaders.set('x-locale', resolvedLocale);
-
   const response = locale
-    ? NextResponse.next({ request: { headers: requestHeaders } })
-    : NextResponse.redirect(new URL(`/${resolvedLocale}${pathname === '/' ? '' : pathname}`, request.url));
+    ? NextResponse.next()
+    : NextResponse.redirect(
+        new URL(`/${resolvedLocale}${pathname === '/' ? '' : pathname}`, request.url)
+      );
 
   response.cookies.set('NEXT_LOCALE', resolvedLocale, {
     path: '/',
     sameSite: 'lax'
   });
-
-  if (locale) {
-    response.headers.set('x-locale', resolvedLocale);
-  }
 
   return response;
 }

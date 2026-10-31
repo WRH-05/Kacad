@@ -1,22 +1,17 @@
 'use client';
 
 import Link from 'next/link';
-import type { Route } from 'next';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
-import { type Locale, locales } from '@/lib/i18n';
-
-type NavLabels = {
-  home: string;
-  courses: string;
-  testimonials: string;
-  whyUs: string;
-  tutor: string;
-};
+import { AsteriskLogo } from '@/components/brand/asterisk-logo';
+import type { Dictionary } from '@/lib/dictionaries';
+import { buildLocaleHref, type Locale, locales } from '@/lib/i18n';
+import { routes } from '@/lib/routes';
+import { cn } from '@/lib/utils';
 
 type SiteNavbarProps = {
   locale: Locale;
-  nav: NavLabels;
+  nav: Dictionary['nav'];
 };
 
 const localeLabels: Record<Locale, string> = {
@@ -24,61 +19,73 @@ const localeLabels: Record<Locale, string> = {
   fr: 'FR'
 };
 
-function buildLocaleHref(pathname: string, targetLocale: Locale): string {
-  const segments = pathname.split('/').filter(Boolean);
-  if (segments.length > 0 && locales.includes(segments[0] as Locale)) {
-    segments[0] = targetLocale;
-  } else {
-    segments.unshift(targetLocale);
-  }
-  return `/${segments.join('/')}`;
-}
-
 export function SiteNavbar({ locale, nav }: SiteNavbarProps) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  const links: { href: Route; label: string }[] = [
-    { href: `/${locale}` as Route, label: nav.home },
-    { href: `/${locale}#courses` as Route, label: nav.courses },
-    { href: `/${locale}#testimonials` as Route, label: nav.testimonials },
-    { href: `/${locale}#why-us` as Route, label: nav.whyUs },
-    { href: `/${locale}/become-a-tutor` as Route, label: nav.tutor }
+  const links = [
+    { href: routes.home(locale), label: nav.home },
+    { href: routes.section(locale, 'courses'), label: nav.courses },
+    { href: routes.section(locale, 'hub'), label: nav.hub },
+    { href: routes.section(locale, 'method'), label: nav.method },
+    { href: routes.contact(locale), label: nav.contact }
   ];
 
-  const linkClassName =
-    'rounded-md px-3 py-2 text-sm font-medium text-navy/80 transition-colors hover:bg-sand hover:text-navy';
+  const contactPath = routes.contact(locale);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-navy/8 bg-cream/90 shadow-card backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-line/60 bg-surface/90 backdrop-blur-md">
       <div className="section-shell flex items-center justify-between gap-4 py-4">
-        <Link
-          href={`/${locale}` as Route}
-          className="font-display text-lg font-semibold tracking-tight text-navy"
-        >
-          Kennedy School
+        <Link href={routes.home(locale)} className="group flex items-center gap-3">
+          <AsteriskLogo
+            decorative
+            animated
+            className="h-8 w-8 shrink-0 text-accent"
+          />
+          <span className="flex flex-col">
+            <span className="font-serif text-lg leading-none text-ink">
+              Kennedy Academy
+            </span>
+            <span className="mt-1 font-mono text-[8px] uppercase tracking-[0.24em] text-ink-muted">
+              El Biar · Algiers
+            </span>
+          </span>
         </Link>
 
-        <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Main navigation">
+        <nav className="hidden items-center gap-6 lg:flex" aria-label={nav.aria.main}>
           {links.map((link) => (
-            <Link key={link.label} href={link.href} className={linkClassName}>
+            <Link
+              key={link.label}
+              href={link.href}
+              aria-current={link.href === contactPath && pathname === contactPath ? 'page' : undefined}
+              className={cn(
+                'font-mono text-[9px] uppercase tracking-[0.18em] transition',
+                link.href === contactPath && pathname === contactPath
+                  ? 'text-accent'
+                  : 'text-ink-muted hover:text-accent'
+              )}
+            >
               {link.label}
             </Link>
           ))}
         </nav>
 
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1 rounded-full border border-navy/8 bg-white px-1 py-1">
+          <div
+            className="flex items-center gap-1 border border-line/70 p-1"
+            aria-label={nav.aria.switchLanguage}
+          >
             {locales.map((loc) => (
               <Link
                 key={loc}
-                href={buildLocaleHref(pathname, loc) as Route}
-                className={`rounded-full px-2.5 py-1 text-xs font-semibold transition-colors ${
-                  loc === locale
-                    ? 'bg-navy text-white'
-                    : 'text-navy/60 hover:bg-sand hover:text-navy'
-                }`}
+                href={buildLocaleHref(pathname, loc)}
                 aria-current={loc === locale ? 'page' : undefined}
+                className={cn(
+                  'px-2 py-1 font-mono text-[9px] uppercase tracking-[0.12em] transition',
+                  loc === locale
+                    ? 'bg-accent text-accent-ink'
+                    : 'text-ink-muted hover:text-accent'
+                )}
               >
                 {localeLabels[loc]}
               </Link>
@@ -87,18 +94,17 @@ export function SiteNavbar({ locale, nav }: SiteNavbarProps) {
 
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-md border border-navy/10 p-2 text-navy lg:hidden"
-            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+            className="inline-flex items-center justify-center border border-line/70 p-2 text-ink lg:hidden"
+            aria-label={mobileOpen ? nav.aria.closeMenu : nav.aria.openMenu}
             aria-expanded={mobileOpen}
             onClick={() => setMobileOpen((open) => !open)}
           >
-            <span className="sr-only">{mobileOpen ? 'Close menu' : 'Open menu'}</span>
             <svg
-              className="h-5 w-5"
+              className="h-4 w-4"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              strokeWidth="2"
+              strokeWidth="1.75"
               aria-hidden="true"
             >
               {mobileOpen ? (
@@ -113,15 +119,15 @@ export function SiteNavbar({ locale, nav }: SiteNavbarProps) {
 
       {mobileOpen ? (
         <nav
-          className="border-t border-navy/8 bg-cream px-6 py-4 lg:hidden"
-          aria-label="Mobile navigation"
+          className="border-t border-line/60 bg-surface px-6 py-4 lg:hidden"
+          aria-label={nav.aria.mobile}
         >
-          <ul className="flex flex-col gap-1">
+          <ul className="flex flex-col">
             {links.map((link) => (
               <li key={link.label}>
                 <Link
                   href={link.href}
-                  className={`block ${linkClassName}`}
+                  className="block border-b border-line/50 py-3 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-muted transition hover:text-accent"
                   onClick={() => setMobileOpen(false)}
                 >
                   {link.label}
