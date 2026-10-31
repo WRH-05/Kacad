@@ -1,9 +1,17 @@
-import { CoursesSection } from '../../components/sections/courses-section';
-import { HeroSection } from '../../components/sections/hero-section';
-import { TestimonialsSection } from '../../components/sections/testimonials-section';
-import { WhyUsSection } from '../../components/sections/why-us-section';
-import { getDictionary } from '../../lib/dictionaries';
-import { isLocale, type Locale } from '../../lib/i18n';
+import { notFound } from 'next/navigation';
+import { CampusHub } from '@/components/sections/campus-hub';
+import { ContactCta } from '@/components/sections/contact-cta';
+import { CourseMatrix } from '@/components/sections/course-matrix';
+import { Hero } from '@/components/sections/hero';
+import { KennedyMethod } from '@/components/sections/kennedy-method';
+import { TestimonialMarquee } from '@/components/sections/testimonial-marquee';
+import { contactInfo, timeZone } from '@/content/contact';
+import { hubSpaces } from '@/content/hub';
+import { getDictionary } from '@/lib/dictionaries';
+import { getOpenState } from '@/lib/hours';
+import { isLocale, type Locale } from '@/lib/i18n';
+
+export const revalidate = 60;
 
 export default async function LocaleHomePage({
   params
@@ -13,21 +21,29 @@ export default async function LocaleHomePage({
   const { locale } = await params;
 
   if (!isLocale(locale)) {
-    return null;
+    notFound();
   }
 
   const dictionary = await getDictionary(locale as Locale);
+  const initialStatus = getOpenState(new Date(), contactInfo.hours, timeZone);
 
   return (
     <main>
-      <HeroSection locale={locale as Locale} hero={dictionary.hero} />
-      <CoursesSection
+      <Hero
         locale={locale as Locale}
-        coursesDict={dictionary.courses}
-        registration={dictionary.registration}
+        hero={dictionary.hero}
+        statusLabels={dictionary.hub.status}
+        initialStatus={initialStatus}
       />
-      <TestimonialsSection testimonialsDict={dictionary.testimonials} />
-      <WhyUsSection whyUs={dictionary.whyUs} />
+      <CampusHub hub={dictionary.hub} spaces={hubSpaces} />
+      <CourseMatrix
+        coursesDict={dictionary.courses}
+        waitlist={dictionary.waitlist}
+        locale={locale as Locale}
+      />
+      <KennedyMethod method={dictionary.method} />
+      <TestimonialMarquee testimonialsDict={dictionary.testimonials} />
+      <ContactCta contact={dictionary.contact} locale={locale as Locale} />
     </main>
   );
 }

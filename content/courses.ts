@@ -1,71 +1,104 @@
-export type CourseCategory = 'STEM' | 'Languages' | 'Creative';
+export const courseTracks = ['tech', 'arts', 'languages'] as const;
+export type CourseTrack = (typeof courseTracks)[number];
 
-export type CourseId =
-  | 'robotics-kids'
-  | 'robotics-juniors'
-  | 'ai-fluency'
-  | 'python-programming'
-  | 'languages'
-  | 'audiovisual-training'
-  | 'multimedia';
+export const ageBrackets = ['kids', 'juniors', 'all'] as const;
+export type AgeBracket = (typeof ageBrackets)[number];
+
+/** Filter values are intentionally distinct from course age brackets. */
+export type AgeFilter = 'any' | 'kids' | 'juniors';
+
+export const courseLevels = ['foundation', 'intermediate', 'advanced', 'all-levels'] as const;
+export type CourseLevel = (typeof courseLevels)[number];
+
+export const courseIds = [
+  'robotics-kids',
+  'robotics-juniors',
+  'ai-fluency',
+  'python-programming',
+  'languages',
+  'audiovisual-training',
+  'multimedia'
+] as const;
+
+export type CourseId = (typeof courseIds)[number];
 
 export type Course = {
   id: CourseId;
-  category: CourseCategory;
-  ageRangeKey: 'kids' | 'juniors' | 'teens' | 'all';
-  tags?: string[];
+  track: CourseTrack;
+  ageBracket: AgeBracket;
+  level: CourseLevel;
+  durationWeeks: number;
+  sessionsPerWeek: number;
+  brochurePath?: string;
+  featured?: boolean;
 };
 
-export const courses: Course[] = [
+export const courses: readonly Course[] = [
   {
     id: 'robotics-kids',
-    category: 'STEM',
-    ageRangeKey: 'kids',
-    tags: ['Build', 'Code', 'Projects']
+    track: 'tech',
+    ageBracket: 'kids',
+    level: 'foundation',
+    durationWeeks: 8,
+    sessionsPerWeek: 2,
+    featured: true
   },
   {
     id: 'robotics-juniors',
-    category: 'STEM',
-    ageRangeKey: 'juniors',
-    tags: ['Competition', 'Engineering', 'Teamwork']
+    track: 'tech',
+    ageBracket: 'juniors',
+    level: 'intermediate',
+    durationWeeks: 12,
+    sessionsPerWeek: 2
   },
   {
     id: 'ai-fluency',
-    category: 'STEM',
-    ageRangeKey: 'all',
-    tags: ['Prompts', 'Ethics', 'Creativity']
+    track: 'tech',
+    ageBracket: 'all',
+    level: 'all-levels',
+    durationWeeks: 8,
+    sessionsPerWeek: 2,
+    featured: true
   },
   {
     id: 'python-programming',
-    category: 'STEM',
-    ageRangeKey: 'teens',
-    tags: ['Logic', 'Projects', 'Problem-solving']
+    track: 'tech',
+    ageBracket: 'juniors',
+    level: 'foundation',
+    durationWeeks: 12,
+    sessionsPerWeek: 2
   },
   {
     id: 'languages',
-    category: 'Languages',
-    ageRangeKey: 'all',
-    tags: ['French', 'English', 'German', 'Spanish']
+    track: 'languages',
+    ageBracket: 'all',
+    level: 'all-levels',
+    durationWeeks: 12,
+    sessionsPerWeek: 2
   },
   {
     id: 'audiovisual-training',
-    category: 'Creative',
-    ageRangeKey: 'teens',
-    tags: ['Film', 'Sound', 'Storytelling']
+    track: 'arts',
+    ageBracket: 'juniors',
+    level: 'intermediate',
+    durationWeeks: 10,
+    sessionsPerWeek: 2
   },
   {
     id: 'multimedia',
-    category: 'Creative',
-    ageRangeKey: 'all',
-    tags: ['Design', 'Digital', 'Portfolio']
+    track: 'arts',
+    ageBracket: 'all',
+    level: 'foundation',
+    durationWeeks: 8,
+    sessionsPerWeek: 2,
+    featured: true
   }
 ];
 
-export const whyUsHighlights = [
-  'Proprietary curriculum designed and owned by the school, not by rotating tutors.',
-  'Hands-on STEM bootcamps focused on real projects, including robotics and IoT systems.',
-  'Curriculum delivered by technically strong instructors, aligned with the USTHB-engineer positioning.',
-  'Compact 3-day rhythm that reduces fatigue and family logistics pressure.',
-  'Strict cohort system that protects learning continuity and prevents late-stage disruption.',
-  'Premium positioning with a practical, parent-friendly delivery model.'
-];
+export function isCourseId(value: unknown): value is CourseId {
+  return typeof value === 'string' && (courseIds as readonly string[]).includes(value);
+}
+
+export function matchesAgeFilter(course: Course, filter: AgeFilter): boolean {
+  return filter === 'any' || course.ageBracket === filter || course.ageBracket === 'all';
+}

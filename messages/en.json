@@ -2,72 +2,309 @@
   "nav": {
     "home": "Home",
     "courses": "Courses",
-    "testimonials": "Testimonials",
-    "whyUs": "Why Us",
-    "tutor": "Become a Tutor"
+    "hub": "The Hub",
+    "method": "The Method",
+    "contact": "Contact",
+    "aria": {
+      "main": "Main navigation",
+      "mobile": "Mobile navigation",
+      "openMenu": "Open menu",
+      "closeMenu": "Close menu",
+      "switchLanguage": "Switch language"
+    }
   },
   "hero": {
     "eyebrow": "El Biar · Algiers",
-    "title": "A modern academy where young minds build, create, and grow with confidence.",
-    "subtitle": "Kennedy School blends European educational rigour with the warmth of Algerian community learning — robotics, AI, languages, and creative media in a light, open campus atmosphere.",
+    "titleLead": "Build the future.",
+    "titleEmphasis": "In the open.",
+    "subtitle": "Kennedy Academy is a technology, digital arts and languages academy in El Biar — with a robotics lab, a media studio and a cafe that stay open between sessions.",
     "ctaPrimary": "Explore Courses",
-    "ctaSecondary": "Become a Tutor",
-    "statCourses": "7",
-    "statCoursesLabel": "Specialised programmes",
-    "statAges": "7–17",
-    "statAgesLabel": "Age groups welcomed",
-    "statLanguages": "4",
-    "statLanguagesLabel": "Languages taught"
+    "ctaSecondary": "Visit the Hub",
+    "stats": {
+      "courses": {
+        "value": "7",
+        "label": "Specialised programmes"
+      },
+      "ages": {
+        "value": "7–17",
+        "label": "Age groups welcomed"
+      },
+      "languages": {
+        "value": "4",
+        "label": "Languages taught"
+      }
+    }
+  },
+  "hub": {
+    "eyebrow": "The Campus",
+    "title": "A school that stays open.",
+    "intro": "Between sessions, the campus becomes a workshop — a robotics lab, a media studio and a cafe where the work continues.",
+    "status": {
+      "open": "Open now",
+      "openUntil": "Open until {time}",
+      "opensAt": "Opens at {time}",
+      "opensTomorrow": "Opens tomorrow at {time}",
+      "closed": "Closed today"
+    },
+    "spaces": {
+      "robotics-lab": {
+        "name": "Robotics Lab",
+        "blurb": "A hardware bench for prototypes, sensors and competition builds.",
+        "alt": "A maker workbench with electronics, tools and a robotics prototype.",
+        "tag": "Hardware"
+      },
+      "media-studio": {
+        "name": "Media Studio",
+        "blurb": "Camera, light and sound — where stories are planned, shot and cut.",
+        "alt": "A camera and lighting setup inside a small media studio.",
+        "tag": "Media"
+      },
+      "cafe-coworking": {
+        "name": "Cafe & Coworking",
+        "blurb": "The room between classes: espresso, long tables and unfinished ideas.",
+        "alt": "Warm cafe tables and chairs arranged for coworking.",
+        "tag": "Open studio"
+      }
+    }
   },
   "courses": {
-    "title": "Our Courses",
-    "intro": "Structured programmes designed for clarity, progression, and hands-on learning — from first robotics builds to professional creative skills.",
-    "register": "Register",
+    "eyebrow": "Programmes",
+    "title": "The Course Matrix",
+    "intro": "Filter by discipline and age, then open a syllabus to see the modules and join the waitlist.",
     "ageRanges": {
       "kids": "Ages 7–11",
       "juniors": "Ages 12–17",
-      "teens": "Ages 13–17",
       "all": "All ages"
     },
-    "categories": {
-      "STEM": "STEM",
-      "Languages": "Languages",
-      "Creative": "Creative"
+    "filters": {
+      "trackLabel": "Discipline",
+      "ageLabel": "Age",
+      "allTracks": "All disciplines",
+      "anyAge": "All ages",
+      "reset": "Clear filters",
+      "results": "{count} programmes",
+      "empty": "No programmes match these filters."
     },
+    "tracks": {
+      "tech": "Tech",
+      "arts": "Arts",
+      "languages": "Languages"
+    },
+    "levels": {
+      "foundation": "Foundation",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced",
+      "all-levels": "All levels"
+    },
+    "meta": {
+      "weeks": "{weeks} weeks",
+      "sessions": "{sessions}× / week",
+      "levelLabel": "Level",
+      "durationLabel": "Duration"
+    },
+    "syllabusCta": "View syllabus",
+    "outcomesLabel": "Outcomes",
+    "modulesLabel": "Syllabus",
     "items": {
       "robotics-kids": {
         "title": "Robotics for Kids",
-        "description": "Introductory robotics where children build, wire, and programme their first moving machines through playful, project-based sessions."
+        "description": "Introductory robotics where children build, wire, and programme their first moving machines through playful, project-based sessions.",
+        "lede": "First machines, first circuits, first moment of \"we built that\".",
+        "highlights": [
+          "Build",
+          "Wire",
+          "Programme"
+        ],
+        "outcomes": [
+          "Assemble and wire a working robot from a guided kit.",
+          "Explain what a sensor does and use one in a small project.",
+          "Debug a simple programme with a mentor's guidance.",
+          "Present a finished build to the group."
+        ],
+        "modules": [
+          "How machines move — motors, wheels and structure",
+          "Circuits and safety — power, switches and sensors",
+          "First programme — sequences, loops and timing",
+          "Sensor logic — making the robot react",
+          "Team build — design, assemble, test",
+          "Demo day — present, explain and refine"
+        ]
       },
       "robotics-juniors": {
-        "title": "Robotics for Juniors (Teens)",
-        "description": "Advanced robotics for teenagers — sensor integration, team challenges, and competition-ready engineering projects."
+        "title": "Robotics for Juniors",
+        "description": "Advanced robotics for teenagers — sensor integration, team challenges, and competition-ready engineering projects.",
+        "lede": "Engineering with constraints: sensors, competition rules and a team that ships.",
+        "highlights": [
+          "Engineering",
+          "Competition",
+          "Teamwork"
+        ],
+        "outcomes": [
+          "Design a robot around a defined challenge and rule set.",
+          "Integrate multiple sensors and explain the signal flow.",
+          "Work in a team with clear build, test and review roles.",
+          "Document and pitch an engineering decision."
+        ],
+        "modules": [
+          "Challenge brief — constraints, scoring and strategy",
+          "Mechanical design — chassis, gearing and torque",
+          "Sensor integration — distance, line and touch",
+          "Control logic — state machines and calibration",
+          "Competition build — iteration under time pressure",
+          "Final run — test, present and review"
+        ]
       },
       "ai-fluency": {
         "title": "AI Fluency",
-        "description": "Age-appropriate AI literacy covering prompts, creative tools, responsible use, and real-world applications students can explain with confidence."
+        "description": "Age-appropriate AI literacy covering prompts, creative tools, responsible use, and real-world applications students can explain with confidence.",
+        "lede": "Understand the tools shaping the next decade — and use them with judgement.",
+        "highlights": [
+          "Prompts",
+          "Ethics",
+          "Creativity"
+        ],
+        "outcomes": [
+          "Explain how large language models generate and miss information.",
+          "Write effective prompts for a defined creative or study task.",
+          "Identify bias, hallucination and privacy risks in AI output.",
+          "Build a small project that uses AI responsibly."
+        ],
+        "modules": [
+          "How AI works — patterns, predictions and limits",
+          "Prompt craft — context, constraints and iteration",
+          "Creative studio — image, text and sound tools",
+          "Responsible use — bias, privacy and attribution",
+          "Study and work — AI as a thinking partner",
+          "Project clinic — build, critique and present"
+        ]
       },
       "python-programming": {
         "title": "Python Programming",
-        "description": "Structured Python foundations from variables and logic to small apps and data projects, taught with patience and practical examples."
+        "description": "Structured Python foundations from variables and logic to small apps and data projects, taught with patience and practical examples.",
+        "lede": "From first variables to a small application — logic you can carry into any field.",
+        "highlights": [
+          "Logic",
+          "Projects",
+          "Problem-solving"
+        ],
+        "outcomes": [
+          "Write readable Python using variables, conditionals and loops.",
+          "Break a problem into functions and test each piece.",
+          "Work with lists, dictionaries and simple files.",
+          "Ship a small command-line project."
+        ],
+        "modules": [
+          "Variables, types and input",
+          "Conditionals and loops",
+          "Functions and clean structure",
+          "Collections — lists and dictionaries",
+          "Files and small data projects",
+          "Project week — build, debug and present"
+        ]
       },
       "languages": {
         "title": "Languages by Levels",
-        "description": "French, English, German, and Spanish taught by level — speaking, reading, and conversation practice aligned to each learner's stage."
+        "description": "French, English, German, and Spanish taught by level — speaking, reading, and conversation practice aligned to each learner's stage.",
+        "lede": "French, English, German and Spanish — placed by level, taught for real conversation.",
+        "highlights": [
+          "French",
+          "English",
+          "German",
+          "Spanish"
+        ],
+        "outcomes": [
+          "Speak with more confidence in everyday and classroom situations.",
+          "Read and understand level-appropriate texts.",
+          "Use grammar with intention rather than memorisation alone.",
+          "Prepare for the next level with a clear progress review."
+        ],
+        "modules": [
+          "Placement and goals — finding your level",
+          "Speaking foundation — rhythm, pronunciation and confidence",
+          "Listening and response — real conversations",
+          "Reading and vocabulary — building range",
+          "Writing and structure — accuracy with purpose",
+          "Progress review and next-level plan"
+        ]
       },
       "audiovisual-training": {
         "title": "Audiovisual Training",
-        "description": "Film, sound, and visual storytelling — students learn to plan, shoot, and edit content with professional creative discipline."
+        "description": "Film, sound, and visual storytelling — students learn to plan, shoot, and edit content with professional creative discipline.",
+        "lede": "Plan it, shoot it, cut it — visual storytelling with professional discipline.",
+        "highlights": [
+          "Film",
+          "Sound",
+          "Storytelling"
+        ],
+        "outcomes": [
+          "Plan a short film from treatment to shot list.",
+          "Operate a camera and capture clean audio.",
+          "Edit a sequence with rhythm and continuity.",
+          "Screen and critique a finished piece."
+        ],
+        "modules": [
+          "Story and treatment — finding the film",
+          "Pre-production — shot lists, locations and roles",
+          "Camera — framing, movement and exposure",
+          "Sound — microphones, levels and room tone",
+          "Editing — assembly, rhythm and colour",
+          "Screening — critique and final cut"
+        ]
       },
       "multimedia": {
         "title": "Multimedia",
-        "description": "Digital design and multimedia production — graphics, layout, and portfolio-ready creative work for the modern creative economy."
+        "description": "Digital design and multimedia production — graphics, layout, and portfolio-ready creative work for the modern creative economy.",
+        "lede": "Design systems, layouts and digital assets that hold up in a real portfolio.",
+        "highlights": [
+          "Design",
+          "Digital",
+          "Portfolio"
+        ],
+        "outcomes": [
+          "Apply layout, type and colour principles to a digital piece.",
+          "Build a small multi-page project with a consistent system.",
+          "Prepare assets for screen and social formats.",
+          "Present a portfolio-ready case study."
+        ],
+        "modules": [
+          "Design foundations — grid, type and hierarchy",
+          "Colour and image — building a visual system",
+          "Layout studio — pages that breathe",
+          "Digital production — assets and formats",
+          "Portfolio craft — selection and sequencing",
+          "Final review — present and refine"
+        ]
+      }
+    }
+  },
+  "method": {
+    "eyebrow": "The Kennedy Method",
+    "title": "Engineering rigour, open culture.",
+    "intro": "Three commitments shape every programme, every cohort and every room.",
+    "items": {
+      "rigorous-engineering": {
+        "number": "01",
+        "title": "Rigorous Engineering",
+        "body": "We teach the reasoning behind the build — structure, constraints, testing, and the discipline to ship something that works."
+      },
+      "open-lab-culture": {
+        "number": "02",
+        "title": "Open Lab Culture",
+        "body": "The lab stays open beyond class hours. Students prototype, break things, and learn to ask better questions alongside mentors."
+      },
+      "bilingual-fluency": {
+        "number": "03",
+        "title": "Bilingual Fluency",
+        "body": "Technical English and French are practised inside the work, not bolted on — so students can explain, pitch and collaborate."
       }
     }
   },
   "testimonials": {
-    "title": "What Families Say",
+    "eyebrow": "Families",
+    "title": "What families say",
     "intro": "Parents across El Biar and Algiers trust Kennedy School for structured, inspiring education.",
+    "pause": "Pause testimonials",
+    "play": "Play testimonials",
     "items": {
       "nadia": {
         "quote": "My daughter went from being shy with technology to presenting her robot project with confidence. The El Biar campus feels welcoming and serious at the same time.",
@@ -95,57 +332,98 @@
       }
     }
   },
-  "whyUs": {
-    "title": "Why Kennedy School",
-    "intro": "A premium, hands-on academy model rooted in El Biar — European structure, Algerian heart.",
-    "items": [
-      "Proprietary curriculum designed and owned by the school.",
-      "Hands-on STEM learning built around real projects and demos.",
-      "Delivered by technically strong instructors aligned with the academy's positioning.",
-      "Compact 3-day rhythm that reduces fatigue and makes planning easier for families.",
-      "Strict cohort system that protects continuity and prevents late joiner disruption.",
-      "Premium quality with a practical, parent-friendly structure."
-    ]
-  },
-  "tutor": {
-    "title": "Become a Tutor",
-    "intro": "We are building a selective team of instructors who can deliver the school's system with consistency, warmth, and technical depth.",
-    "cta": "Apply to Teach"
-  },
-  "registration": {
-    "title": "Course Registration",
-    "subtitle": "Complete the form below and our team will contact you shortly.",
-    "submit": "Submit Registration",
+  "waitlist": {
+    "title": "Join the waitlist",
+    "subtitle": "Save a seat and receive the full syllabus.",
     "close": "Close",
-    "success": "Registration received — we'll contact you soon.",
     "courseLabel": "Selected course",
     "fields": {
-      "parentName": "Parent / guardian full name",
-      "studentName": "Student first name",
-      "studentAge": "Student age",
-      "email": "Email address",
-      "phone": "Phone / WhatsApp",
-      "languagePreference": "Language preference",
-      "notes": "Additional notes (optional)"
+      "name": "Full name",
+      "contact": "WhatsApp or email",
+      "ageGroup": "Age group",
+      "notes": "Notes (optional)"
     },
     "placeholders": {
-      "parentName": "e.g. Amine Benali",
-      "studentName": "e.g. Sara",
-      "studentAge": "e.g. 10",
-      "email": "you@example.com",
-      "phone": "+213 ...",
-      "notes": "Preferred schedule, prior experience, questions..."
+      "name": "e.g. Amine Benali",
+      "contact": "you@example.com or +213 ...",
+      "notes": "Preferred schedule, experience, questions…"
     },
-    "languageOptions": {
-      "french": "French",
-      "english": "English",
-      "german": "German",
-      "spanish": "Spanish"
+    "ageGroupPlaceholder": "Select an age group",
+    "ageGroupOptions": {
+      "kids": "7–11",
+      "juniors": "12–17",
+      "adults": "18+"
     },
+    "contactHint": "We reply within one working day.",
+    "consent": "I agree to be contacted about this programme.",
+    "submit": "Request the syllabus",
+    "submitting": "Sending…",
+    "successTitle": "You're on the list.",
+    "successBody": "Your syllabus is ready to download.",
+    "brochureCta": "Download the syllabus (PDF)",
     "errors": {
       "required": "This field is required.",
-      "email": "Please enter a valid email address.",
-      "age": "Please enter a valid age between 5 and 25."
+      "contact": "Enter a valid email or WhatsApp number.",
+      "ageGroup": "Select an age group.",
+      "consent": "Please accept to be contacted.",
+      "tooLong": "This value is too long.",
+      "network": "Check your connection and try again.",
+      "server": "Something went wrong. Please try again."
+    }
+  },
+  "contact": {
+    "eyebrow": "Visit",
+    "title": "Come see the space.",
+    "intro": "The campus is in El Biar, open Monday to Saturday. Drop in for a tour, a coffee or a conversation about the next cohort.",
+    "addressLabel": "Campus",
+    "mapsCta": "Get directions",
+    "visitCta": "Visit the campus",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone",
+    "whatsappLabel": "WhatsApp",
+    "whatsappCta": "Start a conversation",
+    "whatsappPrefill": "Hello Kennedy Academy — I would like to know more about the programmes.",
+    "hoursTitle": "Hub & Cafe hours",
+    "hoursNote": "Sunday closed",
+    "hoursWeekdays": "Monday–Saturday",
+    "hoursTime": "09:00 – 19:00",
+    "hoursSunday": "Sunday",
+    "hoursClosed": "Closed",
+    "socialsTitle": "Follow",
+    "form": {
+      "title": "General inquiry",
+      "intro": "Tell us what you're looking for and we'll point you to the right programme.",
+      "fields": {
+        "name": "Full name",
+        "email": "Email",
+        "phone": "Phone / WhatsApp",
+        "message": "How can we help?",
+        "consent": "I agree to be contacted."
+      },
+      "placeholders": {
+        "name": "e.g. Amine Benali",
+        "email": "you@example.com",
+        "phone": "+213 ...",
+        "message": "Your question, the programme you're interested in, the student's age…"
+      },
+      "submit": "Send inquiry",
+      "submitting": "Sending…",
+      "successTitle": "Thank you.",
+      "successBody": "We'll be in touch shortly.",
+      "fallback": "The form is unavailable right now. Please message us on WhatsApp or email kennedy@likour.tech.",
+      "errors": {
+        "required": "This field is required.",
+        "email": "Enter a valid email address.",
+        "phone": "Enter a valid phone number.",
+        "consent": "Please accept to be contacted.",
+        "tooLong": "This value is too long.",
+        "network": "Check your connection and try again.",
+        "server": "Something went wrong. Please try again."
+      }
+    },
+    "meta": {
+      "title": "Contact",
+      "description": "Visit Kennedy Academy in El Biar, Algiers. Campus address, opening hours, WhatsApp and general inquiries."
     }
   },
   "footer": {
@@ -158,6 +436,6 @@
       "facebook": "Facebook",
       "location": "Find us on Google Maps"
     },
-    "copyright": "© {year} Kennedy School. All rights reserved."
+    "copyright": "© {year} Kennedy Academy. All rights reserved."
   }
 }

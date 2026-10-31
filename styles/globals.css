@@ -2,28 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color-scheme: light;
-  --brand-navy: 30 48 84;
-  --brand-gold: 245 182 15;
-  --brand-terracotta: 196 105 74;
-  --surface: 250 247 242;
-  --ink: 29 34 48;
-}
+@layer base {
+  :root,
+  [data-era='porcelain'] {
+    color-scheme: light;
+    --surface: 251 251 249;
+    --surface-raised: 255 255 252;
+    --surface-sunken: 243 243 237;
+    --ink: 17 17 22;
+    --ink-muted: 92 92 103;
+    --line: 224 224 218;
+    --accent: 13 0 164;
+    --accent-ink: 251 251 249;
+    --highlight: 253 184 81;
+    --highlight-strong: 122 78 0;
+    --highlight-ink: 17 17 22;
+    --sand: 244 237 228;
+  }
 
-html {
-  scroll-behavior: smooth;
-  background: rgb(var(--surface));
-}
+  [data-era='clay'] {
+    --accent: 158 63 35;
+    --accent-ink: 251 251 249;
+    --highlight: 214 141 54;
+  }
 
-body {
-  min-height: 100vh;
-  background: rgb(var(--surface));
-  color: rgb(var(--ink));
-}
+  [data-era='night'] {
+    color-scheme: dark;
+    --surface: 12 12 16;
+    --surface-raised: 20 20 27;
+    --surface-sunken: 8 8 11;
+    --ink: 244 244 240;
+    --ink-muted: 166 166 178;
+    --line: 44 44 55;
+    --accent: 167 158 255;
+    --accent-ink: 12 12 16;
+    --highlight: 253 184 81;
+    --sand: 30 30 38;
+  }
 
-::selection {
-  background: rgba(245, 182, 15, 0.28);
+  html {
+    scroll-behavior: smooth;
+    background: rgb(var(--surface));
+  }
+
+  body {
+    min-height: 100vh;
+    background: rgb(var(--surface));
+    color: rgb(var(--ink));
+  }
+
+  ::selection {
+    background: rgb(var(--highlight) / 0.28);
+  }
+
+  :where(a, button, input, select, textarea, [tabindex]):focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
 }
 
 @layer components {
@@ -32,12 +73,106 @@ body {
   }
 
   .grid-bg {
-    background-image: linear-gradient(to right, rgba(30, 48, 84, 0.04) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(30, 48, 84, 0.04) 1px, transparent 1px);
+    background-image: linear-gradient(to right, rgb(var(--line) / 0.6) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(var(--line) / 0.6) 1px, transparent 1px);
     background-size: 48px 48px;
   }
 
   .section-anchor {
     @apply scroll-mt-28;
+  }
+
+  .hairline {
+    border-top: 1px solid rgb(var(--line) / 0.75);
+  }
+}
+
+/* Drawer + overlay ------------------------------------------------------- */
+@keyframes drawer-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes drawer-out {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes overlay-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Editorial marquee ----------------------------------------------------- */
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+}
+
+.marquee-track > * {
+  display: flex;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .marquee-track {
+    animation: marquee 48s linear infinite;
+  }
+
+  .marquee[data-paused='true'] .marquee-track,
+  .marquee:hover .marquee-track,
+  .marquee:focus-within .marquee-track {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    overflow-x: auto;
+    mask-image: none;
+    scroll-snap-type: x mandatory;
+  }
+
+  .marquee-track {
+    animation: none;
+    transform: none;
+  }
+
+  .marquee-track > * {
+    scroll-snap-align: start;
   }
 }

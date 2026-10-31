@@ -1,5 +1,8 @@
 node_modules
 .next
+*.tsbuildinfo
 kplanAlt.pdf
 prompt.md
 .claude
+.claudeignore
+CLAUDE.md
