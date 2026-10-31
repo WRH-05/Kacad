@@ -37,11 +37,7 @@ export function SiteNavbar({ locale, nav }: SiteNavbarProps) {
     <header className="sticky top-0 z-50 border-b border-line/60 bg-surface/90 backdrop-blur-md">
       <div className="section-shell flex items-center justify-between gap-4 py-4">
         <Link href={routes.home(locale)} className="group flex items-center gap-3">
-          <AsteriskLogo
-            decorative
-            animated
-            className="h-8 w-8 shrink-0 text-accent"
-          />
+          <AsteriskLogo decorative animated className="h-8 w-8 shrink-0" />
           <span className="flex flex-col">
             <span className="font-serif text-lg leading-none text-ink">
               Kennedy Academy
@@ -72,7 +68,7 @@ export function SiteNavbar({ locale, nav }: SiteNavbarProps) {
 
         <div className="flex items-center gap-3">
           <div
-            className="flex items-center gap-1 border border-line/70 p-1"
+            className="flex items-center gap-1 rounded-none border border-line/70 p-1"
             aria-label={nav.aria.switchLanguage}
           >
             {locales.map((loc) => (
@@ -81,7 +77,7 @@ export function SiteNavbar({ locale, nav }: SiteNavbarProps) {
                 href={buildLocaleHref(pathname, loc)}
                 aria-current={loc === locale ? 'page' : undefined}
                 className={cn(
-                  'px-2 py-1 font-mono text-[9px] uppercase tracking-[0.12em] transition',
+                  'rounded-none px-2 py-1 font-mono text-[9px] uppercase tracking-[0.12em] transition',
                   loc === locale
                     ? 'bg-accent text-accent-ink'
                     : 'text-ink-muted hover:text-accent'
@@ -94,7 +90,7 @@ export function SiteNavbar({ locale, nav }: SiteNavbarProps) {
 
           <button
             type="button"
-            className="inline-flex items-center justify-center border border-line/70 p-2 text-ink lg:hidden"
+            className="inline-flex items-center justify-center rounded-none border border-line/70 p-2 text-ink lg:hidden"
             aria-label={mobileOpen ? nav.aria.closeMenu : nav.aria.openMenu}
             aria-expanded={mobileOpen}
             onClick={() => setMobileOpen((open) => !open)}

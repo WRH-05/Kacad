@@ -49,7 +49,7 @@ export function CampusHub({ hub, spaces, initialStatus }: CampusHubProps) {
   return (
     <section
       id="hub"
-      className="section-anchor border-y border-line/60 bg-surface-sunken/50 py-20 lg:py-28"
+      className="section-anchor border-b border-line/60 bg-surface-sunken/50 py-20 lg:py-28"
     >
       <div className="section-shell">
         <div className="grid gap-8 lg:grid-cols-12">

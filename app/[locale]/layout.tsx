@@ -46,7 +46,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     },
     description: isFrench
       ? "Une académie de technologie, d'arts numériques et de langues à El Biar, Alger — et un hub créatif ouvert aux jeunes créateurs."
-      : 'A technology, digital arts and languages academy in El Biar, Algiers — and an open creative hub for young makers.'
+      : 'A technology, digital arts and languages academy in El Biar, Algiers — and an open creative hub for young makers.',
+    icons: { icon: '/favicon.ico' }
   };
 }
 
