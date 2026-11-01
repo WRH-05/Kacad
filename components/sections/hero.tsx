@@ -56,24 +56,11 @@ export function Hero({ locale, hero }: HeroProps) {
         </div>
 
         <div className="relative flex flex-col items-center lg:col-span-5 lg:ml-auto">
-          <div className="relative flex items-center justify-center">
-            <div
-              className="pointer-events-none absolute left-1/2 top-1/2 h-60 w-60 -translate-x-1/2 -translate-y-1/2 border border-line/40 sm:h-72 sm:w-72 lg:h-[25rem] lg:w-[25rem]"
-              aria-hidden="true"
-            />
-            <AsteriskLogo
-              dock
-              animated
-              decorative
-              className="relative h-52 w-52 drop-shadow-logo sm:h-64 sm:w-64 lg:h-[22rem] lg:w-[22rem]"
-            />
-          </div>
-
-          <div className="mt-8 flex items-center justify-center gap-2 text-[11px] font-mono uppercase tracking-[0.2em] text-ink-muted">
-            <span>{hero.atelier}</span>
-            <span>/</span>
-            <span>{hero.city}</span>
-          </div>
+          <AsteriskLogo
+            animated
+            decorative
+            className="relative h-52 w-52 drop-shadow-logo sm:h-64 sm:w-64 lg:h-[22rem] lg:w-[22rem]"
+          />
         </div>
       </div>
     </section>

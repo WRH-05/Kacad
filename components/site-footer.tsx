@@ -23,7 +23,7 @@ export function SiteFooter({ locale, nav, footer }: SiteFooterProps) {
 
   const links = [
     { href: routes.home(locale), label: nav.home },
-    { href: routes.section(locale, 'courses'), label: nav.courses },
+    { href: routes.section(locale, 'courses'), label: nav.programmes },
     { href: routes.section(locale, 'hub'), label: nav.hub },
     { href: routes.section(locale, 'method'), label: nav.method },
     { href: routes.contact(locale), label: nav.contact }
@@ -34,9 +34,6 @@ export function SiteFooter({ locale, nav, footer }: SiteFooterProps) {
       <div className="section-shell grid gap-10 py-14 md:grid-cols-12 md:gap-8">
         <div className="md:col-span-5">
           <p className="font-serif text-2xl text-surface">Kennedy Academy</p>
-          <p className="mt-2 font-mono text-[9px] uppercase tracking-[0.24em] text-surface/50">
-            {footer.tagline}
-          </p>
           <p className="mt-6 max-w-sm text-sm leading-relaxed text-surface/65">
             {footer.love}
           </p>
@@ -116,12 +113,9 @@ export function SiteFooter({ locale, nav, footer }: SiteFooterProps) {
       </div>
 
       <div className="border-t border-surface/10">
-        <div className="section-shell flex flex-col gap-2 py-5 sm:flex-row sm:items-center sm:justify-between">
+        <div className="section-shell py-5">
           <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-surface/40">
             {interpolate(footer.copyright, { year })}
-          </p>
-          <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-surface/40">
-            {contactInfo.address.line1} · {contactInfo.address.city}
           </p>
         </div>
       </div>

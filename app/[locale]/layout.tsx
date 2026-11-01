@@ -4,6 +4,7 @@ import { DM_Sans, Fraunces, IBM_Plex_Mono } from 'next/font/google';
 import '../../styles/globals.css';
 import { SiteNavbar } from '../../components/site-navbar';
 import { SiteFooter } from '../../components/site-footer';
+import { courses } from '@/content/courses';
 import { getDictionary } from '../../lib/dictionaries';
 import { type Locale, isLocale, locales } from '../../lib/i18n';
 
@@ -65,13 +66,19 @@ export default async function LocaleLayout({
   }
 
   const dictionary = await getDictionary(locale as Locale);
+  const programmes = courses.map((course) => ({
+    id: course.id,
+    track: course.track,
+    title: dictionary.courses.items[course.id].title,
+    ageLabel: dictionary.courses.ageRanges[course.ageBracket]
+  }));
 
   return (
     <html lang={locale} dir="ltr" data-era="porcelain">
       <body
         className={`${dmSans.variable} ${fraunces.variable} ${plexMono.variable} bg-surface font-sans text-ink antialiased`}
       >
-        <SiteNavbar locale={locale as Locale} nav={dictionary.nav} />
+        <SiteNavbar locale={locale as Locale} nav={dictionary.nav} programmes={programmes} />
         {children}
         <SiteFooter locale={locale as Locale} nav={dictionary.nav} footer={dictionary.footer} />
       </body>

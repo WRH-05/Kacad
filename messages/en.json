@@ -1,10 +1,19 @@
 {
   "nav": {
     "home": "Home",
-    "courses": "Courses",
+    "programmes": "Programmes",
     "hub": "The Hub",
     "method": "The Method",
     "contact": "Contact",
+    "mega": {
+      "tracks": {
+        "tech": "Technology & AI",
+        "arts": "Digital Arts & Media",
+        "languages": "Specialized Languages"
+      },
+      "all": "All programmes",
+      "intro": "Eight programmes across technology, digital arts and specialized languages."
+    },
     "aria": {
       "main": "Main navigation",
       "mobile": "Mobile navigation",
@@ -19,9 +28,7 @@
     "titleEmphasis": "In the open.",
     "subtitle": "Kennedy Academy is a technology, digital arts and languages academy in El Biar — with a robotics lab, a media studio and a cafe that stay open between sessions.",
     "ctaPrimary": "Explore Programmes",
-    "ctaSecondary": "Visit the Hub",
-    "atelier": "Atelier El Biar",
-    "city": "Algiers"
+    "ctaSecondary": "Visit the Hub"
   },
   "hub": {
     "eyebrow": "The Campus",
@@ -58,7 +65,7 @@
   "courses": {
     "eyebrow": "Programmes",
     "title": "The Course Matrix",
-    "intro": "Filter by discipline and age, then open a syllabus to see the modules and join the waitlist.",
+    "intro": "Filter by discipline and age, then open a programme to see the modules and join the waitlist.",
     "ageRanges": {
       "kids": "Ages 7–11",
       "juniors": "Ages 12–17",
@@ -90,9 +97,27 @@
       "levelLabel": "Level",
       "durationLabel": "Duration"
     },
-    "syllabusCta": "View syllabus",
-    "outcomesLabel": "Outcomes",
-    "modulesLabel": "Syllabus",
+    "programmeCta": "View Programme",
+    "detail": {
+      "breadcrumbRoot": "Programmes",
+      "breadcrumbLabel": "Breadcrumb",
+      "durationLabel": "Duration",
+      "rhythmLabel": "Rhythm",
+      "levelLabel": "Level",
+      "locationLabel": "Location",
+      "locationValue": "In-Person Atelier · El Biar",
+      "outcomesTitle": "What You Will Build & Master",
+      "toolsTitle": "Hardware & Tools",
+      "syllabusTitle": "Syllabus Timeline",
+      "capstoneTitle": "Capstone Deliverable & Certification",
+      "certificateSeal": "Kennedy Academy · Certified",
+      "admissionsTitle": "Reserve a seat",
+      "admissionsIntro": "Request the full syllabus and we will confirm your placement.",
+      "submitLabel": "Request Full Syllabus & Reserve Placement",
+      "whatsappCta": "Prefer WhatsApp? Message Admissions",
+      "whatsappPrefill": "Hello Kennedy Academy — I would like to know more about {course}.",
+      "backToProgrammes": "All programmes"
+    },
     "items": {
       "robotics-kids": {
         "title": "Robotics for Kids",
@@ -109,14 +134,43 @@
           "Debug a simple programme with a mentor's guidance.",
           "Present a finished build to the group."
         ],
+        "tools": [
+          "Arduino Uno",
+          "LEGO SPIKE Essential",
+          "Servo motors",
+          "Distance sensors",
+          "Breadboard"
+        ],
         "modules": [
-          "How machines move — motors, wheels and structure",
-          "Circuits and safety — power, switches and sensors",
-          "First programme — sequences, loops and timing",
-          "Sensor logic — making the robot react",
-          "Team build — design, assemble, test",
-          "Demo day — present, explain and refine"
-        ]
+          {
+            "title": "How machines move",
+            "description": "Motors, wheels and structure: the mechanics behind a first robot."
+          },
+          {
+            "title": "Circuits and safety",
+            "description": "Power, switches and sensors, wired safely on a breadboard."
+          },
+          {
+            "title": "First programme",
+            "description": "Sequences, loops and timing that make the robot move on purpose."
+          },
+          {
+            "title": "Sensor logic",
+            "description": "Read a distance sensor and turn its signal into a decision."
+          },
+          {
+            "title": "Team build",
+            "description": "Design, assemble and test a shared robot against a simple brief."
+          },
+          {
+            "title": "Demo day",
+            "description": "Present the build, explain how it works and refine one weakness."
+          }
+        ],
+        "capstone": {
+          "title": "A line-following robot",
+          "description": "Students deliver a working robot that follows a marked course, documented with a simple build journal and demonstrated on demo day."
+        }
       },
       "robotics-juniors": {
         "title": "Robotics for Juniors",
@@ -133,14 +187,44 @@
           "Work in a team with clear build, test and review roles.",
           "Document and pitch an engineering decision."
         ],
+        "tools": [
+          "Arduino",
+          "ESP32",
+          "ROS 2",
+          "Line sensors",
+          "3D-printed chassis",
+          "Motor drivers"
+        ],
         "modules": [
-          "Challenge brief — constraints, scoring and strategy",
-          "Mechanical design — chassis, gearing and torque",
-          "Sensor integration — distance, line and touch",
-          "Control logic — state machines and calibration",
-          "Competition build — iteration under time pressure",
-          "Final run — test, present and review"
-        ]
+          {
+            "title": "Challenge brief",
+            "description": "Constraints, scoring and strategy: what winning actually requires."
+          },
+          {
+            "title": "Mechanical design",
+            "description": "Chassis, gearing and torque decisions made against the rule set."
+          },
+          {
+            "title": "Sensor integration",
+            "description": "Combine distance, line and touch sensors and trace the signal flow."
+          },
+          {
+            "title": "Control logic",
+            "description": "State machines and calibration for repeatable autonomous runs."
+          },
+          {
+            "title": "Competition build",
+            "description": "Iterate the build under time pressure, with test data driving changes."
+          },
+          {
+            "title": "Final run",
+            "description": "Run the challenge, present the engineering log and review the result."
+          }
+        ],
+        "capstone": {
+          "title": "A competition-ready robot",
+          "description": "A rule-compliant robot, an engineering log and a short design defence presented to mentors and families."
+        }
       },
       "ai-fluency": {
         "title": "AI Fluency",
@@ -157,14 +241,43 @@
           "Identify bias, hallucination and privacy risks in AI output.",
           "Build a small project that uses AI responsibly."
         ],
+        "tools": [
+          "Claude",
+          "ChatGPT",
+          "Midjourney",
+          "NotebookLM",
+          "Prompt library"
+        ],
         "modules": [
-          "How AI works — patterns, predictions and limits",
-          "Prompt craft — context, constraints and iteration",
-          "Creative studio — image, text and sound tools",
-          "Responsible use — bias, privacy and attribution",
-          "Study and work — AI as a thinking partner",
-          "Project clinic — build, critique and present"
-        ]
+          {
+            "title": "How AI works",
+            "description": "Patterns, predictions and the limits that explain confident mistakes."
+          },
+          {
+            "title": "Prompt craft",
+            "description": "Context, constraints and iteration: writing prompts that can be checked."
+          },
+          {
+            "title": "Creative studio",
+            "description": "Image, text and sound tools explored through a small creative brief."
+          },
+          {
+            "title": "Responsible use",
+            "description": "Bias, privacy and attribution — the questions to ask before publishing."
+          },
+          {
+            "title": "Study and work",
+            "description": "Use AI as a thinking partner without outsourcing the thinking."
+          },
+          {
+            "title": "Project clinic",
+            "description": "Build, critique and present a small project that uses AI deliberately."
+          }
+        ],
+        "capstone": {
+          "title": "An AI-assisted project",
+          "description": "A small researched or creative project with a written account of every AI tool used, its output and its limits."
+        }
       },
       "python-programming": {
         "title": "Python Programming",
@@ -181,39 +294,149 @@
           "Work with lists, dictionaries and simple files.",
           "Ship a small command-line project."
         ],
+        "tools": [
+          "Python 3",
+          "VS Code",
+          "Jupyter Notebook",
+          "Git",
+          "Command line"
+        ],
         "modules": [
-          "Variables, types and input",
-          "Conditionals and loops",
-          "Functions and clean structure",
-          "Collections — lists and dictionaries",
-          "Files and small data projects",
-          "Project week — build, debug and present"
-        ]
+          {
+            "title": "Variables, types and input",
+            "description": "Store values, read input and print results with clear, readable code."
+          },
+          {
+            "title": "Conditionals and loops",
+            "description": "Make decisions and repeat work without repeating yourself."
+          },
+          {
+            "title": "Functions and clean structure",
+            "description": "Break a problem into named functions and test each piece."
+          },
+          {
+            "title": "Collections",
+            "description": "Lists and dictionaries for organising real data."
+          },
+          {
+            "title": "Files and small data projects",
+            "description": "Read and write files, then shape the data into a small report."
+          },
+          {
+            "title": "Project week",
+            "description": "Build, debug and present a command-line project from an empty file."
+          }
+        ],
+        "capstone": {
+          "title": "A command-line application",
+          "description": "A working command-line tool with a README, a short test list and a live walkthrough."
+        }
       },
-      "languages": {
-        "title": "Languages by Levels",
-        "description": "French, English, German, and Spanish taught by level — speaking, reading, and conversation practice aligned to each learner's stage.",
-        "lede": "French, English, German and Spanish — placed by level, taught for real conversation.",
+      "technical-english": {
+        "title": "Technical English",
+        "description": "English for engineering and digital work — describing systems, writing clear documentation, and presenting technical decisions with confidence.",
+        "lede": "The English you need to explain a build, write a spec and hold your ground in a technical conversation.",
         "highlights": [
-          "French",
-          "English",
-          "German",
-          "Spanish"
+          "Documentation",
+          "Presentation",
+          "Vocabulary"
         ],
         "outcomes": [
-          "Speak with more confidence in everyday and classroom situations.",
-          "Read and understand level-appropriate texts.",
-          "Use grammar with intention rather than memorisation alone.",
-          "Prepare for the next level with a clear progress review."
+          "Describe a system, process or prototype in precise spoken English.",
+          "Write short technical documentation with a clear structure.",
+          "Present a project and answer questions without reading from a script.",
+          "Use technical vocabulary accurately in everyday professional contexts."
+        ],
+        "tools": [
+          "Technical glossary",
+          "CEFR B1–C1",
+          "Speaking lab",
+          "Documentation templates",
+          "Presentation clinic"
         ],
         "modules": [
-          "Placement and goals — finding your level",
-          "Speaking foundation — rhythm, pronunciation and confidence",
-          "Listening and response — real conversations",
-          "Reading and vocabulary — building range",
-          "Writing and structure — accuracy with purpose",
-          "Progress review and next-level plan"
-        ]
+          {
+            "title": "Technical register",
+            "description": "Choosing precise verbs, quantities and qualifiers for engineering work."
+          },
+          {
+            "title": "Describing systems",
+            "description": "Explain how a system is built and what limits its performance."
+          },
+          {
+            "title": "Documentation",
+            "description": "Write short specs, READMEs and instructions a stranger could follow."
+          },
+          {
+            "title": "Presenting a build",
+            "description": "Shape a five-minute technical presentation and rehearse difficult questions."
+          },
+          {
+            "title": "Meetings and collaboration",
+            "description": "Clarify, disagree and negotiate scope in professional English."
+          },
+          {
+            "title": "Portfolio clinic",
+            "description": "Review the written and spoken work produced across the programme."
+          }
+        ],
+        "capstone": {
+          "title": "A technical presentation and written brief",
+          "description": "A five-minute presentation and a one-page technical brief, delivered in front of the cohort."
+        }
+      },
+      "german-mobility": {
+        "title": "German for Academic & Tech Mobility",
+        "description": "German for students planning to study or work in Germany — academic vocabulary, application documents, and the confidence to handle daily bureaucracy.",
+        "lede": "German for the next step: a place at university, an internship or a technical role in a German-speaking country.",
+        "highlights": [
+          "Goethe A1–B1",
+          "Academic German",
+          "Applications"
+        ],
+        "outcomes": [
+          "Handle everyday and academic situations in German with growing confidence.",
+          "Read and complete common application and enrolment documents.",
+          "Introduce yourself and your technical background in an interview.",
+          "Follow the structure of a German-language technical presentation."
+        ],
+        "tools": [
+          "Goethe A1–B1",
+          "Anmeldung forms",
+          "Uni-Assist documents",
+          "Speaking lab",
+          "CV & motivation letter templates"
+        ],
+        "modules": [
+          {
+            "title": "Starter German",
+            "description": "Pronunciation, sentence structure and the phrases that carry a first week."
+          },
+          {
+            "title": "Academic vocabulary",
+            "description": "The words and routines of a German university."
+          },
+          {
+            "title": "Applications",
+            "description": "Read, complete and explain the documents a move requires."
+          },
+          {
+            "title": "Technical German",
+            "description": "Introduce your discipline, project and experience in plain German."
+          },
+          {
+            "title": "Interviews and presentations",
+            "description": "Rehearse an interview and a short technical presentation."
+          },
+          {
+            "title": "Arrival clinic",
+            "description": "Registration, housing and the practical conversations that follow admission."
+          }
+        ],
+        "capstone": {
+          "title": "A study-mobility dossier",
+          "description": "A German-language CV, motivation letter and oral presentation, reviewed against a real application checklist."
+        }
       },
       "audiovisual-training": {
         "title": "Audiovisual Training",
@@ -230,14 +453,43 @@
           "Edit a sequence with rhythm and continuity.",
           "Screen and critique a finished piece."
         ],
+        "tools": [
+          "Sony mirrorless camera",
+          "Rode microphone",
+          "DaVinci Resolve",
+          "LED lighting kit",
+          "Shot-list templates"
+        ],
         "modules": [
-          "Story and treatment — finding the film",
-          "Pre-production — shot lists, locations and roles",
-          "Camera — framing, movement and exposure",
-          "Sound — microphones, levels and room tone",
-          "Editing — assembly, rhythm and colour",
-          "Screening — critique and final cut"
-        ]
+          {
+            "title": "Story and treatment",
+            "description": "Turn an idea into a treatment with a clear point of view."
+          },
+          {
+            "title": "Pre-production",
+            "description": "Shot lists, locations and roles planned before anyone presses record."
+          },
+          {
+            "title": "Camera",
+            "description": "Framing, movement and exposure decisions that serve the story."
+          },
+          {
+            "title": "Sound",
+            "description": "Microphones, levels and room tone — capturing audio that can be edited."
+          },
+          {
+            "title": "Editing",
+            "description": "Assembly, rhythm and colour in a first cut that holds attention."
+          },
+          {
+            "title": "Screening",
+            "description": "Screen the work, take structured critique and deliver a final cut."
+          }
+        ],
+        "capstone": {
+          "title": "A short film",
+          "description": "A three-to-five-minute film, delivered with a treatment, shot list and a finished edit screened to the cohort."
+        }
       },
       "multimedia": {
         "title": "Multimedia",
@@ -254,14 +506,43 @@
           "Prepare assets for screen and social formats.",
           "Present a portfolio-ready case study."
         ],
+        "tools": [
+          "Figma",
+          "Adobe Illustrator",
+          "Adobe Photoshop",
+          "Blender",
+          "Portfolio templates"
+        ],
         "modules": [
-          "Design foundations — grid, type and hierarchy",
-          "Colour and image — building a visual system",
-          "Layout studio — pages that breathe",
-          "Digital production — assets and formats",
-          "Portfolio craft — selection and sequencing",
-          "Final review — present and refine"
-        ]
+          {
+            "title": "Design foundations",
+            "description": "Grid, type and hierarchy as decisions, not decoration."
+          },
+          {
+            "title": "Colour and image",
+            "description": "Build a small visual system with colour, imagery and rules."
+          },
+          {
+            "title": "Layout studio",
+            "description": "Compose pages with deliberate space, rhythm and reading order."
+          },
+          {
+            "title": "Digital production",
+            "description": "Prepare assets for screen, print and social without losing quality."
+          },
+          {
+            "title": "Portfolio craft",
+            "description": "Select and sequence work so the strongest idea lands first."
+          },
+          {
+            "title": "Final review",
+            "description": "Present a case study, take critique and refine the final piece."
+          }
+        ],
+        "capstone": {
+          "title": "A portfolio case study",
+          "description": "A multi-page case study documenting the brief, process and final work, ready to share with a client or school."
+        }
       }
     }
   },
@@ -290,15 +571,15 @@
   "testimonials": {
     "eyebrow": "Families",
     "title": "What families say",
-    "intro": "Parents across El Biar and Algiers trust Kennedy School for structured, inspiring education.",
+    "intro": "Parents across Algiers trust Kennedy Academy for structured, inspiring education.",
     "pause": "Pause testimonials",
     "play": "Play testimonials",
     "items": {
       "nadia": {
-        "quote": "My daughter went from being shy with technology to presenting her robot project with confidence. The El Biar campus feels welcoming and serious at the same time.",
+        "quote": "My daughter went from being shy with technology to presenting her robot project with confidence. The campus feels welcoming and serious at the same time.",
         "name": "Nadia B.",
         "role": "Parent",
-        "location": "El Biar"
+        "location": "Dely Ibrahim"
       },
       "karim": {
         "quote": "The Python programme gave my son a real foundation — not just games, but logic he uses in school now. The instructors are patient and clearly know their subject.",
@@ -362,7 +643,7 @@
   "contact": {
     "eyebrow": "Visit",
     "title": "Come see the space.",
-    "intro": "The campus is in El Biar, open Monday to Saturday. Drop in for a tour, a coffee or a conversation about the next cohort.",
+    "intro": "The campus is in El Biar, open every day. Drop in for a tour, a coffee or a conversation about the next cohort.",
     "addressLabel": "Campus",
     "mapsCta": "Get directions",
     "visitCta": "Visit the campus",
@@ -372,11 +653,10 @@
     "whatsappCta": "Start a conversation",
     "whatsappPrefill": "Hello Kennedy Academy — I would like to know more about the programmes.",
     "hoursTitle": "Hub & Cafe hours",
-    "hoursNote": "Sunday closed",
-    "hoursWeekdays": "Monday–Saturday",
+    "hoursNote": "Open 7 days a week",
+    "hoursWeekdays": "Every day",
     "hoursTime": "09:00 – 19:00",
-    "hoursSunday": "Sunday",
-    "hoursClosed": "Closed",
+    "hoursCta": "Open 7 days a week · 09:00 – 19:00",
     "socialsTitle": "Follow",
     "form": {
       "title": "General inquiry",
@@ -415,7 +695,6 @@
     }
   },
   "footer": {
-    "tagline": "El Biar · Algiers",
     "love": "Made with love for every student who walks through our doors.",
     "navigation": "Navigation",
     "connect": "Connect with us",

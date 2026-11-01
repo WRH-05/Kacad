@@ -12,6 +12,9 @@ type WaitlistFormProps = {
   courseLabel: string;
   labels: Dictionary['waitlist'];
   locale: Locale;
+  submitLabel?: string;
+  hideCourseField?: boolean;
+  autoDownload?: boolean;
 };
 
 type FormState = {
@@ -32,7 +35,15 @@ const emptyForm: FormState = {
   website: ''
 };
 
-export function WaitlistForm({ courseId, courseLabel, labels, locale }: WaitlistFormProps) {
+export function WaitlistForm({
+  courseId,
+  courseLabel,
+  labels,
+  locale,
+  submitLabel,
+  hideCourseField = false,
+  autoDownload = false
+}: WaitlistFormProps) {
   const [form, setForm] = useState<FormState>(emptyForm);
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
@@ -121,6 +132,16 @@ export function WaitlistForm({ courseId, courseLabel, labels, locale }: Waitlist
       }
 
       setBrochureUrl(data.brochureUrl ?? null);
+
+      if (autoDownload && data.brochureUrl) {
+        const link = document.createElement('a');
+        link.href = data.brochureUrl;
+        link.download = '';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      }
+
       setStatus('success');
     } catch (error) {
       if (error instanceof Error && error.name === 'AbortError') return;
@@ -150,14 +171,16 @@ export function WaitlistForm({ courseId, courseLabel, labels, locale }: Waitlist
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-      <div>
-        <label className="mb-1.5 block font-mono text-[9px] uppercase tracking-[0.2em] text-ink-muted">
-          {labels.courseLabel}
-        </label>
-        <p className="border border-line/70 bg-surface-sunken px-3 py-2.5 text-sm text-ink">
-          {courseLabel}
-        </p>
-      </div>
+      {hideCourseField ? null : (
+        <div>
+          <label className="mb-1.5 block font-mono text-[9px] uppercase tracking-[0.2em] text-ink-muted">
+            {labels.courseLabel}
+          </label>
+          <p className="border border-line/70 bg-surface-sunken px-3 py-2.5 text-sm text-ink">
+            {courseLabel}
+          </p>
+        </div>
+      )}
 
       <div>
         <label
@@ -286,7 +309,7 @@ export function WaitlistForm({ courseId, courseLabel, labels, locale }: Waitlist
         disabled={status === 'submitting'}
         className="w-full bg-accent px-5 py-3 font-mono text-[10px] uppercase tracking-[0.2em] text-accent-ink transition hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {status === 'submitting' ? labels.submitting : labels.submit}
+        {status === 'submitting' ? labels.submitting : submitLabel ?? labels.submit}
       </button>
     </form>
   );

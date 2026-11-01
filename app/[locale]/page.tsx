@@ -35,11 +35,7 @@ export default async function LocaleHomePage({
         spaces={hubSpaces}
         initialStatus={initialStatus}
       />
-      <CourseMatrix
-        coursesDict={dictionary.courses}
-        waitlist={dictionary.waitlist}
-        locale={locale as Locale}
-      />
+      <CourseMatrix coursesDict={dictionary.courses} locale={locale as Locale} />
       <KennedyMethod method={dictionary.method} />
       <TestimonialMarquee testimonialsDict={dictionary.testimonials} />
       <ContactCta contact={dictionary.contact} locale={locale as Locale} />

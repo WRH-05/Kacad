@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { contactInfo, whatsappHref } from '@/content/contact';
+import { whatsappHref } from '@/content/contact';
 import type { Dictionary } from '@/lib/dictionaries';
 import type { Locale } from '@/lib/i18n';
 import { routes } from '@/lib/routes';
@@ -20,10 +20,7 @@ export function ContactCta({ contact, locale }: ContactCtaProps) {
           <h2 className="mt-3 font-serif text-3xl leading-tight md:text-4xl">
             {contact.title}
           </h2>
-          <p className="mt-3 text-sm text-accent-ink/70">
-            {contactInfo.address.line1}, {contactInfo.address.city} ·{' '}
-            {contact.hoursWeekdays}, {contact.hoursTime}
-          </p>
+          <p className="mt-3 text-sm text-accent-ink/70">{contact.hoursCta}</p>
         </div>
 
         <div className="flex flex-wrap gap-3">

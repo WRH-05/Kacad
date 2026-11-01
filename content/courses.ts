@@ -15,7 +15,8 @@ export const courseIds = [
   'robotics-juniors',
   'ai-fluency',
   'python-programming',
-  'languages',
+  'technical-english',
+  'german-mobility',
   'audiovisual-training',
   'multimedia'
 ] as const;
@@ -69,7 +70,15 @@ export const courses: readonly Course[] = [
     sessionsPerWeek: 2
   },
   {
-    id: 'languages',
+    id: 'technical-english',
+    track: 'languages',
+    ageBracket: 'all',
+    level: 'all-levels',
+    durationWeeks: 12,
+    sessionsPerWeek: 2
+  },
+  {
+    id: 'german-mobility',
     track: 'languages',
     ageBracket: 'all',
     level: 'all-levels',

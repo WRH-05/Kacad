@@ -28,6 +28,7 @@ const config: Config = {
           strong: 'rgb(var(--highlight-strong) / <alpha-value>)'
         },
         sand: 'rgb(var(--sand) / <alpha-value>)',
+        rubric: 'rgb(var(--rubric) / <alpha-value>)',
 
         /* Legacy aliases — remove after old components are deleted */
         navy: 'rgb(var(--accent) / <alpha-value>)',

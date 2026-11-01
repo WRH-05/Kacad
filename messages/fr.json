@@ -1,10 +1,19 @@
 {
   "nav": {
     "home": "Accueil",
-    "courses": "Formations",
+    "programmes": "Programmes",
     "hub": "Le Hub",
     "method": "La Méthode",
     "contact": "Contact",
+    "mega": {
+      "tracks": {
+        "tech": "Technologie & IA",
+        "arts": "Arts numériques & médias",
+        "languages": "Langues spécialisées"
+      },
+      "all": "Tous les programmes",
+      "intro": "Huit programmes en technologie, arts numériques et langues spécialisées."
+    },
     "aria": {
       "main": "Navigation principale",
       "mobile": "Navigation mobile",
@@ -19,9 +28,7 @@
     "titleEmphasis": "À ciel ouvert.",
     "subtitle": "Kennedy Academy est une académie de technologie, d'arts numériques et de langues à El Biar — avec un laboratoire de robotique, un studio média et un café ouverts entre les sessions.",
     "ctaPrimary": "Explorer les programmes",
-    "ctaSecondary": "Visiter le Hub",
-    "atelier": "Atelier El Biar",
-    "city": "Alger"
+    "ctaSecondary": "Visiter le Hub"
   },
   "hub": {
     "eyebrow": "Le Campus",
@@ -58,7 +65,7 @@
   "courses": {
     "eyebrow": "Formations",
     "title": "La Matrice des Formations",
-    "intro": "Filtrez par discipline et par âge, puis ouvrez un syllabus pour découvrir les modules et rejoindre la liste d'attente.",
+    "intro": "Filtrez par discipline et par âge, puis ouvrez un programme pour découvrir les modules et rejoindre la liste d'attente.",
     "ageRanges": {
       "kids": "7–11 ans",
       "juniors": "12–17 ans",
@@ -90,9 +97,27 @@
       "levelLabel": "Niveau",
       "durationLabel": "Durée"
     },
-    "syllabusCta": "Voir le syllabus",
-    "outcomesLabel": "Résultats",
-    "modulesLabel": "Syllabus",
+    "programmeCta": "Voir le programme",
+    "detail": {
+      "breadcrumbRoot": "Programmes",
+      "breadcrumbLabel": "Fil d'Ariane",
+      "durationLabel": "Durée",
+      "rhythmLabel": "Rythme",
+      "levelLabel": "Niveau",
+      "locationLabel": "Lieu",
+      "locationValue": "En présentiel à l'atelier · El Biar",
+      "outcomesTitle": "Ce que vous construirez et maîtriserez",
+      "toolsTitle": "Matériel & outils",
+      "syllabusTitle": "Déroulé du syllabus",
+      "capstoneTitle": "Projet final & certification",
+      "certificateSeal": "Kennedy Academy · Certification",
+      "admissionsTitle": "Réserver une place",
+      "admissionsIntro": "Demandez le syllabus complet et nous confirmerons votre placement.",
+      "submitLabel": "Demander le syllabus complet & réserver une place",
+      "whatsappCta": "Vous préférez WhatsApp ? Écrire aux admissions",
+      "whatsappPrefill": "Bonjour Kennedy Academy — je souhaite en savoir plus sur {course}.",
+      "backToProgrammes": "Tous les programmes"
+    },
     "items": {
       "robotics-kids": {
         "title": "Robotique pour Enfants",
@@ -109,14 +134,43 @@
           "Déboguer un programme simple avec l'aide d'un formateur.",
           "Présenter une construction terminée au groupe."
         ],
+        "tools": [
+          "Arduino Uno",
+          "LEGO SPIKE Essential",
+          "Servomoteurs",
+          "Capteurs de distance",
+          "Plaque de prototypage"
+        ],
         "modules": [
-          "Comment bougent les machines — moteurs, roues et structure",
-          "Circuits et sécurité — alimentation, interrupteurs et capteurs",
-          "Premier programme — séquences, boucles et minutage",
-          "Logique des capteurs — faire réagir le robot",
-          "Construction en équipe — concevoir, assembler, tester",
-          "Jour de démonstration — présenter, expliquer et affiner"
-        ]
+          {
+            "title": "Comment bougent les machines",
+            "description": "Moteurs, roues et structure : la mécanique derrière un premier robot."
+          },
+          {
+            "title": "Circuits et sécurité",
+            "description": "Alimentation, interrupteurs et capteurs, câblés en toute sécurité sur une plaque de prototypage."
+          },
+          {
+            "title": "Premier programme",
+            "description": "Séquences, boucles et minutage pour faire bouger le robot à dessein."
+          },
+          {
+            "title": "Logique des capteurs",
+            "description": "Lire un capteur de distance et transformer son signal en décision."
+          },
+          {
+            "title": "Construction en équipe",
+            "description": "Concevoir, assembler et tester un robot commun à partir d'un brief simple."
+          },
+          {
+            "title": "Jour de démonstration",
+            "description": "Présenter la construction, expliquer son fonctionnement et corriger une faiblesse."
+          }
+        ],
+        "capstone": {
+          "title": "Un robot suiveur de ligne",
+          "description": "Les élèves livrent un robot fonctionnel qui suit un parcours balisé, documenté par un journal de construction et présenté le jour de la démonstration."
+        }
       },
       "robotics-juniors": {
         "title": "Robotique Juniors",
@@ -133,14 +187,44 @@
           "Travailler en équipe avec des rôles clairs de construction, test et revue.",
           "Documenter et défendre une décision d'ingénierie."
         ],
+        "tools": [
+          "Arduino",
+          "ESP32",
+          "ROS 2",
+          "Capteurs de ligne",
+          "Châssis imprimé en 3D",
+          "Pilotes moteur"
+        ],
         "modules": [
-          "Brief du défi — contraintes, score et stratégie",
-          "Conception mécanique — châssis, transmission et couple",
-          "Intégration des capteurs — distance, ligne et contact",
-          "Logique de contrôle — machines à états et calibration",
-          "Construction de compétition — itérer sous pression",
-          "Course finale — tester, présenter et analyser"
-        ]
+          {
+            "title": "Brief du défi",
+            "description": "Contraintes, score et stratégie : ce qu'il faut réellement pour gagner."
+          },
+          {
+            "title": "Conception mécanique",
+            "description": "Châssis, transmission et couple décidés en fonction du règlement."
+          },
+          {
+            "title": "Intégration des capteurs",
+            "description": "Combiner capteurs de distance, de ligne et de contact, et expliquer le flux de signal."
+          },
+          {
+            "title": "Logique de contrôle",
+            "description": "Machines à états et calibration pour des parcours autonomes reproductibles."
+          },
+          {
+            "title": "Construction de compétition",
+            "description": "Itérer la construction sous pression, guidé par les données de test."
+          },
+          {
+            "title": "Course finale",
+            "description": "Lancer le défi, présenter le carnet d'ingénierie et analyser le résultat."
+          }
+        ],
+        "capstone": {
+          "title": "Un robot prêt pour la compétition",
+          "description": "Un robot conforme au règlement, un carnet d'ingénierie et une courte soutenance de conception devant les formateurs et les familles."
+        }
       },
       "ai-fluency": {
         "title": "Maîtrise de l'IA",
@@ -157,14 +241,43 @@
           "Identifier les biais, les hallucinations et les risques de confidentialité.",
           "Construire un petit projet qui utilise l'IA de manière responsable."
         ],
+        "tools": [
+          "Claude",
+          "ChatGPT",
+          "Midjourney",
+          "NotebookLM",
+          "Bibliothèque de prompts"
+        ],
         "modules": [
-          "Comment fonctionne l'IA — motifs, prédictions et limites",
-          "Art du prompt — contexte, contraintes et itération",
-          "Studio créatif — outils d'image, de texte et de son",
-          "Usage responsable — biais, confidentialité et attribution",
-          "Étudier et travailler — l'IA comme partenaire de réflexion",
-          "Clinique de projet — construire, critiquer et présenter"
-        ]
+          {
+            "title": "Comment fonctionne l'IA",
+            "description": "Motifs, prédictions et limites qui expliquent les erreurs confiantes."
+          },
+          {
+            "title": "Art du prompt",
+            "description": "Contexte, contraintes et itération : écrire des prompts vérifiables."
+          },
+          {
+            "title": "Studio créatif",
+            "description": "Outils d'image, de texte et de son explorés à travers un petit brief créatif."
+          },
+          {
+            "title": "Usage responsable",
+            "description": "Biais, confidentialité et attribution : les questions à poser avant de publier."
+          },
+          {
+            "title": "Étudier et travailler",
+            "description": "Utiliser l'IA comme partenaire de réflexion sans déléguer la réflexion."
+          },
+          {
+            "title": "Clinique de projet",
+            "description": "Construire, critiquer et présenter un petit projet qui mobilise l'IA à dessein."
+          }
+        ],
+        "capstone": {
+          "title": "Un projet assisté par l'IA",
+          "description": "Un petit projet de recherche ou de création accompagné d'un compte rendu écrit de chaque outil IA utilisé, de sa production et de ses limites."
+        }
       },
       "python-programming": {
         "title": "Programmation Python",
@@ -181,39 +294,149 @@
           "Manipuler listes, dictionnaires et fichiers simples.",
           "Livrer un petit projet en ligne de commande."
         ],
+        "tools": [
+          "Python 3",
+          "VS Code",
+          "Jupyter Notebook",
+          "Git",
+          "Ligne de commande"
+        ],
         "modules": [
-          "Variables, types et saisie",
-          "Conditions et boucles",
-          "Fonctions et structure claire",
-          "Collections — listes et dictionnaires",
-          "Fichiers et petits projets de données",
-          "Semaine projet — construire, déboguer et présenter"
-        ]
+          {
+            "title": "Variables, types et saisie",
+            "description": "Stocker des valeurs, lire une saisie et afficher des résultats avec un code lisible."
+          },
+          {
+            "title": "Conditions et boucles",
+            "description": "Prendre des décisions et répéter un travail sans se répéter soi-même."
+          },
+          {
+            "title": "Fonctions et structure claire",
+            "description": "Décomposer un problème en fonctions nommées et tester chaque partie."
+          },
+          {
+            "title": "Collections",
+            "description": "Listes et dictionnaires pour organiser de vraies données."
+          },
+          {
+            "title": "Fichiers et petits projets de données",
+            "description": "Lire et écrire des fichiers, puis mettre en forme les données dans un petit rapport."
+          },
+          {
+            "title": "Semaine projet",
+            "description": "Construire, déboguer et présenter un projet en ligne de commande à partir d'un fichier vide."
+          }
+        ],
+        "capstone": {
+          "title": "Une application en ligne de commande",
+          "description": "Un outil en ligne de commande fonctionnel avec un README, une courte liste de tests et une démonstration en direct."
+        }
       },
-      "languages": {
-        "title": "Langues par Niveaux",
-        "description": "Français, anglais, allemand et espagnol par niveau — expression orale, lecture et conversation adaptées à chaque apprenant.",
-        "lede": "Français, anglais, allemand et espagnol — placés par niveau, enseignés pour la conversation réelle.",
+      "technical-english": {
+        "title": "Anglais technique",
+        "description": "L'anglais de l'ingénierie et du numérique — décrire des systèmes, rédiger une documentation claire et présenter des décisions techniques avec assurance.",
+        "lede": "L'anglais nécessaire pour expliquer une construction, rédiger une spécification et tenir sa position dans une conversation technique.",
         "highlights": [
-          "Français",
-          "Anglais",
-          "Allemand",
-          "Espagnol"
+          "Documentation",
+          "Présentation",
+          "Vocabulaire"
         ],
         "outcomes": [
-          "Parler avec plus d'assurance dans les situations quotidiennes et en classe.",
-          "Lire et comprendre des textes adaptés à votre niveau.",
-          "Utiliser la grammaire avec intention plutôt que par mémorisation.",
-          "Préparer le niveau suivant avec un bilan de progression clair."
+          "Décrire un système, un processus ou un prototype dans un anglais oral précis.",
+          "Rédiger une courte documentation technique avec une structure claire.",
+          "Présenter un projet et répondre aux questions sans lire un script.",
+          "Employer le vocabulaire technique avec exactitude dans des contextes professionnels courants."
+        ],
+        "tools": [
+          "Glossaire technique",
+          "CECRL B1–C1",
+          "Laboratoire oral",
+          "Modèles de documentation",
+          "Clinique de présentation"
         ],
         "modules": [
-          "Positionnement et objectifs — trouver son niveau",
-          "Fondations orales — rythme, prononciation et confiance",
-          "Écoute et réponse — conversations réelles",
-          "Lecture et vocabulaire — élargir la palette",
-          "Écriture et structure — la précision avec un objectif",
-          "Bilan de progression et plan du niveau suivant"
-        ]
+          {
+            "title": "Registre technique",
+            "description": "Choisir des verbes, des quantités et des nuances précis pour le travail d'ingénierie."
+          },
+          {
+            "title": "Décrire des systèmes",
+            "description": "Expliquer comment un système est construit et ce qui limite ses performances."
+          },
+          {
+            "title": "Documentation",
+            "description": "Rédiger des spécifications, README et consignes qu'un lecteur extérieur peut suivre."
+          },
+          {
+            "title": "Présenter une construction",
+            "description": "Structurer une présentation technique de cinq minutes et répéter les questions difficiles."
+          },
+          {
+            "title": "Réunions et collaboration",
+            "description": "Clarifier, exprimer un désaccord et négocier le périmètre en anglais professionnel."
+          },
+          {
+            "title": "Clinique de portfolio",
+            "description": "Revoir les travaux écrits et oraux produits pendant le programme."
+          }
+        ],
+        "capstone": {
+          "title": "Une présentation technique et un brief écrit",
+          "description": "Une présentation de cinq minutes et un brief technique d'une page, présentés devant la cohorte."
+        }
+      },
+      "german-mobility": {
+        "title": "Allemand pour la mobilité académique & technique",
+        "description": "L'allemand pour les élèves qui prévoient d'étudier ou de travailler en Allemagne — vocabulaire académique, documents de candidature et assurance pour gérer les démarches quotidiennes.",
+        "lede": "L'allemand pour la prochaine étape : une place à l'université, un stage ou un poste technique dans un pays germanophone.",
+        "highlights": [
+          "Goethe A1–B1",
+          "Allemand académique",
+          "Candidatures"
+        ],
+        "outcomes": [
+          "Gérer des situations quotidiennes et académiques en allemand avec une confiance croissante.",
+          "Lire et remplir les documents courants de candidature et d'inscription.",
+          "Se présenter et présenter son parcours technique lors d'un entretien.",
+          "Suivre la structure d'une présentation technique en allemand."
+        ],
+        "tools": [
+          "Goethe A1–B1",
+          "Formulaires Anmeldung",
+          "Dossiers Uni-Assist",
+          "Laboratoire oral",
+          "Modèles de CV et de lettre de motivation"
+        ],
+        "modules": [
+          {
+            "title": "Premiers pas en allemand",
+            "description": "Prononciation, structure de phrase et formules qui portent une première semaine."
+          },
+          {
+            "title": "Vocabulaire académique",
+            "description": "Les mots et les habitudes d'une université allemande."
+          },
+          {
+            "title": "Candidatures",
+            "description": "Lire, remplir et expliquer les documents qu'exige une installation."
+          },
+          {
+            "title": "Allemand technique",
+            "description": "Présenter sa discipline, son projet et son expérience dans un allemand simple."
+          },
+          {
+            "title": "Entretiens et présentations",
+            "description": "Répéter un entretien et une courte présentation technique."
+          },
+          {
+            "title": "Clinique d'arrivée",
+            "description": "Inscription, logement et les conversations pratiques qui suivent l'admission."
+          }
+        ],
+        "capstone": {
+          "title": "Un dossier de mobilité étudiante",
+          "description": "Un CV, une lettre de motivation et une présentation orale en allemand, évalués selon une vraie liste de contrôle de candidature."
+        }
       },
       "audiovisual-training": {
         "title": "Formation Audiovisuelle",
@@ -230,14 +453,43 @@
           "Monter une séquence avec rythme et continuité.",
           "Projeter et critiquer une œuvre terminée."
         ],
+        "tools": [
+          "Appareil photo Sony hybride",
+          "Micro Rode",
+          "DaVinci Resolve",
+          "Kit d'éclairage LED",
+          "Modèles de liste de plans"
+        ],
         "modules": [
-          "Histoire et traitement — trouver le film",
-          "Préproduction — plans, lieux et rôles",
-          "Caméra — cadrage, mouvement et exposition",
-          "Son — micros, niveaux et ambiance",
-          "Montage — assemblage, rythme et couleur",
-          "Projection — critique et montage final"
-        ]
+          {
+            "title": "Histoire et traitement",
+            "description": "Transformer une idée en traitement avec un point de vue clair."
+          },
+          {
+            "title": "Préproduction",
+            "description": "Listes de plans, lieux et rôles planifiés avant d'appuyer sur enregistrer."
+          },
+          {
+            "title": "Caméra",
+            "description": "Cadrage, mouvement et exposition au service du récit."
+          },
+          {
+            "title": "Son",
+            "description": "Micros, niveaux et ambiance : capter un son qui pourra être monté."
+          },
+          {
+            "title": "Montage",
+            "description": "Assemblage, rythme et couleur pour un premier montage qui retient l'attention."
+          },
+          {
+            "title": "Projection",
+            "description": "Projeter le travail, recevoir une critique structurée et livrer le montage final."
+          }
+        ],
+        "capstone": {
+          "title": "Un court métrage",
+          "description": "Un film de trois à cinq minutes, livré avec un traitement, une liste de plans et un montage final projeté à la cohorte."
+        }
       },
       "multimedia": {
         "title": "Multimédia",
@@ -254,14 +506,43 @@
           "Préparer des ressources pour l'écran et les formats sociaux.",
           "Présenter une étude de cas prête pour un portfolio."
         ],
+        "tools": [
+          "Figma",
+          "Adobe Illustrator",
+          "Adobe Photoshop",
+          "Blender",
+          "Modèles de portfolio"
+        ],
         "modules": [
-          "Fondations du design — grille, typographie et hiérarchie",
-          "Couleur et image — construire un système visuel",
-          "Atelier de mise en page — des pages qui respirent",
-          "Production numérique — ressources et formats",
-          "Art du portfolio — sélection et séquencement",
-          "Revue finale — présenter et affiner"
-        ]
+          {
+            "title": "Fondations du design",
+            "description": "Grille, typographie et hiérarchie comme décisions, non comme décoration."
+          },
+          {
+            "title": "Couleur et image",
+            "description": "Construire un petit système visuel avec des couleurs, des images et des règles."
+          },
+          {
+            "title": "Atelier de mise en page",
+            "description": "Composer des pages avec un espace, un rythme et un ordre de lecture réfléchis."
+          },
+          {
+            "title": "Production numérique",
+            "description": "Préparer des ressources pour l'écran, l'impression et les réseaux sans perte de qualité."
+          },
+          {
+            "title": "Art du portfolio",
+            "description": "Sélectionner et ordonner les travaux pour que l'idée la plus forte arrive en premier."
+          },
+          {
+            "title": "Revue finale",
+            "description": "Présenter une étude de cas, recevoir une critique et affiner la pièce finale."
+          }
+        ],
+        "capstone": {
+          "title": "Une étude de cas de portfolio",
+          "description": "Une étude de cas multi-pages documentant le brief, le processus et le travail final, prête à être partagée avec un client ou une école."
+        }
       }
     }
   },
@@ -290,15 +571,15 @@
   "testimonials": {
     "eyebrow": "Familles",
     "title": "Ce que disent les familles",
-    "intro": "Des parents d'El Biar et d'Alger font confiance à Kennedy School pour une éducation structurée et inspirante.",
+    "intro": "Des parents d'Alger font confiance à Kennedy Academy pour une éducation structurée et inspirante.",
     "pause": "Mettre les témoignages en pause",
     "play": "Lire les témoignages",
     "items": {
       "nadia": {
-        "quote": "Ma fille est passée de la timidité face à la technologie à la présentation confiante de son projet robot. Le campus d'El Biar est accueillant et sérieux à la fois.",
+        "quote": "Ma fille est passée de la timidité face à la technologie à la présentation confiante de son projet robot. Le campus est accueillant et sérieux à la fois.",
         "name": "Nadia B.",
         "role": "Parent",
-        "location": "El Biar"
+        "location": "Dely Ibrahim"
       },
       "karim": {
         "quote": "Le programme Python a donné à mon fils de vraies bases — pas seulement des jeux, mais une logique qu'il utilise à l'école. Les formateurs sont patients et compétents.",
@@ -362,7 +643,7 @@
   "contact": {
     "eyebrow": "Visiter",
     "title": "Venez voir l'espace.",
-    "intro": "Le campus est à El Biar, ouvert du lundi au samedi. Passez pour une visite, un café ou une conversation sur la prochaine cohorte.",
+    "intro": "Le campus est à El Biar, ouvert tous les jours. Passez pour une visite, un café ou une conversation sur la prochaine cohorte.",
     "addressLabel": "Campus",
     "mapsCta": "Obtenir l'itinéraire",
     "visitCta": "Visiter le campus",
@@ -372,11 +653,10 @@
     "whatsappCta": "Démarrer une conversation",
     "whatsappPrefill": "Bonjour Kennedy Academy — je souhaite en savoir plus sur les formations.",
     "hoursTitle": "Horaires du Hub & Café",
-    "hoursNote": "Dimanche fermé",
-    "hoursWeekdays": "Lundi–Samedi",
-    "hoursTime": "09:00 – 19:00",
-    "hoursSunday": "Dimanche",
-    "hoursClosed": "Fermé",
+    "hoursNote": "Ouvert 7 jours sur 7",
+    "hoursWeekdays": "Tous les jours",
+    "hoursTime": "09h00 – 19h00",
+    "hoursCta": "Ouvert 7j/7 · 09h00 – 19h00",
     "socialsTitle": "Nous suivre",
     "form": {
       "title": "Demande d'information",
@@ -415,7 +695,6 @@
     }
   },
   "footer": {
-    "tagline": "El Biar · Alger",
     "love": "Fait avec amour pour chaque élève qui franchit nos portes.",
     "navigation": "Navigation",
     "connect": "Nous suivre",
