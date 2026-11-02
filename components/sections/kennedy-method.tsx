@@ -1,3 +1,4 @@
+import DitherVeil from '@/components/ui/dither-veil';
 import type { Dictionary } from '@/lib/dictionaries';
 
 type KennedyMethodProps = {
@@ -18,6 +19,33 @@ export function KennedyMethod({ method }: KennedyMethodProps) {
             {method.title}
           </h2>
           <p className="mt-5 max-w-sm leading-relaxed text-ink-muted">{method.intro}</p>
+
+          <div className="mt-10">
+            <div className="aspect-[3/2] w-full max-w-md" aria-hidden="true">
+              <DitherVeil
+                src="/images/hero/school-of-athens.png"
+                fit="contain"
+                pattern="floyd"
+                palette="duotone"
+                pixelSize={2}
+                levels={2}
+                inkColor="#881035"
+                paperColor="#ffffff"
+                contrast={1.2}
+                brightness={0}
+                revealRadius={200}
+                softness={0.6}
+                linger={0.8}
+                rim={0}
+                className="h-full w-full"
+              />
+            </div>
+            <div className="mt-4 flex items-center justify-center gap-3 text-[10px] font-mono uppercase tracking-[0.2em] text-ink-muted">
+              <span>{method.canvasCaptionTitle}</span>
+              <span aria-hidden="true">·</span>
+              <span>{method.canvasCaptionAction}</span>
+            </div>
+          </div>
         </div>
 
         <ol className="border-t border-line/70 lg:col-span-7 lg:col-start-6">

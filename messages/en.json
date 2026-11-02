@@ -5,6 +5,7 @@
     "hub": "The Hub",
     "method": "The Method",
     "contact": "Contact",
+    "whatsappAdmissions": "WhatsApp Admissions",
     "mega": {
       "tracks": {
         "tech": "Technology & AI",
@@ -28,7 +29,12 @@
     "titleEmphasis": "In the open.",
     "subtitle": "Kennedy Academy is a technology, digital arts and languages academy in El Biar — with a robotics lab, a media studio and a cafe that stay open between sessions.",
     "ctaPrimary": "Explore Programmes",
-    "ctaSecondary": "Visit the Hub"
+    "ctaSecondary": "Visit the Hub",
+    "pillars": {
+      "inPerson": "01 · 100% IN-PERSON ATELIER",
+      "mentorLed": "02 · MENTOR-LED · MAX 10 / COHORT",
+      "hardware": "03 · PRO HARDWARE & OPEN LAB ACCESS"
+    }
   },
   "hub": {
     "eyebrow": "The Campus",
@@ -550,6 +556,8 @@
     "eyebrow": "The Kennedy Method",
     "title": "Engineering rigour, open culture.",
     "intro": "Three commitments shape every programme, every cohort and every room.",
+    "canvasCaptionTitle": "The Academy",
+    "canvasCaptionAction": "Hover to Reveal Canvas",
     "items": {
       "rigorous-engineering": {
         "number": "01",

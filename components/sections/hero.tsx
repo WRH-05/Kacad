@@ -53,6 +53,18 @@ export function Hero({ locale, hero }: HeroProps) {
               {hero.ctaSecondary}
             </Link>
           </div>
+
+          <ul className="mt-8 grid gap-3 border-t border-line/40 pt-6 sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-line/40">
+            <li className="font-mono text-[11px] uppercase leading-relaxed tracking-wider text-ink/80 sm:px-4 sm:first:pl-0">
+              [&nbsp;{hero.pillars.inPerson}&nbsp;]
+            </li>
+            <li className="font-mono text-[11px] uppercase leading-relaxed tracking-wider text-ink/80 sm:px-4">
+              [&nbsp;{hero.pillars.mentorLed}&nbsp;]
+            </li>
+            <li className="font-mono text-[11px] uppercase leading-relaxed tracking-wider text-ink/80 sm:px-4 sm:last:pr-0">
+              [&nbsp;{hero.pillars.hardware}&nbsp;]
+            </li>
+          </ul>
         </div>
 
         <div className="relative flex flex-col items-center lg:col-span-5 lg:ml-auto">
