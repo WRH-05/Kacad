@@ -18,6 +18,7 @@
     --highlight-strong: 122 78 0;
     --highlight-ink: 17 17 22;
     --sand: 244 237 228;
+    --rubric: 190 48 38;
   }
 
   [data-era='clay'] {
@@ -38,6 +39,7 @@
     --accent-ink: 12 12 16;
     --highlight: 253 184 81;
     --sand: 30 30 38;
+    --rubric: 240 113 100;
   }
 
   html {

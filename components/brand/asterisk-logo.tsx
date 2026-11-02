@@ -7,30 +7,22 @@ type AsteriskLogoProps = {
   className?: string;
   title?: string;
   animated?: boolean;
-  /** Play the one-time four-glyph docking animation (hero only). */
+  /** Play the one-time bar-docking animation (hero only). */
   dock?: boolean;
   decorative?: boolean;
 };
 
-type Glyph = {
-  angle: number;
-  from: { x: number; y: number };
-};
-
-// North, South, West, East — each glyph docks into the same centre.
-const GLYPHS: readonly Glyph[] = [
-  { angle: 0, from: { x: 0, y: -32 } },
-  { angle: 180, from: { x: 0, y: 32 } },
-  { angle: 270, from: { x: -32, y: 0 } },
-  { angle: 90, from: { x: 32, y: 0 } }
-];
-
-const DOCK_EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
+const BLUE = '#0A0099';
+const SAFFRON = '#FCB351';
+const DOCK_EASE: [number, number, number, number] = [0.12, 1, 0.2, 1];
+const DOCK_DELAY = 0.4;
+const DOCK_DURATION = 1.6;
+const LAYER_STAGGER = 0.12;
 
 /**
- * Four intersecting K strokes rotated a quarter-turn each. The four stems
- * become the cardinal points and the arms form the four diagonals — the
- * 8-point starburst from the brand mark.
+ * The reference mark: three continuous overlapping bars.
+ * Paint order is vertical → saffron X → horizontal, so the horizontal bar
+ * caps the centre cleanly with no chevrons or centre joints.
  */
 export function AsteriskLogo({
   className,
@@ -41,65 +33,88 @@ export function AsteriskLogo({
 }: AsteriskLogoProps) {
   const reduceMotion = useReducedMotion() ?? false;
 
+  const dockTransition = (stagger: number) =>
+    reduceMotion
+      ? { duration: 0 }
+      : {
+          duration: DOCK_DURATION,
+          ease: DOCK_EASE,
+          delay: DOCK_DELAY + stagger
+        };
+
   return (
-    <svg
-      viewBox="0 0 100 100"
+    <motion.svg
+      viewBox="0 0 200 200"
       fill="none"
-      className={cn(
-        'origin-center overflow-visible text-accent',
-        animated &&
-          'transition-transform duration-700 ease-out hover:rotate-45 motion-reduce:transition-none',
-        className
-      )}
+      className={cn('origin-center overflow-visible', className)}
+      style={{ transformOrigin: '50% 50%' }}
+      whileHover={animated && !reduceMotion ? { rotate: 45 } : undefined}
+      transition={{ type: 'spring', stiffness: 120, damping: 18, mass: 1.1 }}
       role={decorative ? undefined : 'img'}
       aria-hidden={decorative || undefined}
       aria-label={decorative ? undefined : title}
     >
       {!decorative ? <title>{title}</title> : null}
-      {GLYPHS.map(({ angle, from }) => (
-        <motion.g
-          key={angle}
-          initial={dock ? { x: from.x, y: from.y, opacity: 0 } : false}
-          animate={{ x: 0, y: 0, opacity: 1 }}
-          transition={
-            reduceMotion
-              ? { duration: 0 }
-              : { duration: 1.4, ease: DOCK_EASE }
-          }
-        >
-          <g transform={`rotate(${angle} 50 50)`}>
-            <line
-              x1="50"
-              y1="50"
-              x2="50"
-              y2="15"
-              stroke="currentColor"
-              strokeWidth="8"
-              strokeLinecap="round"
-            />
-            <line
-              x1="50"
-              y1="50"
-              x2="74"
-              y2="26"
-              className="text-highlight"
-              stroke="currentColor"
-              strokeWidth="7"
-              strokeLinecap="round"
-            />
-            <line
-              x1="50"
-              y1="50"
-              x2="74"
-              y2="74"
-              className="text-highlight"
-              stroke="currentColor"
-              strokeWidth="7"
-              strokeLinecap="round"
-            />
-          </g>
-        </motion.g>
-      ))}
-    </svg>
+
+      {/* Base layer: vertical blue bar, entering from the top. */}
+      <motion.g
+        initial={dock ? { y: -64, opacity: 0 } : false}
+        animate={{ y: 0, opacity: 1 }}
+        transition={dockTransition(0)}
+      >
+        <line
+          x1="100"
+          y1="20"
+          x2="100"
+          y2="180"
+          stroke={BLUE}
+          strokeWidth="16"
+          strokeLinecap="round"
+        />
+      </motion.g>
+
+      {/* Middle layer: saffron diagonal X, fading in. */}
+      <motion.g
+        initial={dock ? { opacity: 0 } : false}
+        animate={{ opacity: 1 }}
+        transition={dockTransition(LAYER_STAGGER)}
+      >
+        <line
+          x1="38"
+          y1="38"
+          x2="162"
+          y2="162"
+          stroke={SAFFRON}
+          strokeWidth="16"
+          strokeLinecap="round"
+        />
+        <line
+          x1="162"
+          y1="38"
+          x2="38"
+          y2="162"
+          stroke={SAFFRON}
+          strokeWidth="16"
+          strokeLinecap="round"
+        />
+      </motion.g>
+
+      {/* Top layer: horizontal blue bar, entering from the right. */}
+      <motion.g
+        initial={dock ? { x: 64, opacity: 0 } : false}
+        animate={{ x: 0, opacity: 1 }}
+        transition={dockTransition(LAYER_STAGGER * 2)}
+      >
+        <line
+          x1="20"
+          y1="100"
+          x2="180"
+          y2="100"
+          stroke={BLUE}
+          strokeWidth="16"
+          strokeLinecap="round"
+        />
+      </motion.g>
+    </motion.svg>
   );
 }

@@ -28,9 +28,9 @@ export const contactInfo = {
     },
     { id: 'maps', href: 'https://maps.app.goo.gl/83ka8fKBYabae2eT8' }
   ],
-  /** Mon–Sat 09:00–19:00. Sunday is absent, therefore closed. */
+  /** Open 7 days a week, 09:00–19:00. */
   hours: [
-    { days: [1, 2, 3, 4, 5, 6], open: '09:00', close: '19:00' }
+    { days: [0, 1, 2, 3, 4, 5, 6], open: '09:00', close: '19:00' }
   ] satisfies readonly Schedule[]
 } as const;
 

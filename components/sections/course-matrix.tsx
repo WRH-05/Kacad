@@ -1,31 +1,29 @@
 'use client';
 
+import Link from 'next/link';
 import { useMemo, useState } from 'react';
-import { CourseDrawerModal } from '@/components/courses/course-drawer-modal';
 import {
   courseTracks,
   courses,
   matchesAgeFilter,
   type AgeFilter,
-  type CourseId,
   type CourseTrack
 } from '@/content/courses';
 import type { Dictionary } from '@/lib/dictionaries';
 import type { Locale } from '@/lib/i18n';
+import { routes } from '@/lib/routes';
 import { cn, interpolate } from '@/lib/utils';
 
 type CourseMatrixProps = {
   coursesDict: Dictionary['courses'];
-  waitlist: Dictionary['waitlist'];
   locale: Locale;
 };
 
 type TrackFilter = CourseTrack | 'all';
 
-export function CourseMatrix({ coursesDict, waitlist, locale }: CourseMatrixProps) {
+export function CourseMatrix({ coursesDict, locale }: CourseMatrixProps) {
   const [track, setTrack] = useState<TrackFilter>('all');
   const [age, setAge] = useState<AgeFilter>('any');
-  const [selectedId, setSelectedId] = useState<CourseId | null>(null);
 
   const filtered = useMemo(
     () =>
@@ -55,8 +53,7 @@ export function CourseMatrix({ coursesDict, waitlist, locale }: CourseMatrixProp
   }
 
   return (
-    <>
-      <section id="courses" className="section-anchor py-20 lg:py-28">
+    <section id="courses" className="section-anchor py-20 lg:py-28">
         <div className="section-shell">
           <div className="grid gap-8 lg:grid-cols-12">
             <div className="lg:col-span-5">
@@ -140,9 +137,8 @@ export function CourseMatrix({ coursesDict, waitlist, locale }: CourseMatrixProp
 
                 return (
                   <li key={course.id} className="border-t border-line/70">
-                    <button
-                      type="button"
-                      onClick={() => setSelectedId(course.id)}
+                    <Link
+                      href={routes.course(locale, course.id)}
                       className="group grid w-full grid-cols-1 gap-2 py-6 text-left transition hover:bg-surface-sunken/60 sm:grid-cols-[2.5rem_1fr_auto] sm:items-baseline lg:grid-cols-12 lg:gap-4"
                     >
                       <span className="font-mono text-[10px] tracking-[0.2em] text-ink-muted lg:col-span-1">
@@ -159,9 +155,9 @@ export function CourseMatrix({ coursesDict, waitlist, locale }: CourseMatrixProp
                         {item.description}
                       </span>
                       <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-accent lg:col-span-1 lg:text-right">
-                        {coursesDict.syllabusCta} →
+                        {coursesDict.programmeCta} →
                       </span>
-                    </button>
+                    </Link>
                   </li>
                 );
               })}
@@ -179,15 +175,6 @@ export function CourseMatrix({ coursesDict, waitlist, locale }: CourseMatrixProp
             </div>
           )}
         </div>
-      </section>
-
-      <CourseDrawerModal
-        courseId={selectedId}
-        coursesDict={coursesDict}
-        waitlist={waitlist}
-        locale={locale}
-        onClose={() => setSelectedId(null)}
-      />
-    </>
+    </section>
   );
 }

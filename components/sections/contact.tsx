@@ -115,10 +115,6 @@ export function Contact({ contact, socialLabels, locale }: ContactProps) {
                     {contact.hoursTime}
                   </span>
                 </div>
-                <div className="flex items-baseline justify-between gap-4 text-ink-muted">
-                  <span>{contact.hoursSunday}</span>
-                  <span className="font-mono text-xs">{contact.hoursClosed}</span>
-                </div>
                 <p className="pt-1 text-xs text-ink-muted">{contact.hoursNote}</p>
               </dd>
             </div>
