@@ -380,19 +380,30 @@ void main() {
 
   vec2 sampleUv = imageUv(cellUv);
   float framed = within(sampleUv);
+
+  // The cutout's transparent background and the letterbox never render.
+  vec4 cellTexel = textureLod(tImage, sampleUv, uLod);
+  if (framed < 0.5 || cellTexel.a < 0.1) discard;
+
   vec3 level;
   if (uPattern == 3) {
     level = texelFetch(tDiffused, ivec2(cell), 0).rgb;
   } else {
-    vec3 c = mix(uMatte, textureLod(tImage, sampleUv, uLod).rgb, framed);
+    vec3 c = mix(uMatte, cellTexel.rgb, framed);
     float t = uPattern == 1 ? blueNoise(cell) : (uPattern == 2 ? engraving(cell) : bayer(cell));
     level = quantize(toned(c), t);
   }
 
+  // Crimson dots only: ink cells are opaque, paper cells are fully transparent.
+  float dotLuma = dot(level, vec3(0.2126, 0.7152, 0.0722));
+  float dotAlpha = 1.0 - step(0.5, dotLuma);
+
   vec3 color = mix(uInk, mix(uInk, uPaper, level), max(framed, uKey));
   vec3 backdrop = mix(uInk, uPaper, toned(uMatte));
   vec2 photoUv = imageUv(vUv);
-  vec3 raw = texture(tImage, photoUv).rgb;
+  vec4 rawTexel = texture(tImage, photoUv);
+  if (within(photoUv) < 0.5 || rawTexel.a < 0.1) discard;
+  vec3 raw = rawTexel.rgb;
   float plain = uKey * (1.0 - smoothstep(0.05, 0.22, distance(raw, uMatte)));
   vec3 photo = mix(mix(uInk, backdrop, uKey), mix(raw, backdrop, plain), within(photoUv));
 
@@ -401,13 +412,24 @@ void main() {
   float shown = mix(mask, 1.0 - mask, uReverse);
   float order = bayer(cell.yx);
   float low = order * (1.0 - uRim);
-  color = mix(color, uRimColor, step(low, shown) * step(0.001, uRim));
-  color = mix(color, photo, step(low + uRim, shown));
+
+  float alpha = dotAlpha;
+
+  float rimMix = step(low, shown) * step(0.001, uRim);
+  color = mix(color, uRimColor, rimMix);
+  alpha = mix(alpha, 1.0, rimMix);
+
+  float reveal = step(low + uRim, shown);
+  color = mix(color, photo, reveal);
+  alpha = mix(alpha, rawTexel.a, reveal);
 
   vec2 aspect = vec2(uResolution.x / uResolution.y, 1.0);
   float spread = length((cellUv - 0.5) * aspect) / length(aspect * 0.5);
   float appear = step(spread * 0.72 + bayer(cell + vec2(3.0, 5.0)) * 0.28, uIntro * 1.001);
-  fragColor = vec4(mix(uInk, color, appear), 1.0);
+
+  // Paper cells stay invisible; the revealed original pixels are opaque only
+  // inside the cutout.
+  fragColor = vec4(mix(uInk, color, appear), alpha * appear);
 }
 `;
 
@@ -465,8 +487,14 @@ const DitherVeil = ({
     if (!container) return undefined;
 
     const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-    const renderer = new Renderer({ dpr: Math.min(window.devicePixelRatio || 1, 2), alpha: false, antialias: false });
+    const renderer = new Renderer({
+      dpr: Math.min(window.devicePixelRatio || 1, 2),
+      alpha: true,
+      premultipliedAlpha: false,
+      antialias: false
+    });
     const gl = renderer.gl;
+    gl.clearColor(0, 0, 0, 0);
     const canvas = gl.canvas;
     canvas.style.display = 'block';
     canvas.style.width = '100%';
