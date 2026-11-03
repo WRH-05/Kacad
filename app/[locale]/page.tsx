@@ -7,6 +7,7 @@ import { KennedyMethod } from '@/components/sections/kennedy-method';
 import { TestimonialMarquee } from '@/components/sections/testimonial-marquee';
 import { contactInfo, timeZone } from '@/content/contact';
 import { hubSpaces } from '@/content/hub';
+import { getCourses } from '@/lib/courses-data';
 import { getDictionary } from '@/lib/dictionaries';
 import { getOpenState } from '@/lib/hours';
 import { isLocale, type Locale } from '@/lib/i18n';
@@ -24,7 +25,10 @@ export default async function LocaleHomePage({
     notFound();
   }
 
-  const dictionary = await getDictionary(locale as Locale);
+  const [dictionary, courseViews] = await Promise.all([
+    getDictionary(locale as Locale),
+    getCourses(locale as Locale)
+  ]);
   const initialStatus = getOpenState(new Date(), contactInfo.hours, timeZone);
 
   return (
@@ -35,7 +39,11 @@ export default async function LocaleHomePage({
         spaces={hubSpaces}
         initialStatus={initialStatus}
       />
-      <CourseMatrix coursesDict={dictionary.courses} locale={locale as Locale} />
+      <CourseMatrix
+        courses={courseViews}
+        coursesDict={dictionary.courses}
+        locale={locale as Locale}
+      />
       <KennedyMethod method={dictionary.method} />
       <TestimonialMarquee testimonialsDict={dictionary.testimonials} />
       <ContactCta contact={dictionary.contact} locale={locale as Locale} />

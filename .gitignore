@@ -6,3 +6,6 @@ prompt.md
 .claude
 .claudeignore
 CLAUDE.md
+.env
+.env.local
+.env*.local

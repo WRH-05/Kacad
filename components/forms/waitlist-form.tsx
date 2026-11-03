@@ -136,7 +136,8 @@ export function WaitlistForm({
       if (autoDownload && data.brochureUrl) {
         const link = document.createElement('a');
         link.href = data.brochureUrl;
-        link.download = '';
+        link.download = `${courseId}-syllabus.pdf`;
+        link.rel = 'noopener';
         document.body.appendChild(link);
         link.click();
         link.remove();

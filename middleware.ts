@@ -1,10 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { defaultLocale, isLocale } from './lib/i18n';
+import { updateSession } from './lib/supabase/middleware';
 
 const PUBLIC_FILE = /\.[^/]+$/;
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  if (pathname === '/admin' || pathname.startsWith('/admin/')) {
+    return updateSession(request);
+  }
 
   if (
     pathname.startsWith('/_next') ||

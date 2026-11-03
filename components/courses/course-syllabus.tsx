@@ -1,10 +1,11 @@
 import { TrackEmblem } from '@/components/brand/track-emblem';
-import type { CourseId, CourseTrack } from '@/content/courses';
+import type { CourseTrack } from '@/content/courses';
+import type { CourseCopy } from '@/lib/courses/types';
 import type { Dictionary } from '@/lib/dictionaries';
 
 type CourseSyllabusProps = {
   track: CourseTrack;
-  item: Dictionary['courses']['items'][CourseId];
+  item: CourseCopy;
   courses: Dictionary['courses'];
 };
 
@@ -82,6 +83,17 @@ export function CourseSyllabus({ track, item, courses }: CourseSyllabusProps) {
             </div>
           </div>
         </div>
+
+        {item.capstone.deliverable ? (
+          <div className="mt-5 border-t border-line/70 pt-4">
+            <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-accent">
+              {detail.deliverableLabel}
+            </p>
+            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-ink-muted">
+              {item.capstone.deliverable}
+            </p>
+          </div>
+        ) : null}
       </section>
     </div>
   );

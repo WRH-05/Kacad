@@ -4,24 +4,25 @@ import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import {
   courseTracks,
-  courses,
   matchesAgeFilter,
   type AgeFilter,
   type CourseTrack
 } from '@/content/courses';
+import type { CourseView } from '@/lib/courses/types';
 import type { Dictionary } from '@/lib/dictionaries';
 import type { Locale } from '@/lib/i18n';
 import { routes } from '@/lib/routes';
 import { cn, interpolate } from '@/lib/utils';
 
 type CourseMatrixProps = {
+  courses: CourseView[];
   coursesDict: Dictionary['courses'];
   locale: Locale;
 };
 
 type TrackFilter = CourseTrack | 'all';
 
-export function CourseMatrix({ coursesDict, locale }: CourseMatrixProps) {
+export function CourseMatrix({ courses, coursesDict, locale }: CourseMatrixProps) {
   const [track, setTrack] = useState<TrackFilter>('all');
   const [age, setAge] = useState<AgeFilter>('any');
 
@@ -31,7 +32,7 @@ export function CourseMatrix({ coursesDict, locale }: CourseMatrixProps) {
         (course) =>
           (track === 'all' || course.track === track) && matchesAgeFilter(course, age)
       ),
-    [track, age]
+    [courses, track, age]
   );
 
   const hasFilters = track !== 'all' || age !== 'any';
@@ -133,7 +134,7 @@ export function CourseMatrix({ coursesDict, locale }: CourseMatrixProps) {
           {filtered.length > 0 ? (
             <ol className="border-b border-line/70">
               {filtered.map((course, index) => {
-                const item = coursesDict.items[course.id];
+                const item = course.copy;
 
                 return (
                   <li key={course.id} className="border-t border-line/70">

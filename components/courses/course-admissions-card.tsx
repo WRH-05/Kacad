@@ -1,13 +1,14 @@
 import { WaitlistForm } from '@/components/forms/waitlist-form';
 import { whatsappHref } from '@/content/contact';
-import type { Course, CourseId } from '@/content/courses';
+import type { Course } from '@/content/courses';
+import type { CourseCopy } from '@/lib/courses/types';
 import type { Dictionary } from '@/lib/dictionaries';
 import type { Locale } from '@/lib/i18n';
 import { interpolate } from '@/lib/utils';
 
 type CourseAdmissionsCardProps = {
   course: Course;
-  item: Dictionary['courses']['items'][CourseId];
+  item: CourseCopy;
   courses: Dictionary['courses'];
   waitlist: Dictionary['waitlist'];
   locale: Locale;
