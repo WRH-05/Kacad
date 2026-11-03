@@ -1,16 +1,19 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { TrackEmblem } from '@/components/brand/track-emblem';
+import { CohortBadge } from '@/components/courses/cohort-badge';
 import { CourseAdmissionsCard } from '@/components/courses/course-admissions-card';
+import { CourseMentor } from '@/components/courses/course-mentor';
 import { CourseSpecBar } from '@/components/courses/course-spec-bar';
 import { CourseSyllabus } from '@/components/courses/course-syllabus';
-import { courseIds, courses, isCourseId } from '@/content/courses';
+import { OpenStudioInvite } from '@/components/courses/open-studio-invite';
+import { courseIds, isCourseId } from '@/content/courses';
+import { getCourseView } from '@/lib/courses-data';
 import { getDictionary } from '@/lib/dictionaries';
 import { isLocale, type Locale } from '@/lib/i18n';
 import { routes } from '@/lib/routes';
 
 export const revalidate = 60;
-export const dynamicParams = false;
 
 export function generateStaticParams() {
   // The [locale] layout already generates the locale params; Next merges them
@@ -27,12 +30,13 @@ export async function generateMetadata({
 
   if (!isLocale(locale) || !isCourseId(slug)) return {};
 
-  const dictionary = await getDictionary(locale);
-  const copy = dictionary.courses.items[slug];
+  const view = await getCourseView(locale, slug);
+
+  if (!view) return {};
 
   return {
-    title: { absolute: `${copy.title} — Kennedy Academy` },
-    description: copy.description
+    title: { absolute: `${view.copy.title} — Kennedy Academy` },
+    description: view.copy.description
   };
 }
 
@@ -47,13 +51,13 @@ export default async function CoursePage({
     notFound();
   }
 
-  const course = courses.find((entry) => entry.id === slug);
+  const course = await getCourseView(locale, slug);
   if (!course) {
     notFound();
   }
 
   const dictionary = await getDictionary(locale as Locale);
-  const copy = dictionary.courses.items[slug];
+  const copy = course.copy;
   const detail = dictionary.courses.detail;
 
   return (
@@ -91,6 +95,9 @@ export default async function CoursePage({
               {copy.title}
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-ink-muted">{copy.lede}</p>
+            <div className="mt-6">
+              <CohortBadge course={course} detail={detail} />
+            </div>
           </div>
 
           <ul className="flex flex-wrap gap-2 lg:col-span-4 lg:justify-end">
@@ -109,6 +116,12 @@ export default async function CoursePage({
           <CourseSpecBar course={course} courses={dictionary.courses} />
         </div>
 
+        {course.mentor ? (
+          <div className="mt-12">
+            <CourseMentor mentor={course.mentor} detail={detail} />
+          </div>
+        ) : null}
+
         <div className="mt-12 grid gap-10 lg:grid-cols-12 lg:gap-12">
           <div className="order-2 lg:order-1 lg:col-span-7">
             <CourseSyllabus track={course.track} item={copy} courses={dictionary.courses} />
@@ -123,6 +136,10 @@ export default async function CoursePage({
               locale={locale as Locale}
             />
           </div>
+        </div>
+
+        <div className="mt-14">
+          <OpenStudioInvite course={course} detail={detail} />
         </div>
 
         <div className="mt-16 border-t border-line/70 pt-6">
