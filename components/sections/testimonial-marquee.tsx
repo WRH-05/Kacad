@@ -39,7 +39,7 @@ export function TestimonialMarquee({ testimonialsDict }: TestimonialMarqueeProps
   return (
     <section
       id="voices"
-      className="section-anchor border-y border-line/60 bg-surface-sunken/40 py-20 lg:py-28"
+      className="section-anchor border-b border-line/60 bg-surface-sunken/40 py-20 lg:py-28"
     >
       <div className="section-shell">
         <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">

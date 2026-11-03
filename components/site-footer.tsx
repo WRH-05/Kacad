@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { SocialIcon } from '@/components/ui/social-icons';
 import { contactInfo, whatsappHref } from '@/content/contact';
@@ -33,7 +34,13 @@ export function SiteFooter({ locale, nav, footer }: SiteFooterProps) {
     <footer className="border-t border-line/70 bg-ink text-surface">
       <div className="section-shell grid gap-10 py-14 md:grid-cols-12 md:gap-8">
         <div className="md:col-span-5">
-          <p className="font-serif text-2xl text-surface">Kennedy Academy</p>
+          <Image
+            src="/images/brand/wordmark-black-trim.png"
+            alt="Kennedy Academy"
+            width={367}
+            height={165}
+            className="h-10 w-auto brightness-0 invert"
+          />
           <p className="mt-6 max-w-sm text-sm leading-relaxed text-surface/65">
             {footer.love}
           </p>

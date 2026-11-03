@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
@@ -12,6 +13,7 @@ import {
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { AsteriskLogo } from '@/components/brand/asterisk-logo';
 import { TrackEmblem } from '@/components/brand/track-emblem';
+import { contactInfo } from '@/content/contact';
 import type { CourseId, CourseTrack } from '@/content/courses';
 import type { Dictionary } from '@/lib/dictionaries';
 import { buildLocaleHref, type Locale, locales } from '@/lib/i18n';
@@ -199,7 +201,14 @@ export function SiteNavbar({ locale, nav, programmes }: SiteNavbarProps) {
       <div className="section-shell flex items-center justify-between gap-4 py-4">
         <Link href={routes.home(locale)} className="group flex items-center gap-3">
           <AsteriskLogo decorative animated className="h-8 w-8 shrink-0" />
-          <span className="font-serif text-lg leading-none text-ink">Kennedy Academy</span>
+          <Image
+            src="/images/brand/wordmark-blue-trim.png"
+            alt="Kennedy Academy"
+            width={366}
+            height={165}
+            priority
+            className="h-7 w-auto object-contain sm:h-8"
+          />
         </Link>
 
         <nav className="hidden items-center gap-6 lg:flex" aria-label={nav.aria.main}>
@@ -294,6 +303,22 @@ export function SiteNavbar({ locale, nav, programmes }: SiteNavbarProps) {
         </nav>
 
         <div className="flex items-center gap-3">
+          <a
+            href={contactInfo.whatsapp.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:inline-flex items-center gap-2 rounded-none border border-accent bg-transparent px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-accent transition-colors hover:bg-accent hover:text-accent-ink"
+          >
+            <span
+              className="h-1.5 w-1.5 shrink-0 animate-pulse rounded-full bg-accent motion-reduce:animate-none"
+              aria-hidden="true"
+            />
+            <span>{nav.whatsappAdmissions}</span>
+            <span className="text-xs" aria-hidden="true">
+              ↗
+            </span>
+          </a>
+
           <div
             className="flex items-center gap-1 rounded-none border border-line/70 p-1"
             role="group"
