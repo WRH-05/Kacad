@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
+import { Analytics } from '@vercel/analytics/next';
 import '../../styles/globals.css';
 import { FloatingWhatsApp } from '../../components/floating-whatsapp';
 import { SiteNavbar } from '../../components/site-navbar';
@@ -69,6 +70,7 @@ export default async function LocaleLayout({
           label={dictionary.courses.detail.floatingWhatsapp}
           ariaLabel={dictionary.courses.detail.floatingWhatsappAria}
         />
+        <Analytics />
       </body>
     </html>
   );
