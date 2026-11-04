@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { AsteriskLogo } from '@/components/brand/asterisk-logo';
+import { HeroAsterisk } from '@/components/brand/hero-asterisk';
 import { DitherBackground } from '@/components/ui/dither-background';
 import type { Dictionary } from '@/lib/dictionaries';
 import type { Locale } from '@/lib/i18n';
@@ -68,11 +68,7 @@ export function Hero({ locale, hero }: HeroProps) {
         </div>
 
         <div className="relative flex flex-col items-center lg:col-span-5 lg:ml-auto">
-          <AsteriskLogo
-            animated
-            decorative
-            className="relative h-52 w-52 drop-shadow-logo sm:h-64 sm:w-64 lg:h-[22rem] lg:w-[22rem]"
-          />
+          <HeroAsterisk className="relative h-52 w-52 drop-shadow-logo sm:h-64 sm:w-64 lg:h-[22rem] lg:w-[22rem]" />
         </div>
       </div>
     </section>

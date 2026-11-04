@@ -1,5 +1,6 @@
 import { InquiryForm } from '@/components/forms/inquiry-form';
 import { SocialIcon } from '@/components/ui/social-icons';
+import { WhatsAppIcon } from '@/components/ui/whatsapp-icon';
 import { contactInfo, whatsappHref } from '@/content/contact';
 import type { Dictionary } from '@/lib/dictionaries';
 import type { Locale } from '@/lib/i18n';
@@ -28,6 +29,27 @@ export function Contact({ contact, socialLabels, locale }: ContactProps) {
             {contact.title}
           </h1>
           <p className="mt-5 max-w-md leading-relaxed text-ink-muted">{contact.intro}</p>
+
+          <a
+            href={whatsappHref(contact.whatsappPrefill)}
+            target="_blank"
+            rel="noreferrer"
+            className="group mt-8 block border border-ink bg-ink p-5 text-surface transition hover:bg-ink/95"
+          >
+            <span className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.22em] text-highlight">
+              <WhatsAppIcon className="h-4 w-4 text-[#25D366]" />
+              {contact.liveDesk.eyebrow}
+            </span>
+            <span className="mt-3 block text-sm leading-relaxed text-surface/85">
+              {contact.liveDesk.response}
+            </span>
+            <span className="mt-4 inline-flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.18em] text-surface">
+              {contact.liveDesk.cta}
+              <span aria-hidden="true" className="transition group-hover:translate-x-0.5">
+                ↗
+              </span>
+            </span>
+          </a>
 
           <dl className="mt-10 border-t border-line/70">
             <div className="border-b border-line/70 py-5">
@@ -120,6 +142,24 @@ export function Contact({ contact, socialLabels, locale }: ContactProps) {
             </div>
           </dl>
 
+          <div className="mt-8 border-t border-line/70 pt-6">
+            <p className="font-mono text-[9px] uppercase tracking-[0.22em] text-ink-muted">
+              {contact.location.title}
+            </p>
+            <p className="mt-2 max-w-md text-sm leading-relaxed text-ink">
+              {contact.location.body}
+            </p>
+            <a
+              href={contactInfo.address.mapsUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-3 inline-flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.18em] text-accent transition hover:text-accent/80"
+            >
+              {contact.location.mapsCta}
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+
           <div className="mt-8">
             <p className="font-mono text-[9px] uppercase tracking-[0.22em] text-ink-muted">
               {contact.socialsTitle}
@@ -150,6 +190,34 @@ export function Contact({ contact, socialLabels, locale }: ContactProps) {
             <div className="mt-6">
               <InquiryForm labels={contact.form} locale={locale} />
             </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="section-shell">
+        <div className="mt-16 rounded-none border-t border-line/40 pt-12">
+          <p className="font-mono text-[9px] uppercase tracking-[0.22em] text-accent">
+            {contact.faq.eyebrow}
+          </p>
+          <h2 className="mt-3 font-serif text-3xl text-ink md:text-4xl">{contact.faq.title}</h2>
+
+          <div className="mt-8 divide-y divide-line/40">
+            {contact.faq.items.map((item) => (
+              <details key={item.question} className="group">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 font-serif text-xl leading-snug text-ink transition hover:text-accent [&::-webkit-details-marker]:hidden">
+                  <span>{item.question}</span>
+                  <span
+                    aria-hidden="true"
+                    className="font-mono text-lg transition-transform group-open:rotate-45"
+                  >
+                    +
+                  </span>
+                </summary>
+                <p className="max-w-3xl pb-6 pr-8 text-sm leading-relaxed text-ink-muted">
+                  {item.answer}
+                </p>
+              </details>
+            ))}
           </div>
         </div>
       </div>

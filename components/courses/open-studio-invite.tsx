@@ -38,8 +38,14 @@ export function OpenStudioInvite({ course, detail }: OpenStudioInviteProps) {
             rel="noreferrer"
             className="mt-4 inline-flex items-center justify-center gap-3 bg-accent px-5 py-3 font-mono text-[10px] uppercase tracking-[0.18em] text-accent-ink transition hover:bg-accent/90"
           >
-            {detail.openStudioCta}
+            <span aria-hidden="true" className="text-accent-ink/50">
+              [
+            </span>
+            <span>{detail.openStudioCta}</span>
             <span aria-hidden="true">↗</span>
+            <span aria-hidden="true" className="text-accent-ink/50">
+              ]
+            </span>
           </a>
         </div>
       </div>

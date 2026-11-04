@@ -13,15 +13,15 @@ import {
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { AsteriskLogo } from '@/components/brand/asterisk-logo';
 import { TrackEmblem } from '@/components/brand/track-emblem';
-import { contactInfo } from '@/content/contact';
-import type { CourseId, CourseTrack } from '@/content/courses';
+import { whatsappHref } from '@/content/contact';
+import type { CourseTrack } from '@/content/courses';
 import type { Dictionary } from '@/lib/dictionaries';
 import { buildLocaleHref, type Locale, locales } from '@/lib/i18n';
 import { routes } from '@/lib/routes';
 import { cn } from '@/lib/utils';
 
 export type ProgrammeLink = {
-  id: CourseId;
+  id: string;
   track: CourseTrack;
   title: string;
   ageLabel: string;
@@ -31,6 +31,7 @@ type SiteNavbarProps = {
   locale: Locale;
   nav: Dictionary['nav'];
   programmes: readonly ProgrammeLink[];
+  whatsappPrefill: string;
 };
 
 const localeLabels: Record<Locale, string> = {
@@ -60,7 +61,7 @@ function ProgrammeColumn({
   return (
     <div>
       <h2 className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.22em] text-ink-muted">
-        {track === 'arts' ? <TrackEmblem track="arts" className="h-3.5 w-3.5" /> : null}
+        <TrackEmblem track={track} className="h-3.5 w-3.5" />
         {heading}
       </h2>
       <ul className="mt-5 space-y-4">
@@ -85,7 +86,7 @@ function ProgrammeColumn({
   );
 }
 
-export function SiteNavbar({ locale, nav, programmes }: SiteNavbarProps) {
+export function SiteNavbar({ locale, nav, programmes, whatsappPrefill }: SiteNavbarProps) {
   const pathname = usePathname();
   const reduceMotion = useReducedMotion();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -304,7 +305,7 @@ export function SiteNavbar({ locale, nav, programmes }: SiteNavbarProps) {
 
         <div className="flex items-center gap-3">
           <a
-            href={contactInfo.whatsapp.url}
+            href={whatsappHref(whatsappPrefill)}
             target="_blank"
             rel="noopener noreferrer"
             className="hidden sm:inline-flex items-center gap-2 rounded-none border border-accent bg-transparent px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-accent transition-colors hover:bg-accent hover:text-accent-ink"

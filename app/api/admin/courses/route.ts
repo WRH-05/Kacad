@@ -1,45 +1,66 @@
 import { revalidatePath, revalidateTag } from 'next/cache';
-import { NextRequest, NextResponse } from 'next/server';
-import { parseCourseUpdate } from '@/lib/courses/admin';
-import { createClient } from '@/lib/supabase/server';
+import { NextRequest } from 'next/server';
+import { isCourseSlug } from '@/content/courses';
+import { jsonResponse, requireAdmin } from '@/lib/admin-api';
+import { parseCourseCreate, parseCourseUpdate } from '@/lib/courses/admin';
+import { locales } from '@/lib/i18n';
 
-function json(body: unknown, status = 200) {
-  return NextResponse.json(body, {
-    status,
-    headers: { 'cache-control': 'no-store' }
-  });
+function revalidateCourse(slug: string) {
+  revalidateTag('courses');
+  revalidatePath('/[locale]', 'layout');
+
+  for (const locale of locales) {
+    revalidatePath(`/${locale}/courses/${slug}`, 'page');
+  }
+}
+
+export async function POST(request: NextRequest) {
+  const auth = await requireAdmin();
+
+  if (!auth.ok) {
+    return auth.response;
+  }
+
+  const parsed = parseCourseCreate(await request.json().catch(() => null));
+
+  if (!parsed.ok) {
+    return jsonResponse({ ok: false, code: 'validation_failed', fields: parsed.fields }, 400);
+  }
+
+  const { data, error } = await auth.supabase
+    .from('courses')
+    .insert(parsed.value)
+    .select('id')
+    .single();
+
+  if (error) {
+    if (error.code === '23505') {
+      return jsonResponse({ ok: false, code: 'slug_taken' }, 409);
+    }
+
+    console.error('[admin] course create failed:', error.message);
+    return jsonResponse({ ok: false, code: 'db_error' }, 500);
+  }
+
+  revalidateCourse(parsed.value.id);
+
+  return jsonResponse({ ok: true, id: data?.id ?? parsed.value.id });
 }
 
 export async function PATCH(request: NextRequest) {
-  let supabase;
+  const auth = await requireAdmin();
 
-  try {
-    supabase = await createClient();
-  } catch {
-    return json({ ok: false, code: 'not_configured' }, 500);
-  }
-
-  const {
-    data: { user }
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return json({ ok: false, code: 'unauthorized' }, 401);
-  }
-
-  const { data: isAdmin, error: adminError } = await supabase.rpc('is_admin');
-
-  if (adminError || !isAdmin) {
-    return json({ ok: false, code: 'forbidden' }, 403);
+  if (!auth.ok) {
+    return auth.response;
   }
 
   const parsed = parseCourseUpdate(await request.json().catch(() => null));
 
   if (!parsed.ok) {
-    return json({ ok: false, code: 'validation_failed', fields: parsed.fields }, 400);
+    return jsonResponse({ ok: false, code: 'validation_failed', fields: parsed.fields }, 400);
   }
 
-  const { data, error } = await supabase
+  const { data, error } = await auth.supabase
     .from('courses')
     .update(parsed.update)
     .eq('id', parsed.id)
@@ -48,15 +69,68 @@ export async function PATCH(request: NextRequest) {
 
   if (error) {
     console.error('[admin] course update failed:', error.message);
-    return json({ ok: false, code: 'db_error' }, 500);
+    return jsonResponse({ ok: false, code: 'db_error' }, 500);
   }
 
   if (!data) {
-    return json({ ok: false, code: 'not_found' }, 404);
+    return jsonResponse({ ok: false, code: 'not_found' }, 404);
   }
 
-  revalidateTag('courses');
-  revalidatePath('/[locale]', 'layout');
+  revalidateCourse(parsed.id);
 
-  return json({ ok: true });
+  return jsonResponse({ ok: true });
+}
+
+export async function DELETE(request: NextRequest) {
+  const auth = await requireAdmin();
+
+  if (!auth.ok) {
+    return auth.response;
+  }
+
+  const id = request.nextUrl.searchParams.get('id');
+
+  if (!id || !isCourseSlug(id)) {
+    return jsonResponse({ ok: false, code: 'validation_failed' }, 400);
+  }
+
+  const { count, error: countError } = await auth.supabase
+    .from('waitlist_leads')
+    .select('*', { count: 'exact', head: true })
+    .eq('course_id', id)
+    .in('status', ['new', 'contacted']);
+
+  if (countError) {
+    console.error('[admin] active lead count failed:', countError.message);
+    return jsonResponse({ ok: false, code: 'db_error' }, 500);
+  }
+
+  if ((count ?? 0) > 0) {
+    return jsonResponse({ ok: false, code: 'active_leads', activeLeads: count }, 409);
+  }
+
+  const { data, error } = await auth.supabase
+    .from('courses')
+    .delete()
+    .eq('id', id)
+    .select('id')
+    .maybeSingle();
+
+  if (error) {
+    // Defensive: the FK is SET NULL, but keep a clear conflict if it ever restarts.
+    if (error.code === '23503') {
+      return jsonResponse({ ok: false, code: 'has_leads' }, 409);
+    }
+
+    console.error('[admin] course delete failed:', error.message);
+    return jsonResponse({ ok: false, code: 'db_error' }, 500);
+  }
+
+  if (!data) {
+    return jsonResponse({ ok: false, code: 'not_found' }, 404);
+  }
+
+  revalidateCourse(id);
+
+  return jsonResponse({ ok: true });
 }

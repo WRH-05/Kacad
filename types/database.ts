@@ -106,7 +106,7 @@ export type Database = {
         Row: {
           age_group: string;
           contact: string;
-          course_id: string;
+          course_id: string | null;
           created_at: string;
           id: string;
           locale: string;
@@ -117,7 +117,7 @@ export type Database = {
         Insert: {
           age_group: string;
           contact: string;
-          course_id: string;
+          course_id?: string | null;
           created_at?: string;
           id?: string;
           locale?: string;
@@ -128,7 +128,7 @@ export type Database = {
         Update: {
           age_group?: string;
           contact?: string;
-          course_id?: string;
+          course_id?: string | null;
           created_at?: string;
           id?: string;
           locale?: string;

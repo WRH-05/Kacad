@@ -69,12 +69,12 @@ const mentors = {
 
 const deliverables = {
   'robotics-kids': {
-    en: 'A working line-following robot, a build journal and a demo-day presentation.',
-    fr: 'Un robot suiveur de ligne fonctionnel, un carnet de construction et une présentation au jour de démonstration.'
+    en: 'A working line-following robot, an engineering journal and a studio design defence.',
+    fr: 'Un robot suiveur de ligne fonctionnel, un carnet d’ingénierie et une soutenance de conception en studio.'
   },
   'robotics-juniors': {
-    en: 'An autonomous sensor-driven robot, documented code and a team demo.',
-    fr: 'Un robot autonome piloté par capteurs, un code documenté et une démonstration d’équipe.'
+    en: 'A competition-ready robot, documented code and a design defence before the cohort.',
+    fr: 'Un robot prêt pour la compétition, un code documenté et une soutenance de conception devant la cohorte.'
   },
   'ai-fluency': {
     en: 'A documented AI workflow, an evaluated prototype and a responsible-use brief.',
@@ -85,12 +85,12 @@ const deliverables = {
     fr: 'Une application Python testée, un dépôt propre et une présentation du code.'
   },
   'technical-english': {
-    en: 'A technical presentation, a written report and a mock client briefing.',
-    fr: 'Une présentation technique, un rapport écrit et une simulation de brief client.'
+    en: 'A five-minute pitch, a one-page technical brief and a recorded interview.',
+    fr: 'Un pitch de cinq minutes, un brief technique d’une page et un entretien enregistré.'
   },
   'german-mobility': {
-    en: 'A German CV, a mobility dossier and a recorded interview.',
-    fr: 'Un CV allemand, un dossier de mobilité et un entretien enregistré.'
+    en: 'A German CV, a motivation letter, a recorded presentation and a mock Goethe-style interview.',
+    fr: 'Un CV allemand, une lettre de motivation, une présentation enregistrée et un entretien blanc de type Goethe.'
   },
   'audiovisual-training': {
     en: 'A short film, a production folder and a final screening.',

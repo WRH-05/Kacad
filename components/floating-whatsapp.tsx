@@ -1,30 +1,61 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { WhatsAppIcon } from '@/components/ui/whatsapp-icon';
 import { whatsappHref } from '@/content/contact';
 import { interpolate } from '@/lib/utils';
 
 type FloatingWhatsAppProps = {
   programmes: { id: string; title: string }[];
-  prefillTemplate: string;
+  coursePrefill: string;
+  generalPrefill: string;
   label: string;
   ariaLabel: string;
 };
 
+const REVEAL_AFTER_PX = 300;
+
 export function FloatingWhatsApp({
   programmes,
-  prefillTemplate,
+  coursePrefill,
+  generalPrefill,
   label,
   ariaLabel
 }: FloatingWhatsAppProps) {
+  const [visible, setVisible] = useState(false);
   const pathname = usePathname();
   const match = pathname.match(/^\/(?:en|fr)\/courses\/([^/?#]+)/);
   const slug = match?.[1];
   const programme = slug ? programmes.find((entry) => entry.id === slug) : undefined;
 
   const href = whatsappHref(
-    programme ? interpolate(prefillTemplate, { course: programme.title }) : undefined
+    programme ? interpolate(coursePrefill, { course: programme.title }) : generalPrefill
   );
+
+  useEffect(() => {
+    let frame = 0;
+
+    const sync = () => {
+      frame = 0;
+      setVisible(window.scrollY > REVEAL_AFTER_PX);
+    };
+
+    const onScroll = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(sync);
+    };
+
+    sync();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  if (!visible) return null;
 
   return (
     <a
@@ -32,14 +63,10 @@ export function FloatingWhatsApp({
       target="_blank"
       rel="noreferrer"
       aria-label={ariaLabel}
-      className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] right-4 z-40 inline-flex items-center gap-2 border border-accent bg-accent px-4 py-3 font-mono text-[10px] uppercase tracking-[0.16em] text-accent-ink shadow-soft transition hover:bg-accent/90 md:hidden"
+      title={label}
+      className="fixed bottom-5 right-5 z-40 inline-flex h-14 w-14 items-center justify-center border border-ink bg-ink text-surface shadow-soft transition hover:bg-ink/90 md:hidden"
     >
-      <span
-        className="h-1.5 w-1.5 shrink-0 animate-pulse rounded-full bg-highlight motion-reduce:animate-none"
-        aria-hidden="true"
-      />
-      <span>{label}</span>
-      <span aria-hidden="true">↗</span>
+      <WhatsAppIcon className="h-7 w-7 text-[#25D366]" />
     </a>
   );
 }

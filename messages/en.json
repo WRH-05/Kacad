@@ -13,7 +13,7 @@
         "languages": "Specialized Languages"
       },
       "all": "All programmes",
-      "intro": "Eight programmes across technology, digital arts and specialized languages."
+      "intro": "Programmes across technology, digital arts and specialized languages."
     },
     "aria": {
       "main": "Main navigation",
@@ -27,7 +27,7 @@
     "eyebrow": "El Biar · Algiers",
     "titleLead": "Build the future.",
     "titleEmphasis": "In the open.",
-    "subtitle": "Kennedy Academy is a technology, digital arts and languages academy in El Biar — with a robotics lab, a media studio and a cafe that stay open between sessions.",
+    "subtitle": "Kennedy Academy is an elite technology, digital arts and languages atelier in El Biar — built for university students, founders, researchers and international professionals, with a robotics lab, cinema suites and a members' cafe that stay open between sessions.",
     "ctaPrimary": "Explore Programmes",
     "ctaSecondary": "Visit the Hub",
     "pillars": {
@@ -73,8 +73,8 @@
     "title": "The Course Matrix",
     "intro": "Filter by discipline and age, then open a programme to see the modules and join the waitlist.",
     "ageRanges": {
-      "kids": "Ages 7–11",
-      "juniors": "Ages 12–17",
+      "kids": "Junior Fellows · 7–11",
+      "juniors": "Junior Fellows · 12–17",
       "all": "All ages"
     },
     "filters": {
@@ -121,7 +121,7 @@
       "admissionsIntro": "Request the full syllabus and we will confirm your placement.",
       "submitLabel": "Request Full Syllabus & Reserve Placement",
       "whatsappCta": "Prefer WhatsApp? Message Admissions",
-      "whatsappPrefill": "Hello Kennedy Academy — I would like to know more about {course}.",
+      "whatsappPrefill": "Hello Kennedy Academy, I would like information about {course} (programme, schedule and enrolment).",
       "cohortEnrolling": "Enrolment open",
       "cohortStarts": "Cohort starts {date}",
       "seatsRemaining": "{count} seats left",
@@ -131,19 +131,20 @@
       "mentorPending": "Full mentor profile and portrait coming soon.",
       "deliverableLabel": "Student output",
       "openStudioEyebrow": "Open studio",
-      "openStudioTitle": "Saturday Open Studio",
-      "openStudioBody": "Visit the lab before you enrol. Tour the studio, meet the mentors and see student work — by appointment.",
-      "openStudioCta": "Book a Saturday visit",
-      "openStudioPrefill": "Hello Kennedy Academy — I would like to book a Saturday Open Studio visit for {course}.",
-      "floatingWhatsapp": "Ask admissions",
-      "floatingWhatsappAria": "Message Kennedy Academy admissions on WhatsApp",
+      "openStudioTitle": "Visit the Atelier This Saturday.",
+      "openStudioBody": "Specialty coffee on us, tour our robotics lab and cinema suites, meet the mentors, and see live capstone builds. Open to students, professionals, and prospective fellows.",
+      "openStudioCta": "Reserve a visit (15 min)",
+      "openStudioPrefill": "Hello Kennedy Academy, I would like to book a 15-minute atelier visit this Saturday (programme: {course}).",
+      "floatingWhatsapp": "Chat on WhatsApp",
+      "floatingWhatsappAria": "Chat with Kennedy Academy on WhatsApp",
+      "floatingPrefill": "Hello Kennedy Academy, I would like information about {course} (schedule, fees, enrolment).",
       "backToProgrammes": "All programmes"
     },
     "items": {
       "robotics-kids": {
-        "title": "Robotics for Kids",
-        "description": "Introductory robotics where children build, wire, and programme their first moving machines through playful, project-based sessions.",
-        "lede": "First machines, first circuits, first moment of \"we built that\".",
+        "title": "Robotics Foundations",
+        "description": "A disciplined first robotics lab for Junior Fellows — circuits, sensors, and real code, presented like an engineering studio.",
+        "lede": "First machines, first circuits, first real engineering habits.",
         "highlights": [
           "Build",
           "Wire",
@@ -190,12 +191,12 @@
         ],
         "capstone": {
           "title": "A line-following robot",
-          "description": "Students deliver a working robot that follows a marked course, documented with a simple build journal and demonstrated on demo day."
+          "description": "Students deliver a working robot that follows a marked course, documented with an engineering journal and defended before mentors and the cohort."
         }
       },
       "robotics-juniors": {
-        "title": "Robotics for Juniors",
-        "description": "Advanced robotics for teenagers — sensor integration, team challenges, and competition-ready engineering projects.",
+        "title": "Robotics Engineering",
+        "description": "Advanced robotics for Junior Fellows — sensor fusion, autonomous behaviour, and competition-grade engineering.",
         "lede": "Engineering with constraints: sensors, competition rules and a team that ships.",
         "highlights": [
           "Engineering",
@@ -244,7 +245,7 @@
         ],
         "capstone": {
           "title": "A competition-ready robot",
-          "description": "A rule-compliant robot, an engineering log and a short design defence presented to mentors and families."
+          "description": "A rule-compliant robot, an engineering log and a short design defence presented to mentors and the cohort."
         }
       },
       "ai-fluency": {
@@ -354,77 +355,77 @@
         }
       },
       "technical-english": {
-        "title": "Technical English",
-        "description": "English for engineering and digital work — describing systems, writing clear documentation, and presenting technical decisions with confidence.",
-        "lede": "The English you need to explain a build, write a spec and hold your ground in a technical conversation.",
+        "title": "Technical & Professional English",
+        "description": "English for diplomats, engineers, and founders — pitching, technical documentation, negotiation, and international mobility.",
+        "lede": "The English to present a build, defend a brief, and operate confidently in international rooms.",
         "highlights": [
-          "Documentation",
-          "Presentation",
-          "Vocabulary"
+          "Pitching",
+          "Technical documentation",
+          "International mobility"
         ],
         "outcomes": [
-          "Describe a system, process or prototype in precise spoken English.",
-          "Write short technical documentation with a clear structure.",
-          "Present a project and answer questions without reading from a script.",
-          "Use technical vocabulary accurately in everyday professional contexts."
+          "Pitch a technical project to investors, clients, or institutional partners.",
+          "Write documentation, briefs, and correspondence that hold up in professional review.",
+          "Present and defend decisions in meetings, interviews, and international postings.",
+          "Move between technical, diplomatic, and commercial registers with precision."
         ],
         "tools": [
-          "Technical glossary",
           "CEFR B1–C1",
-          "Speaking lab",
+          "Pitch clinic",
           "Documentation templates",
-          "Presentation clinic"
+          "Executive speaking lab",
+          "Negotiation drills"
         ],
         "modules": [
           {
-            "title": "Technical register",
-            "description": "Choosing precise verbs, quantities and qualifiers for engineering work."
+            "title": "Professional register",
+            "description": "Precision, tone, and the difference between technical, diplomatic, and commercial English."
           },
           {
             "title": "Describing systems",
-            "description": "Explain how a system is built and what limits its performance."
+            "description": "Explain architecture, constraints, and performance to non-specialists."
           },
           {
             "title": "Documentation",
-            "description": "Write short specs, READMEs and instructions a stranger could follow."
+            "description": "Write specs, briefs, and executive summaries a stranger could act on."
           },
           {
-            "title": "Presenting a build",
-            "description": "Shape a five-minute technical presentation and rehearse difficult questions."
+            "title": "Pitching and presenting",
+            "description": "Shape a five-minute pitch and rehearse hostile questions."
           },
           {
-            "title": "Meetings and collaboration",
-            "description": "Clarify, disagree and negotiate scope in professional English."
+            "title": "Meetings and negotiation",
+            "description": "Clarify, disagree, and negotiate scope across cultures."
           },
           {
-            "title": "Portfolio clinic",
-            "description": "Review the written and spoken work produced across the programme."
+            "title": "Mobility clinic",
+            "description": "CVs, interviews, and the language of visas and international appointments."
           }
         ],
         "capstone": {
-          "title": "A technical presentation and written brief",
-          "description": "A five-minute presentation and a one-page technical brief, delivered in front of the cohort."
+          "title": "A pitch, a technical brief, and an interview",
+          "description": "A five-minute pitch, a one-page technical brief, and a recorded interview, reviewed against professional and institutional standards."
         }
       },
       "german-mobility": {
         "title": "German for Academic & Tech Mobility",
-        "description": "German for students planning to study or work in Germany — academic vocabulary, application documents, and the confidence to handle daily bureaucracy.",
-        "lede": "German for the next step: a place at university, an internship or a technical role in a German-speaking country.",
+        "description": "Goethe-Zertifikat preparation for university researchers, engineers, and professionals planning to study, work, or secure a visa in Germany.",
+        "lede": "From Goethe A1 to B1: the German you need for a research placement, an engineering role, or a career move to Germany.",
         "highlights": [
-          "Goethe A1–B1",
+          "Goethe-Zertifikat",
           "Academic German",
-          "Applications"
+          "Visa & career mobility"
         ],
         "outcomes": [
-          "Handle everyday and academic situations in German with growing confidence.",
-          "Read and complete common application and enrolment documents.",
-          "Introduce yourself and your technical background in an interview.",
-          "Follow the structure of a German-language technical presentation."
+          "Prepare for Goethe-Zertifikat A1–B1 with structured speaking, listening, reading, and writing practice.",
+          "Handle university enrolment, research administration, and visa appointments in German.",
+          "Introduce your technical or academic background in an interview.",
+          "Present a project and follow a German-language technical discussion."
         ],
         "tools": [
-          "Goethe A1–B1",
-          "Anmeldung forms",
-          "Uni-Assist documents",
+          "Goethe-Zertifikat A1–B1",
+          "Uni-Assist",
+          "Visa & Anmeldung forms",
           "Speaking lab",
           "CV & motivation letter templates"
         ],
@@ -435,11 +436,11 @@
           },
           {
             "title": "Academic vocabulary",
-            "description": "The words and routines of a German university."
+            "description": "The language of a German university and research institute."
           },
           {
-            "title": "Applications",
-            "description": "Read, complete and explain the documents a move requires."
+            "title": "Applications and visas",
+            "description": "Enrolment, Anmeldung and the appointments a move requires."
           },
           {
             "title": "Technical German",
@@ -455,8 +456,8 @@
           }
         ],
         "capstone": {
-          "title": "A study-mobility dossier",
-          "description": "A German-language CV, motivation letter and oral presentation, reviewed against a real application checklist."
+          "title": "A Goethe-ready mobility dossier",
+          "description": "A German-language CV, motivation letter, oral presentation, and mock Goethe-style interview, reviewed against a real application checklist."
         }
       },
       "audiovisual-training": {
@@ -590,35 +591,35 @@
     }
   },
   "testimonials": {
-    "eyebrow": "Families",
-    "title": "What families say",
-    "intro": "Parents across Algiers trust Kennedy Academy for structured, inspiring education.",
+    "eyebrow": "Community",
+    "title": "Voices from the Atelier",
+    "intro": "Founders, engineers, creatives, and international professionals based in El Biar build and study at Kennedy Academy.",
     "pause": "Pause testimonials",
     "play": "Play testimonials",
     "items": {
-      "nadia": {
-        "quote": "My daughter went from being shy with technology to presenting her robot project with confidence. The campus feels welcoming and serious at the same time.",
-        "name": "Nadia B.",
-        "role": "Parent",
-        "location": "Dely Ibrahim"
+      "marcus": {
+        "quote": "Our team needed intensive, high-level English and German for international postings. The atmosphere in El Biar is quiet, rigorous, and matches European institutional standards.",
+        "name": "Marcus H.",
+        "role": "Diplomatic Mission",
+        "location": "El Biar"
       },
-      "karim": {
-        "quote": "The Python programme gave my son a real foundation — not just games, but logic he uses in school now. The instructors are patient and clearly know their subject.",
-        "name": "Karim M.",
-        "role": "Parent",
-        "location": "Hydra"
+      "amine": {
+        "quote": "Finding an open robotics lab with 3D printers and oscilloscopes in Algiers used to be impossible. Kennedy Academy is where we prototype our hardware between work hours.",
+        "name": "Amine T.",
+        "role": "Software Engineer & Hardware Founder",
+        "location": "Algiers"
       },
-      "sofia": {
-        "quote": "We enrolled in the English and French levels programme. The progression is clear, and our daughter actually looks forward to her sessions every week.",
-        "name": "Sofia L.",
-        "role": "Parent",
-        "location": "Bouzareah"
+      "lyna": {
+        "quote": "The DaVinci Resolve suites and cinema rigs are professional-grade. You are collaborating alongside people who take creative production seriously.",
+        "name": "Lyna K.",
+        "role": "Independent Filmmaker & Colorist",
+        "location": "Algiers"
       },
       "yasmine": {
-        "quote": "The multimedia course opened a creative path we hadn't considered. Professional atmosphere, warm teachers, and a campus that feels open and modern.",
-        "name": "Yasmine K.",
-        "role": "Parent",
-        "location": "Algiers"
+        "quote": "My 14-year-old son isn't playing video games here; he is writing real Python and presenting working robot projects with discipline.",
+        "name": "Dr. Yasmine M.",
+        "role": "Parent & University Researcher",
+        "location": "El Biar"
       }
     }
   },
@@ -672,13 +673,41 @@
     "phoneLabel": "Phone",
     "whatsappLabel": "WhatsApp",
     "whatsappCta": "Start a conversation",
-    "whatsappPrefill": "Hello Kennedy Academy — I would like to know more about the programmes.",
+    "whatsappPrefill": "Hello Kennedy Academy, I would like information about your programmes and the atelier space.",
     "hoursTitle": "Hub & Cafe hours",
     "hoursNote": "Open 7 days a week",
     "hoursWeekdays": "Every day",
     "hoursTime": "09:00 – 19:00",
     "hoursCta": "Open 7 days a week · 09:00 – 19:00",
     "socialsTitle": "Follow",
+    "liveDesk": {
+      "eyebrow": "WhatsApp Live Desk",
+      "response": "Replied in <10 minutes during atelier hours (09:00 – 19:00).",
+      "cta": "Message the desk"
+    },
+    "location": {
+      "title": "Getting here",
+      "body": "Located in the El Biar diplomatic district, accessible with nearby street parking.",
+      "mapsCta": "Open in Google Maps"
+    },
+    "faq": {
+      "eyebrow": "Visitor guide",
+      "title": "Before You Visit",
+      "items": [
+        {
+          "question": "Can I drop by without an appointment?",
+          "answer": "Yes. The atelier and members' cafe are open every day from 09:00 to 19:00. You can tour the robotics lab and cinema suites freely."
+        },
+        {
+          "question": "Can I test the hardware before enrolling?",
+          "answer": "Absolutely. Mentors can demonstrate our 3D printers, ROS2 robotics benches, or DaVinci grading setups during a 15-minute visit."
+        },
+        {
+          "question": "Who are the programmes designed for?",
+          "answer": "Our cohorts are built for university students, founders, researchers, and international professionals, with dedicated tracks for Junior Fellows (ages 12–17)."
+        }
+      ]
+    },
     "form": {
       "title": "General inquiry",
       "intro": "Tell us what you're looking for and we'll point you to the right programme.",

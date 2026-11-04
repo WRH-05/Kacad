@@ -1,14 +1,13 @@
 'use client';
 
 import { useEffect, useRef, useState, type FormEvent } from 'react';
-import type { CourseId } from '@/content/courses';
 import type { Dictionary } from '@/lib/dictionaries';
 import type { Locale } from '@/lib/i18n';
 import { isContact } from '@/lib/validation';
 import type { WaitlistAgeGroup } from '@/lib/waitlist';
 
 type WaitlistFormProps = {
-  courseId: CourseId;
+  courseId: string;
   courseLabel: string;
   labels: Dictionary['waitlist'];
   locale: Locale;
