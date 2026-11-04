@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState, type FormEvent, type ReactNode } from 'react';
 import {
@@ -14,12 +15,10 @@ import {
 } from '@/content/courses';
 import type { AdminCourse } from '@/lib/courses/admin';
 import { createClient } from '@/lib/supabase/client';
-import { SideDrawer } from './side-drawer';
 
-type CourseDrawerProps = {
+type CourseFormProps = {
   mode: 'create' | 'edit';
   course?: AdminCourse;
-  onClose: () => void;
 };
 
 const inputClass =
@@ -175,33 +174,28 @@ function LocalizedField(props: {
 }
 
 function Section({
+  index,
   title,
-  defaultOpen = false,
   children
 }: {
+  index: number;
   title: string;
-  defaultOpen?: boolean;
   children: ReactNode;
 }) {
-  const [open, setOpen] = useState(defaultOpen);
-
   return (
-    <section className="border-t border-line/70 pt-5">
-      <button
-        type="button"
-        aria-expanded={open}
-        onClick={() => setOpen((value) => !value)}
-        className="flex w-full items-center justify-between font-mono text-[9px] uppercase tracking-[0.2em] text-ink"
-      >
-        {title}
-        <span aria-hidden="true">{open ? '−' : '+'}</span>
-      </button>
-      {open ? <div className="mt-4 space-y-5">{children}</div> : null}
+    <section className="border-t border-line/70 pt-6">
+      <div className="flex items-baseline gap-3">
+        <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-accent">
+          {String(index).padStart(2, '0')}
+        </span>
+        <h2 className="font-serif text-2xl text-ink">{title}</h2>
+      </div>
+      <div className="mt-5 space-y-5">{children}</div>
     </section>
   );
 }
 
-export function CourseDrawer({ mode, course, onClose }: CourseDrawerProps) {
+export function CourseForm({ mode, course }: CourseFormProps) {
   const router = useRouter();
   const [draft, setDraft] = useState<AdminCourse>(() => course ?? blankCourse());
   const [brochureFile, setBrochureFile] = useState<File | null>(null);
@@ -411,6 +405,9 @@ export function CourseDrawer({ mode, course, onClose }: CourseDrawerProps) {
         }))
         .filter((module) => module.title || module.description);
 
+      const nextCohort = mirror(draft.nextCohortEn, draft.nextCohortFr);
+      const schedule = mirror(draft.scheduleEn, draft.scheduleFr);
+
       const payload = {
         id: slug,
         track: draft.track,
@@ -426,8 +423,16 @@ export function CourseDrawer({ mode, course, onClose }: CourseDrawerProps) {
           en: splitList(draft.highlightsEn),
           fr: splitList(draft.highlightsFr)
         },
-        next_cohort: mirror(draft.nextCohortEn, draft.nextCohortFr),
-        schedule: mirror(draft.scheduleEn, draft.scheduleFr),
+        ...(nextCohort.en
+          ? { next_cohort: nextCohort }
+          : mode === 'edit'
+            ? { next_cohort: null }
+            : {}),
+        ...(schedule.en
+          ? { schedule }
+          : mode === 'edit'
+            ? { schedule: null }
+            : {}),
         outcomes: {
           en: splitList(draft.outcomesEn),
           fr: splitList(draft.outcomesFr)
@@ -471,7 +476,7 @@ export function CourseDrawer({ mode, course, onClose }: CourseDrawerProps) {
         return;
       }
 
-      onClose();
+      router.push('/admin');
       router.refresh();
     } catch (submitError) {
       setError(
@@ -484,18 +489,39 @@ export function CourseDrawer({ mode, course, onClose }: CourseDrawerProps) {
   }
 
   return (
-    <SideDrawer
-      open
-      onOpenChange={(open) => {
-        if (!open) onClose();
-      }}
-      title={mode === 'create' ? 'Add new programme' : draft.titleEn || draft.id}
-      description={
-        mode === 'create' ? 'New programme · published immediately' : `${draft.id} · ${draft.track}`
-      }
-    >
-      <form onSubmit={handleSubmit} className="space-y-5">
-        <Section title="Identity & structure" defaultOpen>
+    <form onSubmit={handleSubmit} className="pb-24">
+      <div className="sticky top-0 z-30 border-b border-line/70 bg-surface/95 backdrop-blur">
+        <div className="section-shell flex flex-wrap items-center justify-between gap-4 py-4">
+          <div>
+            <Link
+              href="/admin"
+              className="font-mono text-[9px] uppercase tracking-[0.18em] text-ink-muted transition hover:text-accent"
+            >
+              ← Back to Courses
+            </Link>
+            <h1 className="mt-2 font-serif text-3xl leading-tight text-ink">
+              {mode === 'create' ? 'New Programme' : draft.titleEn || draft.id}
+            </h1>
+          </div>
+
+          <div className="flex items-center gap-3">
+            <button
+              type="submit"
+              disabled={pending}
+              className="border border-accent bg-accent px-5 py-3 font-mono text-[10px] uppercase tracking-[0.2em] text-accent-ink transition hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {pending
+                ? 'Saving…'
+                : mode === 'create'
+                  ? '[ Publish Programme ]'
+                  : '[ Save Programme ]'}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="section-shell mt-10 space-y-10">
+        <Section index={1} title="Identity & structure">
           <div>
             <label htmlFor="course-slug" className={labelClass}>
               Slug ID
@@ -630,7 +656,7 @@ export function CourseDrawer({ mode, course, onClose }: CourseDrawerProps) {
           </label>
         </Section>
 
-        <Section title="Copy" defaultOpen>
+        <Section index={2} title="Bilingual copy">
           <LocalizedField
             id="course-title"
             label="Title"
@@ -680,7 +706,7 @@ export function CourseDrawer({ mode, course, onClose }: CourseDrawerProps) {
           />
         </Section>
 
-        <Section title="Schedule & seats">
+        <Section index={3} title="Cohort & schedule">
           <LocalizedField
             id="course-cohort"
             label="Next cohort"
@@ -691,7 +717,7 @@ export function CourseDrawer({ mode, course, onClose }: CourseDrawerProps) {
           />
           <LocalizedField
             id="course-schedule"
-            label="Schedule"
+            label="Schedule slot"
             en={draft.scheduleEn}
             fr={draft.scheduleFr}
             onEn={(value) => update('scheduleEn', value)}
@@ -699,7 +725,7 @@ export function CourseDrawer({ mode, course, onClose }: CourseDrawerProps) {
           />
         </Section>
 
-        <Section title="Mentor">
+        <Section index={4} title="Mentor">
           <LocalizedField
             id="mentor-name"
             label="Mentor name"
@@ -764,7 +790,7 @@ export function CourseDrawer({ mode, course, onClose }: CourseDrawerProps) {
           </div>
         </Section>
 
-        <Section title="Hardware & tools">
+        <Section index={5} title="Tools & hardware">
           <LocalizedField
             id="course-tools"
             label="Tools (comma-separated)"
@@ -777,10 +803,10 @@ export function CourseDrawer({ mode, course, onClose }: CourseDrawerProps) {
           />
         </Section>
 
-        <Section title="Modules">
+        <Section index={6} title="Modules">
           <div className="space-y-4">
             {draft.modules.map((module, index) => (
-              <div key={index} className="border border-line/70 p-4">
+              <div key={index} className="border border-line/70 bg-surface-raised/40 p-4">
                 <div className="flex items-center justify-between gap-3">
                   <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-ink-muted">
                     Module {String(index + 1).padStart(2, '0')}
@@ -836,7 +862,7 @@ export function CourseDrawer({ mode, course, onClose }: CourseDrawerProps) {
           </button>
         </Section>
 
-        <Section title="Capstone">
+        <Section index={7} title="Capstone deliverable">
           <LocalizedField
             id="capstone-title"
             label="Capstone title"
@@ -866,7 +892,7 @@ export function CourseDrawer({ mode, course, onClose }: CourseDrawerProps) {
           />
         </Section>
 
-        <Section title="Syllabus PDF">
+        <Section index={8} title="Syllabus PDF">
           <div>
             <label htmlFor="course-brochure" className={labelClass}>
               Syllabus PDF
@@ -909,18 +935,20 @@ export function CourseDrawer({ mode, course, onClose }: CourseDrawerProps) {
             disabled={pending}
             className="flex-1 bg-accent px-5 py-3 font-mono text-[10px] uppercase tracking-[0.2em] text-accent-ink transition hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {pending ? 'Saving…' : mode === 'create' ? 'Create programme' : 'Save changes'}
+            {pending
+              ? 'Saving…'
+              : mode === 'create'
+                ? '[ Publish Programme ]'
+                : '[ Save Programme ]'}
           </button>
-          <button
-            type="button"
-            onClick={onClose}
-            disabled={pending}
-            className="border border-line/80 px-5 py-3 font-mono text-[10px] uppercase tracking-[0.2em] text-ink transition hover:border-ink disabled:opacity-60"
+          <Link
+            href="/admin"
+            className="border border-line/80 px-5 py-3 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-ink transition hover:border-ink"
           >
             Cancel
-          </button>
+          </Link>
         </div>
-      </form>
-    </SideDrawer>
+      </div>
+    </form>
   );
 }

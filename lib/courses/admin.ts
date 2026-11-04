@@ -63,15 +63,27 @@ export type AdminCourse = {
   brochureUrl: string | null;
 };
 
+export const leadStatuses = ['new', 'contacted', 'enrolled', 'archived'] as const;
+export type LeadStatus = (typeof leadStatuses)[number];
+
+export const REMOVED_COURSE_LABEL = 'Programme removed';
+
+export type LeadCounts = Record<LeadStatus | 'all', number>;
+
+export function isLeadStatus(value: unknown): value is LeadStatus {
+  return typeof value === 'string' && (leadStatuses as readonly string[]).includes(value);
+}
+
 export type AdminLead = {
   id: string;
   name: string;
   contact: string;
-  courseId: string;
+  courseId: string | null;
   courseTitle: string;
   ageGroup: string;
   locale: string;
   notes: string | null;
+  status: LeadStatus;
   createdAt: string;
 };
 
@@ -227,7 +239,7 @@ export function mapAdminLead(
 ): AdminLead | null {
   if (!isRecord(row) || typeof row.id !== 'string') return null;
 
-  const courseId = typeof row.course_id === 'string' ? row.course_id : '';
+  const courseId = typeof row.course_id === 'string' ? row.course_id : null;
   const createdAt = typeof row.created_at === 'string' ? row.created_at : '';
 
   return {
@@ -235,10 +247,13 @@ export function mapAdminLead(
     name: typeof row.name === 'string' ? row.name : '',
     contact: typeof row.contact === 'string' ? row.contact : '',
     courseId,
-    courseTitle: courseTitleById.get(courseId) ?? courseId,
+    courseTitle: courseId
+      ? courseTitleById.get(courseId) ?? courseId
+      : REMOVED_COURSE_LABEL,
     ageGroup: typeof row.age_group === 'string' ? row.age_group : '',
     locale: typeof row.locale === 'string' ? row.locale : 'en',
     notes: typeof row.notes === 'string' ? row.notes : null,
+    status: isLeadStatus(row.status) ? row.status : 'new',
     createdAt: formatLeadDate(createdAt)
   };
 }
@@ -627,15 +642,23 @@ export function parseCourseUpdate(body: unknown): ParseCourseUpdateResult {
   }
 
   if (body.next_cohort !== undefined) {
-    const nextCohort = parseLocalized(body.next_cohort, 120);
-    if (nextCohort) update.next_cohort = nextCohort;
-    else fields.next_cohort = 'invalid';
+    if (body.next_cohort === null) {
+      update.next_cohort = null;
+    } else {
+      const nextCohort = parseLocalized(body.next_cohort, 120);
+      if (nextCohort) update.next_cohort = nextCohort;
+      else fields.next_cohort = 'invalid';
+    }
   }
 
   if (body.schedule !== undefined) {
-    const schedule = parseLocalized(body.schedule, 120);
-    if (schedule) update.schedule = schedule;
-    else fields.schedule = 'invalid';
+    if (body.schedule === null) {
+      update.schedule = null;
+    } else {
+      const schedule = parseLocalized(body.schedule, 120);
+      if (schedule) update.schedule = schedule;
+      else fields.schedule = 'invalid';
+    }
   }
 
   if (body.capstone !== undefined) {
@@ -664,8 +687,10 @@ export function parseCourseUpdate(body: unknown): ParseCourseUpdateResult {
     else fields.seats_left = 'invalid';
   }
 
-  if (body.brochure_url !== undefined && body.brochure_url !== null) {
-    if (
+  if (body.brochure_url !== undefined) {
+    if (body.brochure_url === null) {
+      update.brochure_url = null;
+    } else if (
       typeof body.brochure_url === 'string' &&
       body.brochure_url.length <= 1000 &&
       isAllowedBrochureUrl(body.brochure_url)

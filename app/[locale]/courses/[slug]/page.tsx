@@ -7,18 +7,20 @@ import { CourseMentor } from '@/components/courses/course-mentor';
 import { CourseSpecBar } from '@/components/courses/course-spec-bar';
 import { CourseSyllabus } from '@/components/courses/course-syllabus';
 import { OpenStudioInvite } from '@/components/courses/open-studio-invite';
-import { courseIds, isCourseSlug } from '@/content/courses';
-import { getCourseView } from '@/lib/courses-data';
+import { isCourseSlug } from '@/content/courses';
+import { getCourses, getCourseView } from '@/lib/courses-data';
 import { getDictionary } from '@/lib/dictionaries';
 import { isLocale, type Locale } from '@/lib/i18n';
 import { routes } from '@/lib/routes';
 
 export const revalidate = 60;
 
-export function generateStaticParams() {
-  // The [locale] layout already generates the locale params; Next merges them
-  // with these slug params, producing 8 slugs × 2 locales.
-  return courseIds.map((slug) => ({ slug }));
+export async function generateStaticParams() {
+  // Supabase is the single source of truth. With no database configured this
+  // returns [] and every course renders on demand.
+  const courses = await getCourses('en');
+
+  return courses.map((course) => ({ slug: course.id }));
 }
 
 export async function generateMetadata({

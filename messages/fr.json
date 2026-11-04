@@ -680,6 +680,34 @@
     "hoursTime": "09h00 – 19h00",
     "hoursCta": "Ouvert 7j/7 · 09h00 – 19h00",
     "socialsTitle": "Nous suivre",
+    "liveDesk": {
+      "eyebrow": "Bureau WhatsApp en direct",
+      "response": "Réponse en moins de 10 minutes pendant les horaires de l'atelier (09h00 – 19h00).",
+      "cta": "Écrire au bureau"
+    },
+    "location": {
+      "title": "Comment venir",
+      "body": "Situé dans le quartier diplomatique d'El Biar, accessible avec un stationnement de rue à proximité.",
+      "mapsCta": "Ouvrir dans Google Maps"
+    },
+    "faq": {
+      "eyebrow": "Guide du visiteur",
+      "title": "Avant votre visite",
+      "items": [
+        {
+          "question": "Puis-je passer sans rendez-vous ?",
+          "answer": "Oui. L'atelier et le café des membres sont ouverts tous les jours de 09h00 à 19h00. Vous pouvez visiter librement le laboratoire de robotique et les suites cinéma."
+        },
+        {
+          "question": "Puis-je tester le matériel avant de m'inscrire ?",
+          "answer": "Bien sûr. Les mentors peuvent vous présenter nos imprimantes 3D, nos bancs de robotique ROS2 ou nos installations de colorimétrie DaVinci lors d'une visite de 15 minutes."
+        },
+        {
+          "question": "À qui s'adressent les programmes ?",
+          "answer": "Nos cohortes sont conçues pour les étudiants universitaires, les fondateurs, les chercheurs et les professionnels internationaux, avec des parcours dédiés aux Junior Fellows (12–17 ans)."
+        }
+      ]
+    },
     "form": {
       "title": "Demande d'information",
       "intro": "Dites-nous ce que vous recherchez et nous vous orienterons vers la bonne formation.",

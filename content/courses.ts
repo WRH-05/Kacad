@@ -34,9 +34,6 @@ export type Course = {
   featured?: boolean;
 };
 
-/** Structural course shape for DB-backed programmes with non-static ids. */
-export type CourseSpec = Omit<Course, 'id'> & { id: string };
-
 /**
  * Slug ids are created by the admin CMS, so they are validated by shape rather
  * than by membership in the static `courseIds` list.
@@ -52,6 +49,10 @@ export function isCourseSlug(value: unknown): value is string {
   );
 }
 
+/**
+ * Seed-only catalogue. Runtime reads come exclusively from Supabase; these
+ * records and their `messages/*.json` copy feed `scripts/seed-data.mjs`.
+ */
 export const courses: readonly Course[] = [
   {
     id: 'robotics-kids',
@@ -122,12 +123,8 @@ export const courses: readonly Course[] = [
   }
 ];
 
-export function isCourseId(value: unknown): value is CourseId {
-  return typeof value === 'string' && (courseIds as readonly string[]).includes(value);
-}
-
 export function matchesAgeFilter(
-  course: Pick<CourseSpec, 'ageBracket'>,
+  course: { ageBracket: AgeBracket },
   filter: AgeFilter
 ): boolean {
   return filter === 'any' || course.ageBracket === filter || course.ageBracket === 'all';

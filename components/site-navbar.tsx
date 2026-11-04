@@ -61,7 +61,7 @@ function ProgrammeColumn({
   return (
     <div>
       <h2 className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.22em] text-ink-muted">
-        {track === 'arts' ? <TrackEmblem track="arts" className="h-3.5 w-3.5" /> : null}
+        <TrackEmblem track={track} className="h-3.5 w-3.5" />
         {heading}
       </h2>
       <ul className="mt-5 space-y-4">

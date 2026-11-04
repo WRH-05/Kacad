@@ -1,9 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import type { ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import { WhatsAppIcon } from '@/components/ui/whatsapp-icon';
-import type { AdminLead } from '@/lib/courses/admin';
+import type { AdminLead, LeadStatus } from '@/lib/courses/admin';
+import { leadStatuses } from '@/lib/courses/admin';
 import { isLocale } from '@/lib/i18n';
 import { leadContactAction } from '@/lib/leads';
 import { routes } from '@/lib/routes';
@@ -15,6 +16,13 @@ const ageLabels: Record<string, string> = {
   adults: 'Adults · 18+'
 };
 
+const statusLabels: Record<LeadStatus, string> = {
+  new: 'New',
+  contacted: 'Contacted',
+  enrolled: 'Enrolled',
+  archived: 'Archived'
+};
+
 function Row({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div className="grid gap-1 py-3 sm:grid-cols-[8rem_1fr] sm:gap-4">
@@ -24,10 +32,49 @@ function Row({ label, children }: { label: string; children: ReactNode }) {
   );
 }
 
-export function LeadDrawer({ lead, onClose }: { lead: AdminLead; onClose: () => void }) {
+export function LeadDrawer({
+  lead,
+  onClose,
+  onUpdated
+}: {
+  lead: AdminLead;
+  onClose: () => void;
+  onUpdated: () => void;
+}) {
   const action = leadContactAction(lead.contact, lead.name);
   const locale = isLocale(lead.locale) ? lead.locale : 'en';
   const courseHref = lead.courseId ? routes.course(locale, lead.courseId) : null;
+  const [status, setStatus] = useState<LeadStatus>(lead.status);
+  const [pendingStatus, setPendingStatus] = useState<LeadStatus | null>(null);
+  const [statusError, setStatusError] = useState<string | null>(null);
+
+  async function changeStatus(next: LeadStatus) {
+    if (next === status || pendingStatus) return;
+
+    setPendingStatus(next);
+    setStatusError(null);
+
+    try {
+      const response = await fetch('/api/admin/leads', {
+        method: 'PATCH',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ id: lead.id, status: next })
+      });
+      const data = (await response.json().catch(() => ({}))) as { ok?: boolean };
+
+      if (!response.ok || !data.ok) {
+        setStatusError('Could not update the status. Try again.');
+        return;
+      }
+
+      setStatus(next);
+      onUpdated();
+    } catch {
+      setStatusError('Network error. Check your connection and try again.');
+    } finally {
+      setPendingStatus(null);
+    }
+  }
 
   return (
     <SideDrawer
@@ -53,13 +100,44 @@ export function LeadDrawer({ lead, onClose }: { lead: AdminLead; onClose: () => 
               {lead.courseTitle} ↗
             </Link>
           ) : (
-            lead.courseTitle
+            <span className="text-ink-muted">{lead.courseTitle}</span>
           )}
         </Row>
         <Row label="Profile">{ageLabels[lead.ageGroup] ?? lead.ageGroup}</Row>
         <Row label="Language">{isLocale(lead.locale) ? lead.locale.toUpperCase() : lead.locale}</Row>
         <Row label="Received">{lead.createdAt}</Row>
       </dl>
+
+      <div className="mt-6">
+        <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-ink-muted">Status</p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {leadStatuses.map((value) => {
+            const active = status === value;
+
+            return (
+              <button
+                key={value}
+                type="button"
+                onClick={() => changeStatus(value)}
+                disabled={pendingStatus !== null}
+                aria-pressed={active}
+                className={
+                  active
+                    ? 'border border-ink bg-ink px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.16em] text-surface'
+                    : 'border border-line/80 px-3 py-1.5 font-mono text-[9px] uppercase tracking-[0.16em] text-ink-muted transition hover:border-ink hover:text-ink disabled:opacity-50'
+                }
+              >
+                {pendingStatus === value ? 'Saving…' : statusLabels[value]}
+              </button>
+            );
+          })}
+        </div>
+        {statusError ? (
+          <p role="alert" className="mt-3 text-xs leading-relaxed text-rubric">
+            {statusError}
+          </p>
+        ) : null}
+      </div>
 
       <div className="mt-6">
         <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-ink-muted">

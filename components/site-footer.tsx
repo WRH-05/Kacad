@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { AsteriskLogo } from '@/components/brand/asterisk-logo';
 import { SocialIcon } from '@/components/ui/social-icons';
 import { contactInfo, whatsappHref } from '@/content/contact';
 import type { Dictionary } from '@/lib/dictionaries';
@@ -35,13 +36,19 @@ export function SiteFooter({ locale, nav, footer, whatsappPrefill }: SiteFooterP
     <footer className="border-t border-line/70 bg-ink text-surface">
       <div className="section-shell grid gap-10 py-14 md:grid-cols-12 md:gap-8">
         <div className="md:col-span-5">
-          <Image
-            src="/images/brand/wordmark-black-trim.png"
-            alt="Kennedy Academy"
-            width={367}
-            height={165}
-            className="h-10 w-auto brightness-0 invert"
-          />
+          <div className="flex items-center gap-3">
+            <AsteriskLogo
+              decorative
+              className="h-8 w-8 shrink-0 text-surface brightness-0 invert"
+            />
+            <Image
+              src="/images/brand/wordmark-black-trim.png"
+              alt="Kennedy Academy"
+              width={367}
+              height={165}
+              className="h-10 w-auto brightness-0 invert"
+            />
+          </div>
           <p className="mt-6 max-w-sm text-sm leading-relaxed text-surface/65">
             {footer.love}
           </p>

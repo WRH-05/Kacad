@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse, after } from 'next/server';
-import { isCourseId } from '@/content/courses';
+import { SHARED_BROCHURE_PATH } from '@/lib/courses/normalize';
 import { createPublicClient } from '@/lib/supabase/public';
 import { parseWaitlist, readJsonBody } from '@/lib/validation';
 import { forwardWebhook } from '@/lib/webhook';
@@ -56,10 +56,8 @@ async function persistLead(input: LeadInput): Promise<PersistResult> {
   const client = createPublicClient();
 
   if (!client) {
-    // Static fallback mode: only the eight bundled programmes exist.
-    return isCourseId(input.courseId)
-      ? { ok: true, brochureUrl: null }
-      : { ok: false, code: 'course_not_found' };
+    // Supabase is the single source of truth; without it no programme exists.
+    return { ok: false, code: 'course_not_found' };
   }
 
   try {
@@ -76,7 +74,7 @@ async function persistLead(input: LeadInput): Promise<PersistResult> {
       return insertLead(client, input, null);
     }
 
-    if (!course && !isCourseId(input.courseId)) {
+    if (!course) {
       return { ok: false, code: 'course_not_found' };
     }
 
@@ -139,11 +137,8 @@ export async function POST(request: NextRequest) {
     console.warn('[waitlist] WAITLIST_WEBHOOK_URL is not configured; lead stored in Supabase only');
   }
 
-  const fallback = isCourseId(safe.courseId)
-    ? `/brochures/${safe.courseId}-syllabus.pdf`
-    : '/brochures/kennedy-academy-syllabus.pdf';
-
-  const brochureUrl = persisted.brochureUrl || process.env.BROCHURE_URL || fallback;
+  const brochureUrl =
+    persisted.brochureUrl || process.env.BROCHURE_URL || SHARED_BROCHURE_PATH;
 
   return NextResponse.json(
     {

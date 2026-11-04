@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { WhatsAppIcon } from '@/components/ui/whatsapp-icon';
 import { whatsappHref } from '@/content/contact';
@@ -13,6 +14,8 @@ type FloatingWhatsAppProps = {
   ariaLabel: string;
 };
 
+const REVEAL_AFTER_PX = 300;
+
 export function FloatingWhatsApp({
   programmes,
   coursePrefill,
@@ -20,6 +23,7 @@ export function FloatingWhatsApp({
   label,
   ariaLabel
 }: FloatingWhatsAppProps) {
+  const [visible, setVisible] = useState(false);
   const pathname = usePathname();
   const match = pathname.match(/^\/(?:en|fr)\/courses\/([^/?#]+)/);
   const slug = match?.[1];
@@ -29,31 +33,40 @@ export function FloatingWhatsApp({
     programme ? interpolate(coursePrefill, { course: programme.title }) : generalPrefill
   );
 
-  return (
-    <>
-      <a
-        href={href}
-        target="_blank"
-        rel="noreferrer"
-        aria-label={ariaLabel}
-        className="fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] right-6 z-50 hidden items-center gap-3 border border-ink bg-ink px-4 py-3 text-surface shadow-soft transition hover:bg-ink/90 md:inline-flex"
-      >
-        <WhatsAppIcon className="h-5 w-5 shrink-0 text-[#25D366]" />
-        <span className="font-mono text-[10px] uppercase tracking-[0.16em]">{label}</span>
-        <span className="text-xs" aria-hidden="true">
-          ↗
-        </span>
-      </a>
+  useEffect(() => {
+    let frame = 0;
 
-      <a
-        href={href}
-        target="_blank"
-        rel="noreferrer"
-        aria-label={ariaLabel}
-        className="fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] right-6 z-50 inline-flex h-14 w-14 items-center justify-center border border-ink bg-ink text-surface shadow-soft transition hover:bg-ink/90 md:hidden"
-      >
-        <WhatsAppIcon className="h-7 w-7 text-[#25D366]" />
-      </a>
-    </>
+    const sync = () => {
+      frame = 0;
+      setVisible(window.scrollY > REVEAL_AFTER_PX);
+    };
+
+    const onScroll = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(sync);
+    };
+
+    sync();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  if (!visible) return null;
+
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      aria-label={ariaLabel}
+      title={label}
+      className="fixed bottom-5 right-5 z-40 inline-flex h-14 w-14 items-center justify-center border border-ink bg-ink text-surface shadow-soft transition hover:bg-ink/90 md:hidden"
+    >
+      <WhatsAppIcon className="h-7 w-7 text-[#25D366]" />
+    </a>
   );
 }

@@ -1,4 +1,4 @@
-import type { CourseSpec } from '@/content/courses';
+import type { AgeBracket, CourseLevel, CourseTrack } from '@/content/courses';
 
 export type Localized = { en: string; fr: string };
 export type LocalizedList = { en: string[]; fr: string[] };
@@ -63,7 +63,14 @@ export type CourseCopy = {
   capstone: CourseCapstone;
 };
 
-export type CourseView = CourseSpec & {
+export type CourseView = {
+  id: string;
+  track: CourseTrack;
+  ageBracket: AgeBracket;
+  level: CourseLevel;
+  durationWeeks: number;
+  sessionsPerWeek: number;
+  featured: boolean;
   seatsLeft: number;
   nextCohort: string;
   schedule: string;
