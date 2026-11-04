@@ -18,7 +18,7 @@ export const contactInfo = {
     number: whatsappNumber,
     url: `https://wa.me/${whatsappNumber}`,
     message:
-      'Hello Kennedy Academy — I would like to know more about the programmes.'
+      'Hello Kennedy Academy, I would like information about your programmes and the atelier space.'
   },
   socials: [
     { id: 'instagram', href: 'https://www.instagram.com/kennedy.acad/' },

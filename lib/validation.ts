@@ -1,4 +1,4 @@
-import { isCourseId } from '@/content/courses';
+import { isCourseSlug } from '@/content/courses';
 import { isLocale } from '@/lib/i18n';
 import {
   waitlistAgeGroups,
@@ -50,7 +50,7 @@ export function parseWaitlist(body: unknown): ParseResult<WaitlistInput> {
   const consent = body.consent === true;
   const website = clip(body.website, 200);
 
-  if (!isCourseId(courseId)) fields.courseId = courseId ? 'invalid' : 'required';
+  if (!isCourseSlug(courseId)) fields.courseId = courseId ? 'invalid' : 'required';
   if (!name) fields.name = 'required';
   else if (name.length >= 120) fields.name = 'too_long';
   if (!contact) fields.contact = 'required';

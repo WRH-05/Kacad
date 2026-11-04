@@ -1,10 +1,8 @@
-import type { CourseId } from '@/content/courses';
-
 export const waitlistAgeGroups = ['kids', 'juniors', 'adults'] as const;
 export type WaitlistAgeGroup = (typeof waitlistAgeGroups)[number];
 
 export type WaitlistInput = {
-  courseId: CourseId;
+  courseId: string;
   name: string;
   contact: string;
   ageGroup: WaitlistAgeGroup;

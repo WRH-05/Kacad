@@ -11,6 +11,7 @@ type SiteFooterProps = {
   locale: Locale;
   nav: Dictionary['nav'];
   footer: Dictionary['footer'];
+  whatsappPrefill: string;
 };
 
 function socialLabel(id: 'instagram' | 'facebook' | 'maps', labels: Dictionary['footer']['social']) {
@@ -19,7 +20,7 @@ function socialLabel(id: 'instagram' | 'facebook' | 'maps', labels: Dictionary['
   return labels.location;
 }
 
-export function SiteFooter({ locale, nav, footer }: SiteFooterProps) {
+export function SiteFooter({ locale, nav, footer, whatsappPrefill }: SiteFooterProps) {
   const year = new Date().getFullYear();
 
   const links = [
@@ -76,7 +77,7 @@ export function SiteFooter({ locale, nav, footer }: SiteFooterProps) {
           <ul className="mt-4 space-y-2">
             <li>
               <a
-                href={whatsappHref()}
+                href={whatsappHref(whatsappPrefill)}
                 target="_blank"
                 rel="noreferrer"
                 className="text-sm text-surface/70 transition hover:text-highlight"

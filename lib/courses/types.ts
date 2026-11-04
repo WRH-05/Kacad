@@ -1,5 +1,4 @@
-import type { Course, CourseId } from '@/content/courses';
-import type { Dictionary } from '@/lib/dictionaries';
+import type { CourseSpec } from '@/content/courses';
 
 export type Localized = { en: string; fr: string };
 export type LocalizedList = { en: string[]; fr: string[] };
@@ -53,16 +52,18 @@ export type CourseRow = {
   brochure_url: string | null;
 };
 
-export type CourseCopy = Omit<
-  Dictionary['courses']['items'][CourseId],
-  'capstone'
-> & {
-  capstone: Dictionary['courses']['items'][CourseId]['capstone'] & {
-    deliverable?: string;
-  };
+export type CourseCopy = {
+  title: string;
+  description: string;
+  lede: string;
+  highlights: string[];
+  outcomes: string[];
+  tools: string[];
+  modules: CourseModule[];
+  capstone: CourseCapstone;
 };
 
-export type CourseView = Course & {
+export type CourseView = CourseSpec & {
   seatsLeft: number;
   nextCohort: string;
   schedule: string;

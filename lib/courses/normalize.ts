@@ -2,6 +2,7 @@ import {
   ageBrackets,
   courseLevels,
   courseTracks,
+  isCourseSlug,
   type AgeBracket,
   type Course,
   type CourseLevel,
@@ -156,12 +157,15 @@ function brochureUrl(value: unknown, id: string): string {
   return `/brochures/${id}-syllabus.pdf`;
 }
 
+function seatsLeft(value: unknown, fallback: number): number {
+  return typeof value === 'number' && Number.isInteger(value) && value >= 0 ? value : fallback;
+}
+
 /**
- * Merges a Supabase row over the static course/dictionary fallback. Every field
- * is validated independently so a malformed or partially migrated row still
- * renders a complete course page.
+ * Static course merge: DB row (when present) over the dictionary copy, with the
+ * local JSON as the offline fallback. Always returns a complete view.
  */
-export function normalizeCourse(
+export function normalizeStaticCourse(
   base: Course,
   row: CourseRow | undefined,
   dictionary: Dictionary,
@@ -188,8 +192,6 @@ export function normalizeCourse(
     }
   };
 
-  const seats = row?.seats_left;
-
   return {
     ...base,
     track,
@@ -198,12 +200,58 @@ export function normalizeCourse(
     durationWeeks: positiveInteger(row?.duration_weeks, base.durationWeeks),
     sessionsPerWeek: positiveInteger(row?.sessions_per_week, base.sessionsPerWeek),
     featured: typeof row?.featured === 'boolean' ? row.featured : Boolean(base.featured),
-    seatsLeft:
-      typeof seats === 'number' && Number.isInteger(seats) && seats >= 0 ? seats : 6,
+    seatsLeft: seatsLeft(row?.seats_left, 6),
     nextCohort: pickLocalized(row?.next_cohort, locale) ?? defaultCohort[locale],
     schedule: pickLocalized(row?.schedule, locale) ?? defaultSchedule[locale],
     brochureUrl: brochureUrl(row?.brochure_url, base.id),
     copy,
     mentor: pickMentor(row?.mentor, locale) ?? fallbackMentor(dictionary, track, locale)
+  };
+}
+
+/**
+ * DB-only course (created through the CMS). Returns null when the row is not a
+ * complete, valid course — the admin create API requires title, description and
+ * lede, so an invalid row should not surface publicly.
+ */
+export function normalizeDynamicCourse(row: CourseRow, locale: Locale): CourseView | null {
+  if (!isCourseSlug(row.id)) return null;
+
+  const track = isCourseTrack(row.track) ? row.track : null;
+  const ageBracket = isAgeBracket(row.age_bracket) ? row.age_bracket : null;
+  const level = isCourseLevel(row.level) ? row.level : null;
+  const title = pickLocalized(row.title, locale);
+  const description = pickLocalized(row.description, locale);
+  const lede = pickLocalized(row.lede, locale);
+
+  if (!track || !ageBracket || !level || !title || !description || !lede) {
+    return null;
+  }
+
+  const capstone = pickCapstone(row.capstone, locale);
+
+  return {
+    id: row.id,
+    track,
+    ageBracket,
+    level,
+    durationWeeks: positiveInteger(row.duration_weeks, 8),
+    sessionsPerWeek: positiveInteger(row.sessions_per_week, 2),
+    featured: Boolean(row.featured),
+    seatsLeft: seatsLeft(row.seats_left, 0),
+    nextCohort: pickLocalized(row.next_cohort, locale) ?? defaultCohort[locale],
+    schedule: pickLocalized(row.schedule, locale) ?? defaultSchedule[locale],
+    brochureUrl: brochureUrl(row.brochure_url, row.id),
+    copy: {
+      title,
+      description,
+      lede,
+      highlights: pickLocalizedList(row.highlights, locale) ?? [],
+      outcomes: pickLocalizedList(row.outcomes, locale) ?? [],
+      tools: pickLocalizedList(row.tools, locale) ?? [],
+      modules: pickModules(row.modules, locale) ?? [],
+      capstone: capstone ?? { title: '', description: '', deliverable: '' }
+    },
+    mentor: pickMentor(row.mentor, locale)
   };
 }

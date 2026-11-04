@@ -34,6 +34,24 @@ export type Course = {
   featured?: boolean;
 };
 
+/** Structural course shape for DB-backed programmes with non-static ids. */
+export type CourseSpec = Omit<Course, 'id'> & { id: string };
+
+/**
+ * Slug ids are created by the admin CMS, so they are validated by shape rather
+ * than by membership in the static `courseIds` list.
+ */
+export const COURSE_SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
+export function isCourseSlug(value: unknown): value is string {
+  return (
+    typeof value === 'string' &&
+    value.length >= 2 &&
+    value.length <= 80 &&
+    COURSE_SLUG_RE.test(value)
+  );
+}
+
 export const courses: readonly Course[] = [
   {
     id: 'robotics-kids',
@@ -108,6 +126,9 @@ export function isCourseId(value: unknown): value is CourseId {
   return typeof value === 'string' && (courseIds as readonly string[]).includes(value);
 }
 
-export function matchesAgeFilter(course: Course, filter: AgeFilter): boolean {
+export function matchesAgeFilter(
+  course: Pick<CourseSpec, 'ageBracket'>,
+  filter: AgeFilter
+): boolean {
   return filter === 'any' || course.ageBracket === filter || course.ageBracket === 'all';
 }

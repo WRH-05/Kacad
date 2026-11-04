@@ -13,7 +13,7 @@
         "languages": "Langues spécialisées"
       },
       "all": "Tous les programmes",
-      "intro": "Huit programmes en technologie, arts numériques et langues spécialisées."
+      "intro": "Des programmes en technologie, arts numériques et langues spécialisées."
     },
     "aria": {
       "main": "Navigation principale",
@@ -27,7 +27,7 @@
     "eyebrow": "El Biar · Alger",
     "titleLead": "Construire l'avenir.",
     "titleEmphasis": "À ciel ouvert.",
-    "subtitle": "Kennedy Academy est une académie de technologie, d'arts numériques et de langues à El Biar — avec un laboratoire de robotique, un studio média et un café ouverts entre les sessions.",
+    "subtitle": "Kennedy Academy est un atelier d'excellence en technologie, arts numériques et langues à El Biar — pensé pour les étudiants universitaires, fondateurs, chercheurs et professionnels internationaux, avec un laboratoire de robotique, des suites cinéma et un café membre ouverts entre les sessions.",
     "ctaPrimary": "Explorer les programmes",
     "ctaSecondary": "Visiter le Hub",
     "pillars": {
@@ -73,8 +73,8 @@
     "title": "La Matrice des Formations",
     "intro": "Filtrez par discipline et par âge, puis ouvrez un programme pour découvrir les modules et rejoindre la liste d'attente.",
     "ageRanges": {
-      "kids": "7–11 ans",
-      "juniors": "12–17 ans",
+      "kids": "Junior Fellows · 7–11 ans",
+      "juniors": "Junior Fellows · 12–17 ans",
       "all": "Tous âges"
     },
     "filters": {
@@ -121,7 +121,7 @@
       "admissionsIntro": "Demandez le syllabus complet et nous confirmerons votre placement.",
       "submitLabel": "Demander le syllabus complet & réserver une place",
       "whatsappCta": "Vous préférez WhatsApp ? Écrire aux admissions",
-      "whatsappPrefill": "Bonjour Kennedy Academy — je souhaite en savoir plus sur {course}.",
+      "whatsappPrefill": "Bonjour Kennedy Academy, je souhaite des informations sur {course} (programme, créneaux et inscriptions).",
       "cohortEnrolling": "En inscriptions",
       "cohortStarts": "Rentrée du {date}",
       "seatsRemaining": "{count} places restantes",
@@ -130,20 +130,21 @@
       "mentorTitle": "Qui vous accompagne",
       "mentorPending": "Le profil complet et le portrait du mentor seront publiés prochainement.",
       "deliverableLabel": "Livrable étudiant",
-      "openStudioEyebrow": "Open studio",
-      "openStudioTitle": "Open Studio du samedi",
-      "openStudioBody": "Visitez le laboratoire avant de vous inscrire. Découvrez le studio, rencontrez les mentors et les travaux des étudiants — sur rendez-vous.",
-      "openStudioCta": "Réserver une visite du samedi",
-      "openStudioPrefill": "Bonjour Kennedy Academy — je souhaite réserver une visite de l'Open Studio du samedi pour {course}.",
-      "floatingWhatsapp": "Écrire aux admissions",
-      "floatingWhatsappAria": "Contacter les admissions de Kennedy Academy sur WhatsApp",
+      "openStudioEyebrow": "Atelier ouvert",
+      "openStudioTitle": "Passez voir l'atelier ce samedi.",
+      "openStudioBody": "Café de spécialité offert, visite des équipements (laboratoire robotique, régie audiovisuelle), échange avec les mentors et démonstration des projets en cours. Ouvert aux étudiants, professionnels et futurs apprenants.",
+      "openStudioCta": "Réserver une visite (15 min)",
+      "openStudioPrefill": "Bonjour Kennedy Academy, je souhaite réserver une visite de 15 minutes de l'atelier ce samedi (programme : {course}).",
+      "floatingWhatsapp": "Discuter sur WhatsApp",
+      "floatingWhatsappAria": "Discuter avec Kennedy Academy sur WhatsApp",
+      "floatingPrefill": "Bonjour Kennedy Academy, je souhaite avoir des informations sur {course} (créneau, tarifs, inscription).",
       "backToProgrammes": "Tous les programmes"
     },
     "items": {
       "robotics-kids": {
-        "title": "Robotique pour Enfants",
-        "description": "Initiation à la robotique où les enfants construisent, câblent et programment leurs premières machines en sessions ludiques et projetées.",
-        "lede": "Premières machines, premiers circuits, premier moment de « c'est nous qui l'avons construit ».",
+        "title": "Fondations en robotique",
+        "description": "Un premier laboratoire de robotique exigeant pour les Junior Fellows — circuits, capteurs et code réel, présenté comme un studio d'ingénierie.",
+        "lede": "Premières machines, premiers circuits, premières habitudes d'ingénieur.",
         "highlights": [
           "Construire",
           "Câbler",
@@ -190,12 +191,12 @@
         ],
         "capstone": {
           "title": "Un robot suiveur de ligne",
-          "description": "Les élèves livrent un robot fonctionnel qui suit un parcours balisé, documenté par un journal de construction et présenté le jour de la démonstration."
+          "description": "Les étudiants livrent un robot fonctionnel qui suit un parcours balisé, documenté par un carnet d'ingénierie et défendu devant les mentors et la cohorte."
         }
       },
       "robotics-juniors": {
-        "title": "Robotique Juniors",
-        "description": "Robotique avancée pour adolescents — capteurs, défis en équipe et projets d'ingénierie prêts pour la compétition.",
+        "title": "Ingénierie robotique",
+        "description": "Robotique avancée pour les Junior Fellows — fusion de capteurs, comportements autonomes et ingénierie de niveau compétition.",
         "lede": "L'ingénierie avec des contraintes : capteurs, règles de compétition et une équipe qui livre.",
         "highlights": [
           "Ingénierie",
@@ -244,7 +245,7 @@
         ],
         "capstone": {
           "title": "Un robot prêt pour la compétition",
-          "description": "Un robot conforme au règlement, un carnet d'ingénierie et une courte soutenance de conception devant les formateurs et les familles."
+          "description": "Un robot conforme au règlement, un carnet d'ingénierie et une courte soutenance de conception devant les mentors et la cohorte."
         }
       },
       "ai-fluency": {
@@ -354,77 +355,77 @@
         }
       },
       "technical-english": {
-        "title": "Anglais technique",
-        "description": "L'anglais de l'ingénierie et du numérique — décrire des systèmes, rédiger une documentation claire et présenter des décisions techniques avec assurance.",
-        "lede": "L'anglais nécessaire pour expliquer une construction, rédiger une spécification et tenir sa position dans une conversation technique.",
+        "title": "Anglais technique & professionnel",
+        "description": "L'anglais des diplomates, ingénieurs et fondateurs — pitch, documentation technique, négociation et mobilité internationale.",
+        "lede": "L'anglais pour présenter une réalisation, défendre un brief et évoluer avec assurance dans les cercles internationaux.",
         "highlights": [
-          "Documentation",
-          "Présentation",
-          "Vocabulaire"
+          "Pitch",
+          "Documentation technique",
+          "Mobilité internationale"
         ],
         "outcomes": [
-          "Décrire un système, un processus ou un prototype dans un anglais oral précis.",
-          "Rédiger une courte documentation technique avec une structure claire.",
-          "Présenter un projet et répondre aux questions sans lire un script.",
-          "Employer le vocabulaire technique avec exactitude dans des contextes professionnels courants."
+          "Présenter un projet technique à des investisseurs, clients ou partenaires institutionnels.",
+          "Rédiger une documentation, des briefs et une correspondance qui résistent à une revue professionnelle.",
+          "Présenter et défendre des décisions en réunion, en entretien et lors d'affectations internationales.",
+          "Passer avec précision du registre technique au registre diplomatique ou commercial."
         ],
         "tools": [
-          "Glossaire technique",
           "CECRL B1–C1",
-          "Laboratoire oral",
+          "Clinique de pitch",
           "Modèles de documentation",
-          "Clinique de présentation"
+          "Laboratoire oral exécutif",
+          "Exercices de négociation"
         ],
         "modules": [
           {
-            "title": "Registre technique",
-            "description": "Choisir des verbes, des quantités et des nuances précis pour le travail d'ingénierie."
+            "title": "Registre professionnel",
+            "description": "Précision, ton et différence entre anglais technique, diplomatique et commercial."
           },
           {
             "title": "Décrire des systèmes",
-            "description": "Expliquer comment un système est construit et ce qui limite ses performances."
+            "description": "Expliquer une architecture, des contraintes et des performances à des non-spécialistes."
           },
           {
             "title": "Documentation",
-            "description": "Rédiger des spécifications, README et consignes qu'un lecteur extérieur peut suivre."
+            "description": "Rédiger des spécifications, des briefs et des synthèses qu'un lecteur extérieur peut exécuter."
           },
           {
-            "title": "Présenter une construction",
-            "description": "Structurer une présentation technique de cinq minutes et répéter les questions difficiles."
+            "title": "Pitch et présentation",
+            "description": "Construire un pitch de cinq minutes et répéter les questions difficiles."
           },
           {
-            "title": "Réunions et collaboration",
-            "description": "Clarifier, exprimer un désaccord et négocier le périmètre en anglais professionnel."
+            "title": "Réunions et négociation",
+            "description": "Clarifier, exprimer un désaccord et négocier le périmètre entre cultures."
           },
           {
-            "title": "Clinique de portfolio",
-            "description": "Revoir les travaux écrits et oraux produits pendant le programme."
+            "title": "Clinique de mobilité",
+            "description": "CV, entretiens et langage des visas et des nominations internationales."
           }
         ],
         "capstone": {
-          "title": "Une présentation technique et un brief écrit",
-          "description": "Une présentation de cinq minutes et un brief technique d'une page, présentés devant la cohorte."
+          "title": "Un pitch, un brief technique et un entretien",
+          "description": "Un pitch de cinq minutes, un brief technique d'une page et un entretien enregistré, évalués selon des standards professionnels et institutionnels."
         }
       },
       "german-mobility": {
         "title": "Allemand pour la mobilité académique & technique",
-        "description": "L'allemand pour les élèves qui prévoient d'étudier ou de travailler en Allemagne — vocabulaire académique, documents de candidature et assurance pour gérer les démarches quotidiennes.",
-        "lede": "L'allemand pour la prochaine étape : une place à l'université, un stage ou un poste technique dans un pays germanophone.",
+        "description": "Préparation au Goethe-Zertifikat pour chercheurs universitaires, ingénieurs et professionnels qui prévoient d'étudier, de travailler ou d'obtenir un visa en Allemagne.",
+        "lede": "Du Goethe A1 au B1 : l'allemand nécessaire pour un séjour de recherche, un poste d'ingénieur ou une évolution professionnelle en Allemagne.",
         "highlights": [
-          "Goethe A1–B1",
+          "Goethe-Zertifikat",
           "Allemand académique",
-          "Candidatures"
+          "Visa & mobilité professionnelle"
         ],
         "outcomes": [
-          "Gérer des situations quotidiennes et académiques en allemand avec une confiance croissante.",
-          "Lire et remplir les documents courants de candidature et d'inscription.",
-          "Se présenter et présenter son parcours technique lors d'un entretien.",
-          "Suivre la structure d'une présentation technique en allemand."
+          "Préparer le Goethe-Zertifikat A1–B1 avec un entraînement structuré à l'oral, à l'écrit et à la compréhension.",
+          "Gérer une inscription universitaire, une démarche de recherche et un rendez-vous de visa en allemand.",
+          "Présenter son parcours technique ou académique lors d'un entretien.",
+          "Présenter un projet et suivre une discussion technique en allemand."
         ],
         "tools": [
-          "Goethe A1–B1",
-          "Formulaires Anmeldung",
-          "Dossiers Uni-Assist",
+          "Goethe-Zertifikat A1–B1",
+          "Uni-Assist",
+          "Formulaires visa & Anmeldung",
           "Laboratoire oral",
           "Modèles de CV et de lettre de motivation"
         ],
@@ -435,11 +436,11 @@
           },
           {
             "title": "Vocabulaire académique",
-            "description": "Les mots et les habitudes d'une université allemande."
+            "description": "La langue d'une université et d'un institut de recherche allemands."
           },
           {
-            "title": "Candidatures",
-            "description": "Lire, remplir et expliquer les documents qu'exige une installation."
+            "title": "Candidatures et visas",
+            "description": "Inscription, Anmeldung et les rendez-vous qu'exige une installation."
           },
           {
             "title": "Allemand technique",
@@ -455,8 +456,8 @@
           }
         ],
         "capstone": {
-          "title": "Un dossier de mobilité étudiante",
-          "description": "Un CV, une lettre de motivation et une présentation orale en allemand, évalués selon une vraie liste de contrôle de candidature."
+          "title": "Un dossier de mobilité prêt pour le Goethe",
+          "description": "Un CV, une lettre de motivation, une présentation orale et un entretien blanc de type Goethe, évalués selon une vraie liste de contrôle de candidature."
         }
       },
       "audiovisual-training": {
@@ -590,35 +591,35 @@
     }
   },
   "testimonials": {
-    "eyebrow": "Familles",
-    "title": "Ce que disent les familles",
-    "intro": "Des parents d'Alger font confiance à Kennedy Academy pour une éducation structurée et inspirante.",
+    "eyebrow": "Communauté",
+    "title": "Les voix de l'atelier",
+    "intro": "Fondateurs, ingénieurs, créatifs et professionnels internationaux basés à El Biar se forment et créent à Kennedy Academy.",
     "pause": "Mettre les témoignages en pause",
     "play": "Lire les témoignages",
     "items": {
-      "nadia": {
-        "quote": "Ma fille est passée de la timidité face à la technologie à la présentation confiante de son projet robot. Le campus est accueillant et sérieux à la fois.",
-        "name": "Nadia B.",
-        "role": "Parent",
-        "location": "Dely Ibrahim"
+      "marcus": {
+        "quote": "Notre équipe avait besoin d'un anglais et d'un allemand intensifs et de haut niveau pour nos affectations internationales. L'atmosphère à El Biar est calme, rigoureuse et conforme aux standards des institutions européennes.",
+        "name": "Marcus H.",
+        "role": "Mission diplomatique",
+        "location": "El Biar"
       },
-      "karim": {
-        "quote": "Le programme Python a donné à mon fils de vraies bases — pas seulement des jeux, mais une logique qu'il utilise à l'école. Les formateurs sont patients et compétents.",
-        "name": "Karim M.",
-        "role": "Parent",
-        "location": "Hydra"
+      "amine": {
+        "quote": "Trouver à Alger un laboratoire de robotique ouvert avec imprimantes 3D et oscilloscopes était impossible. Kennedy Academy est l'endroit où nous prototypons notre matériel entre deux journées de travail.",
+        "name": "Amine T.",
+        "role": "Ingénieur logiciel & fondateur hardware",
+        "location": "Alger"
       },
-      "sofia": {
-        "quote": "Nous avons choisi le programme de langues par niveaux. La progression est claire, et notre fille attend ses sessions chaque semaine avec impatience.",
-        "name": "Sofia L.",
-        "role": "Parent",
-        "location": "Bouzareah"
+      "lyna": {
+        "quote": "Les suites DaVinci Resolve et les caméras cinéma sont de qualité professionnelle. On collabore avec des personnes qui prennent la production créative au sérieux.",
+        "name": "Lyna K.",
+        "role": "Réalisatrice indépendante & coloriste",
+        "location": "Alger"
       },
       "yasmine": {
-        "quote": "La formation multimédia a ouvert une voie créative inattendue. Ambiance professionnelle, enseignants chaleureux et un campus moderne et ouvert.",
-        "name": "Yasmine K.",
-        "role": "Parent",
-        "location": "Alger"
+        "quote": "Mon fils de 14 ans ne joue pas aux jeux vidéo ici ; il écrit du vrai Python et présente des projets de robots fonctionnels avec discipline.",
+        "name": "Dr Yasmine M.",
+        "role": "Parent & chercheuse universitaire",
+        "location": "El Biar"
       }
     }
   },
@@ -672,7 +673,7 @@
     "phoneLabel": "Téléphone",
     "whatsappLabel": "WhatsApp",
     "whatsappCta": "Démarrer une conversation",
-    "whatsappPrefill": "Bonjour Kennedy Academy — je souhaite en savoir plus sur les formations.",
+    "whatsappPrefill": "Bonjour Kennedy Academy, je souhaite avoir des informations sur vos programmes et l'espace atelier.",
     "hoursTitle": "Horaires du Hub & Café",
     "hoursNote": "Ouvert 7 jours sur 7",
     "hoursWeekdays": "Tous les jours",

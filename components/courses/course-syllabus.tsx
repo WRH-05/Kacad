@@ -63,10 +63,11 @@ export function CourseSyllabus({ track, item, courses }: CourseSyllabusProps) {
         </ol>
       </section>
 
-      <section className="mt-10 border-t border-line/70 pt-8">
-        <h2 className="font-mono text-[10px] uppercase tracking-[0.24em] text-accent">
-          {detail.capstoneTitle}
-        </h2>
+      {item.capstone.title || item.capstone.description ? (
+        <section className="mt-10 border-t border-line/70 pt-8">
+          <h2 className="font-mono text-[10px] uppercase tracking-[0.24em] text-accent">
+            {detail.capstoneTitle}
+          </h2>
         <div className="mt-5 flex flex-col gap-6 border border-line/70 bg-surface-sunken/60 p-6 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h3 className="font-serif text-2xl leading-snug text-ink">{item.capstone.title}</h3>
@@ -94,7 +95,8 @@ export function CourseSyllabus({ track, item, courses }: CourseSyllabusProps) {
             </p>
           </div>
         ) : null}
-      </section>
+        </section>
+      ) : null}
     </div>
   );
 }

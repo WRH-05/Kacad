@@ -7,7 +7,7 @@ import { CourseMentor } from '@/components/courses/course-mentor';
 import { CourseSpecBar } from '@/components/courses/course-spec-bar';
 import { CourseSyllabus } from '@/components/courses/course-syllabus';
 import { OpenStudioInvite } from '@/components/courses/open-studio-invite';
-import { courseIds, isCourseId } from '@/content/courses';
+import { courseIds, isCourseSlug } from '@/content/courses';
 import { getCourseView } from '@/lib/courses-data';
 import { getDictionary } from '@/lib/dictionaries';
 import { isLocale, type Locale } from '@/lib/i18n';
@@ -28,7 +28,7 @@ export async function generateMetadata({
 }) {
   const { locale, slug } = await params;
 
-  if (!isLocale(locale) || !isCourseId(slug)) return {};
+  if (!isLocale(locale) || !isCourseSlug(slug)) return {};
 
   const view = await getCourseView(locale, slug);
 
@@ -47,7 +47,7 @@ export default async function CoursePage({
 }) {
   const { locale, slug } = await params;
 
-  if (!isLocale(locale) || !isCourseId(slug)) {
+  if (!isLocale(locale) || !isCourseSlug(slug)) {
     notFound();
   }
 

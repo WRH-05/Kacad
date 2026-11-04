@@ -27,8 +27,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       template: '%s · Kennedy Academy'
     },
     description: isFrench
-      ? "Une académie de technologie, d'arts numériques et de langues à El Biar, Alger — et un hub créatif ouvert aux jeunes créateurs."
-      : 'A technology, digital arts and languages academy in El Biar, Algiers — and an open creative hub for young makers.',
+      ? "Un atelier d'excellence en technologie, arts numériques et langues à El Biar, Alger — pour étudiants universitaires, fondateurs, chercheurs, professionnels internationaux et Junior Fellows."
+      : 'An elite technology, digital arts and languages atelier in El Biar, Algiers — for university students, founders, researchers, international professionals and Junior Fellows.',
     icons: { icon: '/favicon.ico' }
   };
 }
@@ -60,12 +60,23 @@ export default async function LocaleLayout({
       <body
         className={`${dmSans.variable} ${fraunces.variable} ${plexMono.variable} bg-surface font-sans text-ink antialiased`}
       >
-        <SiteNavbar locale={locale as Locale} nav={dictionary.nav} programmes={programmes} />
+        <SiteNavbar
+          locale={locale as Locale}
+          nav={dictionary.nav}
+          programmes={programmes}
+          whatsappPrefill={dictionary.contact.whatsappPrefill}
+        />
         {children}
-        <SiteFooter locale={locale as Locale} nav={dictionary.nav} footer={dictionary.footer} />
+        <SiteFooter
+          locale={locale as Locale}
+          nav={dictionary.nav}
+          footer={dictionary.footer}
+          whatsappPrefill={dictionary.contact.whatsappPrefill}
+        />
         <FloatingWhatsApp
           programmes={programmes}
-          prefillTemplate={dictionary.courses.detail.whatsappPrefill}
+          coursePrefill={dictionary.courses.detail.floatingPrefill}
+          generalPrefill={dictionary.contact.whatsappPrefill}
           label={dictionary.courses.detail.floatingWhatsapp}
           ariaLabel={dictionary.courses.detail.floatingWhatsappAria}
         />

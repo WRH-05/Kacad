@@ -1,9 +1,9 @@
-import type { Course } from '@/content/courses';
+import type { CourseView } from '@/lib/courses/types';
 import type { Dictionary } from '@/lib/dictionaries';
 import { interpolate } from '@/lib/utils';
 
 type CourseSpecBarProps = {
-  course: Course;
+  course: CourseView;
   courses: Dictionary['courses'];
 };
 

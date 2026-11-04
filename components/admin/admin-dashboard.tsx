@@ -16,6 +16,7 @@ type Tab = 'courses' | 'leads';
 export function AdminDashboard({ courses, leads, loadError }: AdminDashboardProps) {
   const [tab, setTab] = useState<Tab>('courses');
   const [editing, setEditing] = useState<AdminCourse | null>(null);
+  const [creating, setCreating] = useState(false);
 
   const totalSeats = courses.reduce((sum, course) => sum + course.seatsLeft, 0);
 
@@ -87,7 +88,21 @@ export function AdminDashboard({ courses, leads, loadError }: AdminDashboardProp
       ) : null}
 
       {tab === 'courses' ? (
-        <div className="mt-8 border-t border-line/70">
+        <>
+          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-line/70 pt-5">
+            <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-ink-muted">
+              {courses.length} programme{courses.length === 1 ? '' : 's'}
+            </p>
+            <button
+              type="button"
+              onClick={() => setCreating(true)}
+              className="bg-ink px-4 py-2.5 font-mono text-[9px] uppercase tracking-[0.18em] text-surface transition hover:bg-ink/90"
+            >
+              [ + Add New Programme ]
+            </button>
+          </div>
+
+          <div className="mt-5 border-t border-line/70">
           <div className="hidden grid-cols-[1fr_7rem_11rem_5rem_5rem] gap-4 border-b border-line/70 py-3 font-mono text-[8px] uppercase tracking-[0.2em] text-ink-muted lg:grid">
             <span>Course</span>
             <span>Track</span>
@@ -133,16 +148,36 @@ export function AdminDashboard({ courses, leads, loadError }: AdminDashboardProp
           ))}
 
           {courses.length === 0 ? (
-            <p className="py-16 text-center text-sm text-ink-muted">
-              No courses found. Seed the database, then reload.
-            </p>
+            <div className="py-16 text-center">
+              <p className="font-serif text-2xl text-ink">No programmes yet.</p>
+              <p className="mt-2 text-sm text-ink-muted">
+                Add the first programme to publish it across the site.
+              </p>
+              <button
+                type="button"
+                onClick={() => setCreating(true)}
+                className="mt-5 bg-ink px-4 py-2.5 font-mono text-[9px] uppercase tracking-[0.18em] text-surface transition hover:bg-ink/90"
+              >
+                [ + Add New Programme ]
+              </button>
+            </div>
           ) : null}
-        </div>
+          </div>
+        </>
       ) : (
         <LeadsTable leads={leads} />
       )}
 
-      {editing ? <CourseDrawer course={editing} onClose={() => setEditing(null)} /> : null}
+      {creating ? (
+        <CourseDrawer key="create" mode="create" onClose={() => setCreating(false)} />
+      ) : editing ? (
+        <CourseDrawer
+          key={editing.id}
+          mode="edit"
+          course={editing}
+          onClose={() => setEditing(null)}
+        />
+      ) : null}
     </main>
   );
 }

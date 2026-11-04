@@ -1,12 +1,12 @@
-export type TestimonialId = 'nadia' | 'karim' | 'sofia' | 'yasmine';
+export type TestimonialId = 'marcus' | 'amine' | 'lyna' | 'yasmine';
 
 export type Testimonial = {
   id: TestimonialId;
 };
 
 export const testimonials: Testimonial[] = [
-  { id: 'nadia' },
-  { id: 'karim' },
-  { id: 'sofia' },
+  { id: 'marcus' },
+  { id: 'amine' },
+  { id: 'lyna' },
   { id: 'yasmine' }
 ];
