@@ -3,17 +3,21 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import type { Route } from 'next';
-import type {
-  AdminCourse,
-  AdminLead,
-  LeadCounts,
-  LeadStatus
-} from '@/lib/courses/admin';
+import {
+  buildAdminQuery,
+  defaultDirForSort,
+  hrefFor,
+  toggleLeadSort,
+  type LeadFilters,
+  type LeadSortKey
+} from '@/lib/admin/lead-filters';
+import type { AdminCourse, AdminLead, LeadCounts, LeadStatus } from '@/lib/courses/admin';
 import { ConfirmDialog } from './confirm-dialog';
 import { LeadDrawer } from './lead-drawer';
+import { LeadTimeFilter } from './lead-time-filter';
 import { LeadsLiveSync } from './leads-live-sync';
 import { RowMenu } from './row-menu';
+import { SortGlyph } from './sort-glyph';
 
 type LeadsTableProps = {
   leads: AdminLead[];
@@ -21,7 +25,7 @@ type LeadsTableProps = {
   total: number;
   page: number;
   pageCount: number;
-  filters: { status: LeadStatus | 'all'; course: string | null };
+  filters: LeadFilters;
   courses: AdminCourse[];
   totalLeads: number;
 };
@@ -53,24 +57,11 @@ function StatusBadge({ status }: { status: LeadStatus }) {
   );
 }
 
-function buildQuery(
-  status: LeadStatus | 'all',
-  course: string | null,
-  page: number
-): Record<string, string> {
-  const query: Record<string, string> = { tab: 'leads' };
+function sortAriaLabel(key: LeadSortKey, label: string, filters: LeadFilters) {
+  const active = filters.sort.key === key;
+  const nextDir = active ? (filters.sort.dir === 'asc' ? 'desc' : 'asc') : defaultDirForSort(key);
 
-  if (status !== 'all') query.status = status;
-  if (course) query.course = course;
-  if (page > 1) query.page = String(page);
-
-  return query;
-}
-
-function hrefFor(query: Record<string, string>): Route {
-  const params = new URLSearchParams(query).toString();
-
-  return (params ? `/admin?${params}` : '/admin') as Route;
+  return `Sort by ${label} ${nextDir === 'asc' ? 'ascending' : 'descending'}`;
 }
 
 export function LeadsTable({
@@ -160,7 +151,7 @@ export function LeadsTable({
             return (
               <Link
                 key={tab.value}
-                href={hrefFor(buildQuery(tab.value, filters.course, 1))}
+                href={hrefFor(buildAdminQuery({ ...filters, status: tab.value }, 1))}
                 scroll={false}
                 aria-current={active ? 'page' : undefined}
                 className={
@@ -177,27 +168,31 @@ export function LeadsTable({
         </div>
 
         <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
-          <label className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.16em] text-ink-muted">
-            Course
-            <select
-              value={filters.course ?? ''}
-              onChange={(event) => {
-                const course = event.target.value || null;
-                router.push(hrefFor(buildQuery(filters.status, course, 1)));
-              }}
-              className="border border-line/80 bg-surface px-2 py-1.5 font-mono text-[9px] uppercase tracking-[0.12em] text-ink focus:border-accent focus:ring-accent/20"
-            >
-              <option value="">All courses</option>
-              {courses.map((course) => (
-                <option key={course.id} value={course.id}>
-                  {course.titleEn}
-                </option>
-              ))}
-              {filters.course && !courses.some((course) => course.id === filters.course) ? (
-                <option value={filters.course}>{filters.course}</option>
-              ) : null}
-            </select>
-          </label>
+          <div className="flex flex-wrap items-center gap-3">
+            <label className="flex items-center gap-2 font-mono text-[9px] uppercase tracking-[0.16em] text-ink-muted">
+              Course
+              <select
+                value={filters.course ?? ''}
+                onChange={(event) => {
+                  const course = event.target.value || null;
+                  router.push(hrefFor(buildAdminQuery({ ...filters, course }, 1)));
+                }}
+                className="border border-line/80 bg-surface px-2 py-1.5 font-mono text-[9px] uppercase tracking-[0.12em] text-ink focus:border-accent focus:ring-accent/20"
+              >
+                <option value="">All courses</option>
+                {courses.map((course) => (
+                  <option key={course.id} value={course.id}>
+                    {course.titleEn}
+                  </option>
+                ))}
+                {filters.course && !courses.some((course) => course.id === filters.course) ? (
+                  <option value={filters.course}>{filters.course}</option>
+                ) : null}
+              </select>
+            </label>
+
+            <LeadTimeFilter filters={filters} />
+          </div>
 
           <p className="font-mono text-[9px] uppercase tracking-[0.16em] text-ink-muted">
             {total === 0 ? 'No leads' : `Showing ${start}–${end} of ${total}`}
@@ -217,12 +212,18 @@ export function LeadsTable({
       {leads.length === 0 ? (
         <div className="mt-6 border border-line/70 py-16 text-center">
           <p className="font-serif text-2xl text-ink">
-            {totalLeads === 0 ? 'No leads yet.' : 'No leads match these filters.'}
+            {totalLeads === 0
+              ? filters.time.preset === 'all'
+                ? 'No leads yet.'
+                : 'No leads in this period.'
+              : 'No leads match these filters.'}
           </p>
           <p className="mt-2 text-sm text-ink-muted">
             {totalLeads === 0
-              ? 'Syllabus requests from the course pages will appear here.'
-              : 'Try another status or course.'}
+              ? filters.time.preset === 'all'
+                ? 'Syllabus requests from the course pages will appear here.'
+                : 'Try a wider time range.'
+              : 'Try another status, course or time range.'}
           </p>
           {totalLeads > 0 ? (
             <Link
@@ -235,12 +236,42 @@ export function LeadsTable({
         </div>
       ) : (
         <div className="mt-6 border-t border-line/70">
-          <div className="hidden grid-cols-[9rem_11rem_1fr_6rem_9rem_2.5rem] gap-4 border-b border-line/70 py-3 font-mono text-[8px] uppercase tracking-[0.2em] text-ink-muted lg:grid">
-            <span>Name</span>
+          <div className="hidden grid-cols-[9rem_11rem_1fr_6rem_9rem_2.5rem] gap-4 border-b border-line/70 py-3 font-mono text-xs uppercase tracking-wider text-ink-muted lg:grid">
+            <Link
+              href={hrefFor(
+                buildAdminQuery(
+                  { ...filters, sort: toggleLeadSort(filters.sort, 'name') },
+                  page
+                )
+              )}
+              scroll={false}
+              replace
+              aria-label={sortAriaLabel('name', 'name', filters)}
+              className="inline-flex items-center gap-1 transition hover:text-ink"
+            >
+              Name <SortGlyph active={filters.sort.key === 'name'} dir={filters.sort.dir} />
+            </Link>
             <span>Contact</span>
             <span>Course</span>
             <span>Status</span>
-            <span>Received</span>
+            <Link
+              href={hrefFor(
+                buildAdminQuery(
+                  { ...filters, sort: toggleLeadSort(filters.sort, 'received') },
+                  page
+                )
+              )}
+              scroll={false}
+              replace
+              aria-label={sortAriaLabel('received', 'received date', filters)}
+              className="inline-flex items-center gap-1 transition hover:text-ink"
+            >
+              Received{' '}
+              <SortGlyph
+                active={filters.sort.key === 'received'}
+                dir={filters.sort.dir}
+              />
+            </Link>
             <span className="text-right">Actions</span>
           </div>
 
@@ -308,7 +339,7 @@ export function LeadsTable({
         <div className="mt-6 flex items-center justify-between gap-4">
           {page > 1 ? (
             <Link
-              href={hrefFor(buildQuery(filters.status, filters.course, page - 1))}
+              href={hrefFor(buildAdminQuery(filters, page - 1))}
               scroll={false}
               className="border border-line/80 px-4 py-2 font-mono text-[9px] uppercase tracking-[0.16em] text-ink transition hover:border-ink"
             >
@@ -326,7 +357,7 @@ export function LeadsTable({
 
           {page < pageCount ? (
             <Link
-              href={hrefFor(buildQuery(filters.status, filters.course, page + 1))}
+              href={hrefFor(buildAdminQuery(filters, page + 1))}
               scroll={false}
               className="border border-line/80 px-4 py-2 font-mono text-[9px] uppercase tracking-[0.16em] text-ink transition hover:border-ink"
             >

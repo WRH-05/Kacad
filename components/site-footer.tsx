@@ -46,7 +46,7 @@ export function SiteFooter({ locale, nav, footer, whatsappPrefill }: SiteFooterP
               alt="Kennedy Academy"
               width={367}
               height={165}
-              className="h-10 w-auto brightness-0 invert"
+              className="h-8 w-auto object-contain brightness-0 invert"
             />
           </div>
           <p className="mt-6 max-w-sm text-sm leading-relaxed text-surface/65">
