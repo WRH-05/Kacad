@@ -46,6 +46,20 @@ const config: Config = {
         display: ['var(--font-fraunces)', 'Georgia', 'serif'],
         mono: ['var(--font-ibm-plex-mono)', 'ui-monospace', 'SFMono-Regular', 'monospace']
       },
+      keyframes: {
+        'accordion-down': {
+          from: { height: '0' },
+          to: { height: 'var(--radix-accordion-content-height)' }
+        },
+        'accordion-up': {
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: '0' }
+        }
+      },
+      animation: {
+        'accordion-down': 'accordion-down 300ms ease-in-out',
+        'accordion-up': 'accordion-up 300ms ease-in-out'
+      },
       boxShadow: {
         glow: '0 18px 60px -28px rgb(var(--accent) / 0.35)',
         soft: '0 8px 30px -12px rgb(var(--ink) / 0.12)',

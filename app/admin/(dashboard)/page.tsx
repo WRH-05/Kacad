@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import { AdminDashboard } from '@/components/admin/admin-dashboard';
-import { isCourseSlug } from '@/content/courses';
+import { parseAdminParams, resolveLeadBounds } from '@/lib/admin/lead-filters';
 import {
-  isLeadStatus,
   mapAdminCourse,
   mapAdminLead,
   type AdminCourse,
@@ -22,52 +21,53 @@ const PAGE_SIZE = 20;
 
 type SearchParams = Record<string, string | string[] | undefined>;
 
-function readParam(value: string | string[] | undefined): string | undefined {
-  return Array.isArray(value) ? value[0] : value;
-}
-
 export default async function AdminDashboardPage({
   searchParams
 }: {
   searchParams: Promise<SearchParams>;
 }) {
   const params = await searchParams;
-  const tab = readParam(params.tab) === 'leads' ? 'leads' : 'courses';
-
-  const statusParam = readParam(params.status);
-  const status: LeadStatus | 'all' = statusParam && isLeadStatus(statusParam) ? statusParam : 'all';
-
-  const courseParam = readParam(params.course);
-  const course = courseParam && isCourseSlug(courseParam) ? courseParam : null;
-
-  const requestedPage = Number.parseInt(readParam(params.page) ?? '1', 10);
-  const requested = Number.isFinite(requestedPage) && requestedPage > 0 ? requestedPage : 1;
+  const { tab, filters, page: requestedPage } = parseAdminParams(params);
+  const bounds = resolveLeadBounds(filters.time, new Date());
 
   const supabase = await createClient();
 
-  const countFor = async (leadStatus?: LeadStatus | 'all') => {
-    let query = supabase
-      .from('waitlist_leads')
-      .select('*', { count: 'exact', head: true });
+  const countLeads = async (
+    options: { status?: LeadStatus | 'all'; ignoreCourse?: boolean } = {}
+  ): Promise<number> => {
+    let query = supabase.from('waitlist_leads').select('*', { count: 'exact', head: true });
 
-    if (course) query = query.eq('course_id', course);
-    if (leadStatus && leadStatus !== 'all') query = query.eq('status', leadStatus);
+    if (!options.ignoreCourse && filters.course) {
+      query = query.eq('course_id', filters.course);
+    }
+    if (options.status && options.status !== 'all') {
+      query = query.eq('status', options.status);
+    }
+    if (bounds.startIso) query = query.gte('created_at', bounds.startIso);
+    if (bounds.endIso) query = query.lt('created_at', bounds.endIso);
 
     const { count } = await query;
 
     return count ?? 0;
   };
 
-  const [coursesResult, totalResult, allCount, newCount, contactedCount, enrolledCount, archivedCount] =
-    await Promise.all([
-      supabase.from('courses').select('*').order('id'),
-      supabase.from('waitlist_leads').select('*', { count: 'exact', head: true }),
-      countFor('all'),
-      countFor('new'),
-      countFor('contacted'),
-      countFor('enrolled'),
-      countFor('archived')
-    ]);
+  const [
+    coursesResult,
+    totalCount,
+    allCount,
+    newCount,
+    contactedCount,
+    enrolledCount,
+    archivedCount
+  ] = await Promise.all([
+    supabase.from('courses').select('*').order('id'),
+    countLeads({ ignoreCourse: true }),
+    countLeads({ status: 'all' }),
+    countLeads({ status: 'new' }),
+    countLeads({ status: 'contacted' }),
+    countLeads({ status: 'enrolled' }),
+    countLeads({ status: 'archived' })
+  ]);
 
   const counts: LeadCounts = {
     all: allCount,
@@ -77,20 +77,23 @@ export default async function AdminDashboardPage({
     archived: archivedCount
   };
 
-  const filteredTotal = counts[status];
+  const filteredTotal = counts[filters.status];
   const pageCount = Math.max(1, Math.ceil(filteredTotal / PAGE_SIZE));
-  const page = Math.min(requested, pageCount);
+  const page = Math.min(requestedPage, pageCount);
 
-  let leadsQuery = supabase
-    .from('waitlist_leads')
-    .select('*')
-    .order('created_at', { ascending: false })
+  let filterQuery = supabase.from('waitlist_leads').select('*');
+
+  if (filters.course) filterQuery = filterQuery.eq('course_id', filters.course);
+  if (filters.status !== 'all') filterQuery = filterQuery.eq('status', filters.status);
+  if (bounds.startIso) filterQuery = filterQuery.gte('created_at', bounds.startIso);
+  if (bounds.endIso) filterQuery = filterQuery.lt('created_at', bounds.endIso);
+
+  const leadsResult = await filterQuery
+    .order(filters.sort.key === 'name' ? 'name' : 'created_at', {
+      ascending: filters.sort.dir === 'asc'
+    })
+    .order('id', { ascending: true })
     .range((page - 1) * PAGE_SIZE, page * PAGE_SIZE - 1);
-
-  if (course) leadsQuery = leadsQuery.eq('course_id', course);
-  if (status !== 'all') leadsQuery = leadsQuery.eq('status', status);
-
-  const leadsResult = await leadsQuery;
 
   const courses = (coursesResult.data ?? [])
     .map((row) => mapAdminCourse(row))
@@ -104,18 +107,17 @@ export default async function AdminDashboardPage({
     .map((row) => mapAdminLead(row, titleById))
     .filter((lead): lead is AdminLead => lead !== null);
 
-  const loadError =
-    coursesResult.error?.message ?? leadsResult.error?.message ?? null;
+  const loadError = coursesResult.error?.message ?? leadsResult.error?.message ?? null;
 
   return (
     <AdminDashboard
       courses={courses}
       leads={leads}
       leadCounts={counts}
-      leadTotal={totalResult.count ?? 0}
+      leadTotal={totalCount}
       page={page}
       pageCount={pageCount}
-      filters={{ status, course }}
+      filters={filters}
       tab={tab}
       loadError={loadError}
     />

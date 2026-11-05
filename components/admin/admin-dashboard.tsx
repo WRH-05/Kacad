@@ -2,17 +2,15 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import type { Route } from 'next';
-import type {
-  AdminCourse,
-  AdminLead,
-  LeadCounts,
-  LeadStatus
-} from '@/lib/courses/admin';
+import { sortCourses, type CourseSortKey } from '@/lib/admin/course-sort';
+import type { LeadFilters } from '@/lib/admin/lead-filters';
+import type { AdminCourse, AdminLead, LeadCounts } from '@/lib/courses/admin';
 import { ConfirmDialog } from './confirm-dialog';
 import { LeadsTable } from './leads-table';
 import { RowMenu } from './row-menu';
+import { SortGlyph } from './sort-glyph';
 
 type AdminDashboardProps = {
   courses: AdminCourse[];
@@ -21,7 +19,7 @@ type AdminDashboardProps = {
   leadTotal: number;
   page: number;
   pageCount: number;
-  filters: { status: LeadStatus | 'all'; course: string | null };
+  filters: LeadFilters;
   tab: 'courses' | 'leads';
   loadError: string | null;
 };
@@ -46,8 +44,30 @@ export function AdminDashboard({
   const [deleteTarget, setDeleteTarget] = useState<AdminCourse | null>(null);
   const [deletePending, setDeletePending] = useState(false);
   const [deleteError, setDeleteError] = useState<string | null>(null);
+  const [courseSort, setCourseSort] = useState<{
+    key: CourseSortKey | null;
+    dir: 'asc' | 'desc';
+  }>({ key: null, dir: 'asc' });
 
   const totalSeats = courses.reduce((sum, course) => sum + course.seatsLeft, 0);
+  const sortedCourses = useMemo(
+    () => sortCourses(courses, courseSort.key, courseSort.dir),
+    [courses, courseSort]
+  );
+
+  function toggleCourseSort(key: CourseSortKey) {
+    setCourseSort((current) =>
+      current.key === key
+        ? { key, dir: current.dir === 'asc' ? 'desc' : 'asc' }
+        : { key, dir: 'asc' }
+    );
+  }
+
+  function sortLabel(key: CourseSortKey, label: string) {
+    const active = courseSort.key === key;
+    const next = active && courseSort.dir === 'asc' ? 'descending' : 'ascending';
+    return `Sort by ${label} ${next}`;
+  }
 
   function requestDelete(course: AdminCourse) {
     setDeleteError(null);
@@ -163,15 +183,37 @@ export function AdminDashboard({
           </div>
 
           <div className="mt-5 border-t border-line/70">
-            <div className="hidden grid-cols-[1fr_7rem_11rem_5rem_5rem] gap-4 border-b border-line/70 py-3 font-mono text-[8px] uppercase tracking-[0.2em] text-ink-muted lg:grid">
-              <span>Course</span>
+            <div className="hidden grid-cols-[1fr_7rem_11rem_5rem_5rem] gap-4 border-b border-line/70 py-3 font-mono text-xs uppercase tracking-wider text-ink-muted lg:grid">
+              <button
+                type="button"
+                onClick={() => toggleCourseSort('course')}
+                aria-label={sortLabel('course', 'course')}
+                className="inline-flex items-center gap-1 text-left uppercase tracking-wider transition hover:text-ink"
+              >
+                Course <SortGlyph active={courseSort.key === 'course'} dir={courseSort.dir} />
+              </button>
               <span>Track</span>
-              <span>Next cohort</span>
-              <span>Seats</span>
+              <button
+                type="button"
+                onClick={() => toggleCourseSort('cohort')}
+                aria-label={sortLabel('cohort', 'next cohort')}
+                className="inline-flex items-center gap-1 text-left uppercase tracking-wider transition hover:text-ink"
+              >
+                Next cohort{' '}
+                <SortGlyph active={courseSort.key === 'cohort'} dir={courseSort.dir} />
+              </button>
+              <button
+                type="button"
+                onClick={() => toggleCourseSort('seats')}
+                aria-label={sortLabel('seats', 'seats')}
+                className="inline-flex items-center gap-1 text-left uppercase tracking-wider transition hover:text-ink"
+              >
+                Seats <SortGlyph active={courseSort.key === 'seats'} dir={courseSort.dir} />
+              </button>
               <span className="text-right">Actions</span>
             </div>
 
-            {courses.map((course) => (
+            {sortedCourses.map((course) => (
               <div
                 key={course.id}
                 className="grid gap-2 border-b border-line/70 py-4 lg:grid-cols-[1fr_7rem_11rem_5rem_5rem] lg:items-center lg:gap-4"

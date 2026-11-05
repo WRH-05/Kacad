@@ -680,31 +680,28 @@
     "hoursTime": "09:00 – 19:00",
     "hoursCta": "Open 7 days a week · 09:00 – 19:00",
     "socialsTitle": "Follow",
-    "liveDesk": {
-      "eyebrow": "WhatsApp Live Desk",
-      "response": "Replied in <10 minutes during atelier hours (09:00 – 19:00).",
-      "cta": "Message the desk"
-    },
+    "directLines": "Direct Lines",
     "location": {
       "title": "Getting here",
       "body": "Located in the El Biar diplomatic district, accessible with nearby street parking.",
       "mapsCta": "Open in Google Maps"
     },
     "faq": {
-      "eyebrow": "Visitor guide",
+      "eyebrow": "VISITOR GUIDE",
       "title": "Before You Visit",
+      "lede": "Everything you need to know about drop-in sessions, lab tours, and equipment access.",
       "items": [
         {
-          "question": "Can I drop by without an appointment?",
-          "answer": "Yes. The atelier and members' cafe are open every day from 09:00 to 19:00. You can tour the robotics lab and cinema suites freely."
+          "q": "Can I drop by without an appointment?",
+          "a": "Yes. The atelier and members' cafe are open every day from 09:00 to 19:00. You are welcome to drop in, tour the space, and speak with our team."
         },
         {
-          "question": "Can I test the hardware before enrolling?",
-          "answer": "Absolutely. Mentors can demonstrate our 3D printers, ROS2 robotics benches, or DaVinci grading setups during a 15-minute visit."
+          "q": "Can I test the equipment before enrolling?",
+          "a": "Absolutely. We are happy to show you our 3D printers, electronics workstations, and cinema editing suites, and walk you through current student builds."
         },
         {
-          "question": "Who are the programmes designed for?",
-          "answer": "Our cohorts are built for university students, founders, researchers, and international professionals, with dedicated tracks for Junior Fellows (ages 12–17)."
+          "q": "Who are the programmes designed for?",
+          "a": "Our cohorts are built for university students, founders, researchers, and professionals, with dedicated tracks for Junior Fellows (ages 12–17)."
         }
       ]
     },
